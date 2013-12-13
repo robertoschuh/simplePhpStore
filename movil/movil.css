@@ -1,0 +1,60 @@
+/* 
+    Document   : movil
+    Created on : 04-ene-2013, 12:29:40
+    Author     : usuario
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.container {border: 10px solid #000; margin: 0 auto; text-align: center; width:900px}
+.ui-btn-up-c {
+border: 1px solid #CCC;
+background: #E8F0F3;
+font-weight: bold;
+color: #222;
+text-shadow: 0 1px 0 white;
+background-image: -ms-linear-gradient(white,#F1F1F1);
+background-image: -o-linear-gradient(white,#F1F1F1);
+background-image: linear-gradient(white,#F1F1F1);
+}
+
+.product-individual {
+padding: 0 40px;
+display: block;
+width: 200px;
+border: 0px solid black;
+float: left;
+text-align: center;
+}
+
+.centrado {text-align: center}
+
+.small-txt {font-size:9px}
+
+.ui-btn {
+text-align: left;
+cursor: pointer;
+}
+.ui-input-search input.ui-input-text {
+border: 0;
+width: 58%;
+padding: 1em 0;
+
+}
+.ui-header{
+background: url('../fondoestrellas.jpg') #002c61;
+}
+.ui-grid-a .ui-block-a, .ui-grid-a .ui-block-b {
+background:  #002c61;
+}
+.ui-btn-up-c {
+
+
+
+
+}

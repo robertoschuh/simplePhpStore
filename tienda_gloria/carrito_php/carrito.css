@@ -1,0 +1,88 @@
+	
+	body
+	{
+	color: #336699;
+	}
+	
+	
+	body, table, p
+	{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	}
+
+
+
+.carrito_ver{margin:0px 0px 0px 0px;
+	
+	}
+
+
+.tablas_encabezados {
+	background-color:#C4C4E1;
+	font-size: 11px;
+	color: #336699;
+	text-decoration: none;
+}
+
+.tablas_items {
+	background-color:#E7E7F3;
+	font-size: 11px;
+	color: #3366CC;
+	text-decoration: none;
+}
+
+.amount{
+	background-color:#BBADEC;
+	text-decoration: none;
+	font-size: 11px;
+	color: #006699;
+}
+
+.img_carrito { width:50px; height:50px }
+
+.notas{ font-size:12px; color:#990000}
+
+.titulos_texto {
+	color: #003366;
+	text-decoration: none;
+	font-size: 17px;
+	letter-spacing: 3px;
+}
+
+.titulos_bienvenido
+{
+	font-size: 13px;
+	color: #506ED5;
+	text-decoration: none;
+}
+
+
+.textito {
+	font-size: 11px;
+	color: #6293D4;
+	text-decoration: none;
+}
+.boton{
+	font-size:12px;
+	color: #003366;
+	text-decoration: none;
+	background-color: #F0F0FB;
+	border: 1px ridge #B1BACC;
+	padding: 3px;
+}
+
+.boton:hover{
+	color: #7B9FE2;
+	text-decoration: none;
+	padding: 3px;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: groove;
+	border-right-style: groove;
+	border-bottom-style: groove;
+	border-left-style: groove;
+	background-color: #EEEEEE;
+}

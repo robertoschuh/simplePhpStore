@@ -1,0 +1,594 @@
+<?
+
+//aquí iran las funciones que muestran resultados en pantalla
+
+function display_categories($cat_array)
+{
+  if (!is_array($cat_array))
+  {
+     echo "No hay categorías actualmente disponibles<br>";
+     return;
+  }
+  
+  foreach ($cat_array as $row)
+  {
+    $url = "show_arts.php?catid=".($row["catid"]); //descativado mientras no exista ese enlace
+	//$id_ext= $row["id_ext"];
+	$ext=extension_check($id_ext);
+	//$img=($row["catid"])."cat.$ext";
+    $title = $row["cat_name"];
+	$details= $row["cat_details"];
+    
+    do_categories($title,$url,/*$img*/$details);
+  }
+  
+}
+
+function do_categories ($title,$url,/*$imagen,*/$details) 
+{
+	//crea table que muestra resultado de la consulta
+echo "<div class='lista_cats'>	<table border='0'>
+		<tr>
+			<td class='title_cats' ><a href='$url'>  $title</title> </td>
+		</tr>
+		</table>
+		
+			
+		<table>	
+		
+		 <tr>
+		 <td> <br> </td>
+		 </tr>
+		
+		</table></div>";
+
+} //fin de la función que muestra en pantalla las categorías habidas
+
+function display_arts ($art_array)
+{
+
+@session_start();
+  if (!is_array($art_array))
+  {
+     echo "No hay Artículos en  esta categoría disponibles<br>";
+   
+	 return;
+  }
+
+
+
+ ?>
+<link href="../gloria.css" rel="stylesheet" type="text/css" />
+
+ <title>Artículos</title><table >
+ <tr>
+ <?
+  $i=0; //inicializamos contador a 0 para las columnas de artículos
+ ?>
+<div class="articles_show"> <table  >
+ <tr>
+ <?
+  
+  foreach ($art_array as $row)
+   
+   
+  {
+    $url = "show_article_individual.php?artid=".($row["artid"]); //descativado mientras no exista ese enlace
+	
+	$id_ext= $row["id_ext"];
+	$ext=extension_check($id_ext);
+	if (($row["id_ext"])==4 )
+	$img="demo.jpeg"; //sino hay ninguna imagen asociada a ese artículo, se carga esta por defecto
+	if (($row["id_ext"])==4 )
+	$img="demo.jpeg"; //sino hay ninguna imagen asociada a ese artículo, se carga esta por defecto
+	else
+	$img=($row["artid"])."art.$ext";
+	
+    $title = $row["art_name"];
+	//$details_short=corta_texto($details, 10);
+	$title=corta_texto($title, 10);
+
+
+	$details= $row["art_details"];
+
+	//limitamos el número de caracteres que aparecera en la breve descripción de artículo
+	$cat=$row["catid"];
+    $price=$row["art_price"];
+ //Creamos las filas que contendrá los artículos
+
+   echo " 
+		<td width='190px'><table ><tr><td class='title_arts' width='100%'>$title</td></tr>
+					<tr><td> <a href=$url><img src=../../gloria/img/arts/$img class='img_med'> </a></td> </tr>
+				 	<tr><td class='descript'> Descripción</td></tr> 
+					<tr><td class='descript_arts'> $details_short</td> </tr>
+					<tr><td class='price'> $price  €</td> </tr>";
+				if(session_is_registered("admin_user"))
+					echo "<tr><td><a href='admin/panel/mod_art_form.php?artid=$row[artid]'> Modificar</a> </td> </tr>";
+echo "
+			</table>
+			</td>
+		    
+		";
+		if ($i===4)
+		{
+			echo "</tr><table><tr> ";
+			
+			$i=0; /*pone el contador a 0 una vez haya saltado de linea para que vuelva a sumar otros 3 artículos antes de saltar a la 			                   siguiente linea */
+		}
+		else
+		$i++; 
+	
+
+
+	}
+	?>
+				 </table>      
+				 </div>
+<?
+
+	
+?>
+
+</table>	
+<?
+}//fin de la función display_arts 
+
+function display_menu($menu) 
+{
+
+ foreach ($menu as $row)
+  {
+    
+	
+	$catid=$row["catid"];
+    $title = $row["cat_name"];
+	$url = "show_arts.php?catid="."$catid"; //descativado mientras no exista ese enlace
+	echo "<p/>";
+	echo "<a href=$url target='center_frame' class='menu'> $title </a>" ;
+	}
+
+}
+//PARTE DEL ADMINISTRADOR 
+
+/*
+FUNCIONES DE SALIDA EN PANTALLA PARA EL PANEL DE ADMINISTRACIÓN DE LA TIENDA 
+ 
+display_form_add_cat //Formulario para añadir nueva categoria
+display_form_add_art //Formulario para añadir nueva categoria
+display_add_del_cat($valor) //Muestra mensaje de añadido o borrado de categoría según sea valor=0 "borrado"o valor=1 "añadida"
+display_add_del_art($valor)  //Muestra mensaje de añadido o borrado de artículo según sea valor=0 "borrado"o valor=1 "añadido"
+display_show_ships //Lista en pantalla todos los pedidos activos de la tienda (opción de archivar pedido y borrar)
+display_getdown_ship //dar de baja , es decir archivar pedido servido de la tienda o borrar 
+ 
+ 
+*/
+
+
+function display_form_add_cat () 
+{
+?>
+<div class='form_cat'>
+<form action="add_cat.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <p>&nbsp;</p>
+  <table width="258" border="0" align="center">
+    <tr>
+      <th width="378" align='left'>
+        Nombre Categoria
+      </th>
+      </tr>
+    <tr>
+      <td><input name="cat_name" type="text" id="cat_name" class='box' /></td>
+      
+    </tr>
+	<td>&nbsp;</td>
+	  
+    <tr>
+      <td>Detalles</td>
+      </tr>
+    <tr>
+      <td><input name="details" type="text" id="cat_name2" size="40" class='box' /></td>
+      </tr>
+    
+	   <tr>
+    <td colspan="5" class="aviso_img">Recuerde: las imagenes tienen que tener la extensi&oacute;n,JPEG,GIF O PNG, Gracias, Gracias </td>
+  </tr>
+    <tr>
+      <td>&nbsp;</td>
+      </tr>
+    <tr>
+      <td><input type="submit" name="Submit" value="Enviar" /></td>
+      </tr>
+  </table>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <label></label>
+  <p>
+    <label></label>
+  </p>
+  <p>
+    <label></label>
+  </p>
+</form>
+</div>
+<?
+
+	}
+
+function display_add_cat ($mensaje)
+{
+
+print "La categoria nueva se ha añadido con éxito<br>";
+
+print "<a href='admin.html'> Volver </a>";
+
+
+}
+
+function article_individual($article)
+{
+//comprobamos la extensión de la imagen
+$id_ext=$article[id_ext];
+$ext=extension_check ($id_ext);
+?>
+<div class="article">
+
+<table> 
+
+<tr>
+  <td class='title_arts'>
+<?
+echo  $article['art_name']; 
+?>
+</td>
+</tr>
+<tr>
+  <td class='descript_arts'>
+ <? 
+echo $article['art_details'];
+?>
+</td>
+
+<tr>
+  <td class='price'>
+ <?
+echo "Precio: ".$article['art_price']." €";
+?>
+</td>
+ <tr>
+  <td>
+  <?
+	echo "<a href='#self.php?catid=$article[1]'> <img src=../../gloria/img/add-to-cart.gif class='img_carrito'> </a> </p>";
+	?>
+	</td>
+</tr>
+<tr>
+  <td>
+<?
+	echo "<img src=../../gloria/img/arts/$article[artid]art.$ext class='img_big'> "."</p>";
+	?>
+	</td>
+	
+  </tr>
+ 
+</div>
+</table>
+
+<?
+
+}
+
+//Formularia para añadir nuevaos artículos 
+
+function display_form_add_art($cats_list) 
+
+{
+?>
+<div class='form_art'>
+<form action="add_art.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <p>&nbsp;</p>
+  <table width="70%" border="0" align="center">
+    <tr>
+      <th colspan="2" align='left'>Nombre Artículo</th>
+    </tr>
+    <tr>
+      <td colspan="2"><input name="art_name" type="text" id="art_name" class='box' maxlength='10'/></td>
+      <td>&nbsp;</td>
+	  <td width="10">&nbsp;</td>
+	  <td width="136">&nbsp;</td>
+    </tr>
+	<tr><td colspan="2">&nbsp;</td>
+	  <td>&nbsp;</td>
+	  <td>&nbsp;</td>
+    <tr>
+      <td colspan="2">Detalles</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2"><input name="details" type="text" id="cat_name2" size="40" class='box'/></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <div align="left">
+          <input type="file" name="file" class='box'/>
+      </div></td>
+      <td>&nbsp;</td>
+    </tr>
+	 <tr>
+    <td colspan="5" class="aviso_img">Recuerde: las imagenes tienen que tener la extensi&oacute;n JPG,JPEG,GIF O PNG, Gracias </td>
+  </tr>
+    <tr>
+      <td colspan="2"><p>&nbsp;</p>
+      <p>
+        <label>
+        <select name="catid" id="catid" class='box'>
+		<?
+		
+		foreach ($cats_list as $row)
+		{
+		$catid=$row['catid'];
+		$cat_name=$row['cat_name'];
+		echo "<option value=$catid/>$cat_name</option>";
+	
+		}
+         ?>
+        </select>
+        </label>
+      </p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p></td>
+      <td rowspan="2">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="118">Precio 
+      <input name="price" type="text" id="price" size="10" class='box'/></td>
+      <td width="401">&euro;</td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" name="Submit" value="Enviar" /></td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  <label></label>
+  <p>
+    <label></label>
+  </p>
+  <p>
+    <label></label>
+  </p>
+</form>
+</div>
+<?
+
+	}
+	
+	//BORRAR CATEGORIAS O ARTÍCULOS DE CATEGORIAS SEGÚN EL VALOR DE OPTION  SI ES 1 SE TRATA DE CATEGORIAS SI ES 2 DE ARTICULOS
+function display_cats_arts_delete ($list,$option) {
+
+if ($option==1)
+
+$url="del_cat.php";
+
+if ($option==2)
+
+$url="";
+
+echo "<form id='form1' name='form1' method='post' action='$url' ";
+?>
+  <p>&nbsp;</p>
+  <p>Categor&iacute;a 
+    <label>
+    <select name="cats" class='box'>
+		<? //Listamos TODAS las categorías para seleccionar la que deseamos ver sus artículos
+		foreach ($list as $row)
+		{
+		$catid=$row['catid'];
+		$cat_name=$row['cat_name'];
+		echo "<option value=$catid/>$cat_name</option>";
+	
+		}
+		?>
+        
+    </select>
+<?
+	//Si quremos borrar una categoria 
+	if ($option==1)
+	{
+		
+		echo "  <input type='submit' name='Submit' value='Borrar' />";
+		echo "<br>";
+		echo "<a href='../../../demo_marcos.html'>Volver Tienda</a>";
+	
+	//Solamente si hemos decidido borrar solo una categoria NO artículos
+	echo "</form>";
+		exit;
+	}
+	
+		
+		//Si queremos borrar un artículo en concreto de una categoría en concreto
+	if ($option==2)
+	 	{
+		
+ 		//Obtenemos lista de los artículos de esa categoría en concreto
+		$catid=$_GET['catid']; 
+		$art_array=get_arts($catid);
+?>  <select name="arts">
+
+<?	 //Listamos todos los artículos de la categoría seleccionada previamente
+		 foreach ($art_array as $row)
+  {
+    
+	
+	//$img=($row["artid"])."art.jpg";
+     $title = $row["art_name"];
+	//$details= $row["art_details"];
+	 $artid=$row["artid"];
+    //$price=$row["art_price"];
+			echo "<option value=$artid/>$art_name</option>";
+ }
+  	?>	</select>
+	<?
+			echo "  <input type='submit' name='Submit' value='Seleccionar' />";
+			echo "<br>";
+			echo "<a href='../../../demo_marcos.html'>Volver Tienda</a>";
+	//Obtenemos un array con los artículos de esa categoría en concreto
+		
+		
+?>
+	
+    </label>
+  </p>
+  <p>&nbsp;</p>
+  <p>Art&iacute;culo
+  
+		
+  
+  </p>
+
+</form>
+		<?
+		}// Fin del segundo if
+		
+}
+function extension_check($id_ext)
+{
+//Devuelve la extensión de la imagen del artículo en cuestion
+
+if ($id_ext==0)
+	{
+		$ext="jpeg";
+		return $ext;
+	}
+if ($id_ext==1)
+	{
+		$ext="jpg";
+		return $ext;
+	}
+	
+if ($id_ext==2)
+	{
+		$ext="gif";
+		return $ext;
+	}
+	
+if ($id_ext==3)
+	{
+	  $ext="png";
+	  return $ext;
+	 }
+	
+}//fin de la función 
+function corta_texto($texto, $num) {
+$txt = (strlen($texto) > $num) ? substr($texto,0,$num)."   " : $texto;
+return $txt;
+}
+//$titulo = "hola me llamo Ramón y follo un montón XD"; // un ejemplo
+//$limitado = "30"; // número de caracteres en el cuál se corta el texto y se dejará en "..."
+// lo que hago es: <strong>corta_texto($titulo,$limitado);</strong> y lo que queda es... <i>hola me llamo Ramón y follo un...</i>
+
+
+//Modificar Artículo
+
+function mod_article_form ($article) 
+{
+
+	
+	 //Llenamos variables con los valores del array
+		$title=$article['art_name'];
+		$details=$article['art_details'];
+		$price=$article['art_price'];
+		$artid=$article['artid'];
+		$ext=$article['id_ext'];
+		
+		
+		
+	
+?>
+<form action="mod_art.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
+  <label></label>
+
+  <table width="467" border="1">
+    <tr>
+      <th colspan="2">Modificar Art&iacute;culo  </th>
+    </tr>
+    <tr>
+      <td width="169">Nombre</td>
+      <td width="282"><input name="art_name" type="text" id="art_name" value="<? echo $title ?>" maxlength="10" /></td>
+    </tr>
+    <tr>
+      <td>Descripci&oacute;n</td>
+      <td><label>
+        <textarea name="art_details" id="art_details"><? echo $details  ?></textarea>
+      </label></td>
+    </tr>
+    <tr>
+      <td>Precio</td>
+      <td><input name="art_price" type="text" size="7" value="<? echo $price ?>" maxlength="10" /></td>
+    </tr>
+    <tr>
+      <td>Imagen</td>
+      <td><label>
+        <input type="file" name="file" />
+      </label></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input name="artid" type="hidden" id="artid" value="<? echo $artid ?>" /></td>
+    </tr>
+	<tr>
+      <td>&nbsp;</td>
+      <td><input name="ext" type="hidden" id="artid" value="<? echo $ext ?>" /></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><label>
+        <input type="submit" name="Submit" value="Modificar" />
+      </label></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  <p>&nbsp; </p>
+  <p>&nbsp;</p>
+</form>
+<?
+}
+
+function mod_cat_form ($cats)
+{
+
+
+?><form action="mod_cat.php" method="post" name="form2" id="form2">
+	<table>
+	<tr> <td colspan='2'> Modificar Categoría  </td> </tr>
+	<tr> <td> Nombre</td> 
+	<td><label>
+	
+	  <select name="cat_name" class='box'>
+	  <?
+	foreach ($cats as $row)
+	{
+	$catid=$row[catid];
+	$cat_name=$row['cat_name'];
+	$cat_details=$row['cat_datails'];
+	echo "<option value=$catid/>$cat_name</option>";
+
+	}
+	?>
+	  
+            </select>
+	</label></td>
+	</tr>
+	<tr> <td colspan='2'>Nuevo Nombre </td></tr> 
+	<tr> <td> <input type="text" name="newname" /></td> </tr>
+	<tr><td><input name="catid" type="hidden" value="<? echo $catid ?>" /></td></tr>
+	<tr> <td colspan='2'><input type="submit" name="Submit2" value="Modificar" /></td></tr>
+	</table>
+	</form>
+<?
+}
+?>	

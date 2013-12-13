@@ -1,0 +1,8 @@
+<?
+ require_once("fns.php");
+ do_html_header("Administración");
+
+ display_login_form();
+
+ do_html_footer();
+?>

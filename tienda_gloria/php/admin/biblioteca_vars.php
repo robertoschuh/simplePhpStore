@@ -1,4 +1,5 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
 //CONTANTES 
 
 //datos facturas
@@ -106,4 +107,3 @@ Móvil + (34) 615623896 </p><br>
 <b>Soporte técnico</b>: soportetecnico@gloriabotonero.com <br>
 <b>Web:</b> www.gloriabotonero.com </p><br>
 ";
-?>

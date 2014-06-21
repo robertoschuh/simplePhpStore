@@ -1,4 +1,8 @@
-﻿<?
+<?php
+
+//Constants
+define('EMAIL_SUPPORT', 'rob@masquebits.com');
+
 //Email Robot que se envia al cliente una vez realizado el pedido indic�ndole que se le enviar� brevemente otro mail
 //en el que se le dir� los dias que tardar� su pedido as� como los portes
 function mail_bienvenida($email,$password) {
@@ -15,7 +19,7 @@ $mensaje="
 $mensaje.="<p>".$datos_vendedor."</p>
 <p></p>";
 
-if (!mail($email, $asunto, $mensaje,$remitente) ) 
+if (!mail($email, $asunto, $mensaje,$remitente) )
 return false;
 return true;
 
@@ -41,7 +45,7 @@ $asunto="Su Pedido en ".$tienda_name;
 
 $asunto_copia="Copia del pedido";
 
-$pedido=su_pedido (); 
+$pedido=su_pedido ();
 
 $date=date("j,m,Y");
 
@@ -54,7 +58,7 @@ $mensaje="
 <p>Sus datos son los siguientes:</p>
 <p><b>Pedido n&uacute;mero $ref </b>de fecha ". $date."</p>
 $pedido <table align='left' width='100%'>
-		<tr> <th align='right' colspan='3'>Total: $total &euro;</th></tr>	
+		<tr> <th align='right' colspan='3'>Total: $total &euro;</th></tr>
 		<tr>
 		<td><font color='blue'>Sus Comentarios:<br></font></td>
 		<td> </td><td> </td>
@@ -66,16 +70,16 @@ $pedido <table align='left' width='100%'>
 		 <tr>
 		 <td> </td>
 		 </tr>
-		
+
 		 <tr>
 		<td><font color='blue'>Forma de pago y envío elegida:</font><br><span class='texto_mini '> $pago </span><br>
 		$envio_modo</td>
 <td> </td><td> </td>
 		 </tr>
 		</table>
-		<br><br><br><br><br> 
 		<br><br><br><br><br>
-		
+		<br><br><br><br><br>
+
 		  <table align='left' width='100%'>
 		   <tr>
 		  <td>  </td>
@@ -103,8 +107,8 @@ $pedido <table align='left' width='100%'>
 </td>
 		 </tr>
 		</table>
-		
-		
+
+
 		 <br>
 
  ";
@@ -112,17 +116,17 @@ $pedido <table align='left' width='100%'>
 $mensaje.=$datos_vendedor;
 
 $mail = new phpmailer();
-$mail->IsSMTP(); 
-//$mail->Host = 'gloriabotonero.com';
-$mail->Host     = "gloriabotonero.com";
+$mail->IsSMTP();
 
-$mail->From = 'info@gloriabotonero.com';
+$mail->Host = "gloriabotonero.com";
 
-$mail->FromName = 'gloriabotonero.com';
+$mail->From = 'avisos@gloriabotonero.com';
+
+$mail->FromName = 'Gloria Botonero';
 
 $mail->Subject = $asunto;
 
-$mail->AltBody = $asunto; 
+$mail->AltBody = $asunto;
 
 $mail->MsgHTML($mensaje);
 
@@ -131,15 +135,37 @@ $mail->AddAddress($mail_webmaster); //Mail a administrador
 
 $mail->SMTPAuth = true;
 
-$mail->Username = 'info@gloriabotonero.com';
+$mail->Username = 'avisos@gloriabotonero.com';
 
-$mail->Password = '54321energia12345';
+$mail->Password = 'Energia54321';
 
 
+
+// Intentamos enviarlo por SMTP
 if(!$mail->Send()) {
-return false;
-} else {
-return true;
+
+  log_admin('SMTP not works', 'error','gloriabotonero.com', $email);
+  // Para enviar un correo HTML mail, la cabecera Content-type debe fijarse
+  $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+  $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+  $cabeceras .= 'To: Mary <'.$email.'>' . "\r\n";
+  $cabeceras .= 'From: Recordatorio <avisos@gloriabotonero.com>' . "\r\n";
+
+
+  if (!mail($email, $asunto, $mensaje, $cabeceras)){
+    return false;
+  }
+  // Si falla el SMTP intentamos enviarlo por mail().
+  if(!mail($email, $asunto, $mensaje, $cabeceras) ){
+    log_admin('EMAIL function not works','error', 'gloriabotonero.com',$email);
+    return FALSE;
+  }
+
+  return TRUE;
+}
+else {
+  return TRUE;
 }
  //indicamos el inicio de nuestro lcodigo php
 /*if ( mail($email, $asunto, $mensaje,$headers) ) {
@@ -155,33 +181,50 @@ return false;
 
 }
 
+function log_admin($sent_result, $type = 'error', $site, $sent_to_user) {
+
+  $mensaje = $sent_result;
+
+  $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+  $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+
+  $cabeceras .= 'To: Support <EMAIL_SUPPORT>' . "\r\n";
+  $cabeceras .= 'From: Recordatorio <avisos@gloriabotonero.com>' . "\r\n";
+
+
+  if (!empty($sent_result)){
+    mail(EMAIL_SUPPORT, $type.' FROM: '.$site.' SENT TO '.$sent_to_user, $mensaje, $cabeceras);
+  }
+
+}
+
 //Envio de publicidad a todos los clientes que as� lo desean
 function masive_mail_form() {
 
 ?>
-<form action="<?=$PHP_SELF ?>" method="post"> 
+<form action="<?=$PHP_SELF ?>" method="post">
 <table width="200" border="0" align="center">
   <tr>
     <th colspan='3'>Envio Mails a clientes</th>
-  
+
   </tr>
   <tr>
     <td> Asunto: </td><td><input name="asunto" type="text" /></td>
    </tr>
-   <tr> 
+   <tr>
 	<td>Mensaje</td>
     <td><textarea name="mensaje" cols="40" rows="16"></textarea>
 </td><td></td>
   </tr>
   <tr>
     <td colspan='3' align="center"><input type="submit" name="Submit" value="Enviar" /></td>
-   
+
   </tr>
 </table>
 
 </form>
 
-<?
+<?php
 }
 function consulta_mails_promo () {
 
@@ -193,13 +236,13 @@ function consulta_mails_promo () {
   $result = mysql_query("select email,name from usuarios
                          where promo=1 ");
   if (!$result)
-    
+
 	return 0;
 
   if (mysql_num_rows($result)>0)
-    
+
 		$datos=db_result_to_array($result);
-	
+
 	return $datos;
 }
 
@@ -211,13 +254,13 @@ include("php/config_inc.php");
 
 $contador=0;
 $datos=consulta_mails_promo ();
-	
+
 $asunto="Información de ".$tienda_name.": ".$tema;
 
-$mensaje.="<br><br><br><br>".$tienda_name."<br>".$datos_vendedor."<br><br>".$estimado_cliente."";  
+$mensaje.="<br><br><br><br>".$tienda_name."<br>".$datos_vendedor."<br><br>".$estimado_cliente."";
 
 //Mensaje Contrarembolso
-		
+
 foreach ($datos as $row)
 	{
 
@@ -233,16 +276,16 @@ return $contador;
 }
 function mail_confirm_form($email,$ref,$portes) {
 ?>
-<form action="<?  echo $_SERVER['PHP_SELF'] ?>" method="post"> 
+<form action="<?  echo $_SERVER['PHP_SELF'] ?>" method="post">
 <table width="200" border="0" align="center">
   <tr>
     <th colspan='3'>Envio Mails a clientes</th>
-  
+
   </tr>
   <tr>
   <td align="left"> Asunto: </td><td align="left"><input name="asunto" type="text" size="55" /></td>
    </tr>
-   <tr> 
+   <tr>
 	<td align="left" colspan="2">Mensaje</td>
 	</tr>
 	<tr>
@@ -251,16 +294,16 @@ function mail_confirm_form($email,$ref,$portes) {
 
   <tr>
     <td colspan='3' align="center"><input type="submit" name="Submit" value="Enviar" /></td>
-   
+
   </tr>
 </table>
 <input name="email" type="hidden" value="<? echo $email ?>" />
 <input name="ref" type="hidden" value="<? echo $ref ?>" />
 <input name="portes" type="hidden" value="<? echo $portes ?>" />
 </form>
-<?
+<?php
 }
-//Mail de confirmaci�n de los d�as de tardanza del pedido 
+//Mail de confirmaci�n de los d�as de tardanza del pedido
 function mail_confirm ($texto,$email,$asunto,$ref,$envio) {
 //datos de config de los correos
 include("../config_inc.php");;
@@ -294,7 +337,7 @@ $mensaje.="</br>".$pedido."<br>";
 
 $mensaje.="<br>".$cliente."<br>";
 
-} 
+}
 else
 $mensaje="<br><br><br><br><br><br>".$texto."<br><br><br><br><br><br><br><br><br><br>";
 
@@ -304,7 +347,7 @@ require('class.phpmailer.php');
 require('class.smtp.php');
 
 $mail = new phpmailer();
-$mail->IsSMTP(); 
+$mail->IsSMTP();
 //$mail->Host = 'gloriabotonero.com';
 $mail->Host     = "gloriabotonero.com";
 
@@ -314,7 +357,7 @@ $mail->FromName = 'gloriabotonero.com';
 
 $mail->Subject = $asunto;
 
-$mail->AltBody = $asunto; 
+$mail->AltBody = $asunto;
 
 $mail->MsgHTML($mensaje);
 
@@ -371,7 +414,7 @@ return 0;
 
 //Si insertamos el c�digo de la petici�n entonces enviamos el mail
 //Mensaje Contrarembolso
-		
+
 //$sender="From: gloriabotonero@gloriabotonero.com \r\nContent-type: text/html\r\n";
 $mensaje="<br/>
 <b>".$tienda_name."</b>
@@ -382,16 +425,16 @@ Mail automático para recuperar contraseña
 <br><br>
 
 abajo verá un enlace, por favor pínchelo y en la página que se le abre
-escriba una nueva contraseña. 
+escriba una nueva contraseña.
 
 <br><br><br>Si al hacer clic en el enlace no se le abriera ninguna página, entonces copie esta dirección y pégela en su navegador. <br><br>
-Gracias y saludos <br/><br/><br/> ".$url."/tienda_gloria/php/admin/nuevo_pwd.php?coddeerrttyasd=".md5(trim($email))."&email=$email ";    
+Gracias y saludos <br/><br/><br/> ".$url."/tienda_gloria/php/admin/nuevo_pwd.php?coddeerrttyasd=".md5(trim($email))."&email=$email ";
 
 
 $mensaje.=$datos_vendedor;
 
 $mail = new phpmailer();
-$mail->IsSMTP(); 
+$mail->IsSMTP();
 //$mail->Host = 'gloriabotonero.com';
 $mail->Host     = "gloriabotonero.com";
 
@@ -401,7 +444,7 @@ $mail->FromName = 'gloriabotonero.com';
 
 $mail->Subject = utf8_decode($asunto);
 
-$mail->AltBody = $asunto; 
+$mail->AltBody = $asunto;
 
 $mail->MsgHTML($mensaje);
 
@@ -413,18 +456,12 @@ $mail->Username = 'info@gloriabotonero.com';
 
 $mail->Password = '54321energia12345';
 
-if(!$mail->Send()) {
-return false;
+$remitente="From: info@gloriabotonero.com  \n \r\nContent-type: text/html\r\n";
+
+if(/* !$mail->Send() */ !mail($sendto, $asunto, $mensaje, $remitente)) {
+    return false;
 } else {
-return true;
+    return true;
 }
- //indicamos el inicio de nuestro lcodigo php
-/*
-if ( mail($email, $asunto, $mensaje,$headers) )
 
-return true;
-
-else
-return false;
-*/
 }

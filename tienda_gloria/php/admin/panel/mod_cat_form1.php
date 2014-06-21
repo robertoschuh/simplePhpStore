@@ -8,17 +8,17 @@
 require ("../../fns.php");
 require ("../admin_fns.php");
 
-if (!session_is_registered("admin_user")) 
+if (!$_SESSION['admin_user'])
 {
-  echo "Usted no tiene autorización.<br>";
- echo "<a href='admin/acces.html'>Volver</a>";  
+  echo "Usted no tiene autorizaci?n.<br>";
+ echo "<a href='admin/acces.html'>Volver</a>";
 }
 
  panel_control ();
-//Obtenemos la lista entera de categorías habidas para enviarlas al formulario
+//Obtenemos la lista entera de categor?as habidas para enviarlas al formulario
 $cats=get_categories();
 
-//enviamos la lsita de categorías al formulario para poder editarlas
+//enviamos la lsita de categor?as al formulario para poder editarlas
 mod_cat_form($cats);
 ?>
 

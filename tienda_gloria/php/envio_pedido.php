@@ -27,7 +27,7 @@ if ($_POST['Actualizar'] && !$_POST['Aceptar'] )
 	
 if (!valid_email($_POST["email"]))
 	{
-	echo "<center>El Email no es v&aacute;lido, por favor int�ntelo de nuevo, Gracias <br>";
+	echo "<center>El Email no es válido, por favor inténtelo de nuevo, Gracias <br>";
 	echo " <br><br><a href='javascript:history.back(-1)'  class='boton'>Volver</a><center><br>";
 	
 	echo exit;
@@ -36,7 +36,7 @@ if (!valid_email($_POST["email"]))
 	//comprobamos que es un pass v�lido
 if (pais_value($country)<0 || pais_value($country) >13)	
 {
-	echo "<center>Compruebe que ha escrito bien el pa&iacute;s, Gracias <br>";
+	echo "<center>Compruebe que ha escrito bien el país, Gracias <br>";
 
 	echo "<br><br> <a href='javascript:history.back(-1)'  class='boton'>Volver</a><center><br>";
 
@@ -47,12 +47,12 @@ if (pais_value($country)<0 || pais_value($country) >13)
 $result=update_datos_clientes($_POST['name'],$_POST['surname'],$_POST["address"],$_POST["city"],$_POST["state"],$_POST["zip"],$country,
 						$_POST["telf"],$_POST["celular"],$_POST["email"],$_POST["email2"]);
 if (!$result)
-echo "Sus datos no se han  podido actualizar por el momento , por favor int�ntelo m�s tarde,este sistema esta en obras momentaneamente Gracias<br> resultado: $result";
+echo "Sus datos no se han  podido actualizar por el momento , por favor inténtelo más tarde,este sistema esta en obras momentaneamente Gracias<br> resultado: $result";
 	else
 
-	echo "<p><h2>Actualizaci&oacute;n de sus datos correcta<br></h2></p>
-		 <p>Recuerde que para que se reconozcan los cambios en sus pr&oacute;ximas compras deber&aacute; salir de la tienda.<br>
-		 De lo contrario la actualizaci&oacute;n ser&aacute; v&aacute;lida solo para esta compra.</p>";
+	echo "<p><h2>Actualización de sus datos correcta<br></h2></p>
+		 <p>Recuerde que para que se reconozcan los cambios en sus próximas compras deberá volver a iniciar sesión en la tienda.<br>
+		 De lo contrario la actualización será válida solo para esta compra.</p>";
 	echo " <p ><a href='javascript:history.back();' class='anadir_cesta'>Volver</a></p>";
 	
 	
@@ -102,12 +102,12 @@ $pedido=su_pedido ();
 
 $asunto="Pedido Nuevo";
 $mensaje="\nEnvio Pedido\n <br><span class='text_mails'>Nombre</span> : 
-		  ". utf8_encode($_REQUEST['name'])."<br>Direcci&oacute;n:  ". utf8_encode($_REQUEST['address'])."
+		  ". utf8_encode($_REQUEST['name'])."<br>Dirección:  ". utf8_encode($_REQUEST['address'])."
 		  <br>Ciudad: ".$_REQUEST['city']."
 		  <br>Estado:  ".$_REQUEST['state']."
 		  <br> zip:  ". $_REQUEST['zip'] ."<br><span class='text_mails'>
 		  Pa&iacute;s</span>:  ".$_REQUEST['country']."<br> 
-		  <span class='text_mails'>Tel&eacute;fono</span>:  ".$_REQUEST['telf'] ."<br> 
+		  <span class='text_mails'>Teléfono</span>:  ".$_REQUEST['telf'] ."<br> 
 		  <span class='text_mails'>Movil</span>:  ".$_REQUEST['celular']. 
 	"<br><span class='text_mails'>Email</span>:  ".$_REQUEST['email']."<br>
 	     <span class='text_mails'> Referencia</span>:   ".$ref_pedido['ref']."<br/>

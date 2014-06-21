@@ -1,6 +1,8 @@
-﻿<?php
+<?php
 @session_start();
-$row=array();
+header("Content-Type: text/html;charset=utf-8");
+
+$row = array();
 $user['country']=array();
 //Cabecera
 if (!  ($_SESSION['idioma' ] == 2 ) )
@@ -161,16 +163,16 @@ $forget_pwd="Do you forget your password?, please clic here";
 $register_form=" Register for continue shopping";
 $confirm_mail_pwd_rescue="Please enter two times your Email acount for send to you a link where you can put a new password again";
 $no_more_promo="No more Promo Email please";
-$texto_ofertas ="INGL�S Deseo recibir noticias, informaci�n o novedades, relacionadas solo con productos o servicios de 
-				www.gloriabotonero.com, pudiendo ser desactivada la opci�n en cualquier momento";
+$texto_ofertas ="INGLÉS Deseo recibir noticias, información o novedades, relacionadas solo con productos o servicios de 
+				www.gloriabotonero.com, pudiendo ser desactivada la opción en cualquier momento";
 
 }
 //TEXTOS
 if (!  ($_SESSION['idioma' ] == 2 ) )
 {
 $wellcome="<br><br><br>Bienvenidos a la tienda del gloria Botonero";
-$redirect="<br><br>Ha salido correctamente, <br> en breves segundos ser� redireccionado a la tienda";
-$no_articles="<br><br><br><br><br><br><b>Lo sentimos, por el momento no hay art�culos en esta categor�a</b>";
+$redirect="<br><br>Ha salido correctamente, <br> en breves segundos será redireccionado a la tienda";
+$no_articles="<br><br><br><br><br><br><b>Lo sentimos, por el momento no hay artículos en esta categoría</b>";
 }
 else
 {
@@ -256,10 +258,10 @@ $ok_message="<div class='message' align='center'><br><br><br><br><br><br><br><b>
 	<br><br><br><b>Gracias por confiar en nosotros</b>
 	</div>"; 
 	/*$ok_message="<div class='message' align='center'><br><br><br><br><br><br><br><b>Proceso terminado, provisionalmente por razones de mantenimiento no podemos atender su pedido por la web, por ello le pedimos se ponga en contacto con nosotros por tel�fono , Gracias: <h3>955904274</h3<h3>615623896</h3></b><br>";*/			  
-	$error_message="<center> <div class='message'><br><br><br><br> Su pedido NO se ha podido realizar por un error de la red. Disculpe las molestias. Por favor int�ntelo más tarde, gracias.</center> </div>";
+	$error_message="<center> <div class='message'><br><br><br><br> Su pedido NO se ha podido realizar por un error de la red. Disculpe las molestias. Por favor inténtelo más tarde, gracias.</center> </div>";
 	$datos="<br><br><br><br><b><center>No ha puesto todos los datos. </b><br><br> Por favor revise si falta alguno.<br><br>";	
-	$no_mail_send="<div class='message'><br><br><br><b>Ha ocurrido un error en la p�gina.</center></b>	
-	<br><br><br><br>No se ha podido atender su pedido por el momento.<br> Por favor inténtelo m�s tarde o póngase en contacto con nosotros, Gracias y disculpe las molestias.<br>
+	$no_mail_send="<div class='message'><br><br><br><b>Ha ocurrido un error en la pÁgina.</center></b>	
+	<br><br><br><br>No se ha podido atender su pedido por el momento.<br> Por favor inténtelo más tarde o póngase en contacto con nosotros, Gracias y disculpe las molestias.<br>
 </div>";	
 }
 //Paises
@@ -322,7 +324,7 @@ if ($_SESSION['valid_user']['country']==6)
  $country_value="Austria";
  
  }
- //Textos de cajitas de Login  
+ //Textos de cajitas de Login   
  if($_SESSION['idioma']==2)
 {
  $acceso_cliente="Acces Customer";
@@ -332,6 +334,6 @@ else
  $acceso_cliente="ACCESO CLIENTE";
 }
 //Mercancias enviadas
-$mercancia_enviada='La mercancía enviada por Gloria Botonero mediante la agencia Tourline Express está asegurada. Cualquier rotura o desperfecto causado durante el transporte, deber� ser comunicado a Gloria Botonero en un plazo m�ximo de 24 horas desde la recepción del paquete, de lo contrario se entenderá que se ha recibido en perfecto estado y no procederá la reclamación de la misma.<br><br>
+$mercancia_enviada='La mercancía enviada por Gloria Botonero mediante la agencia Tourline Express está asegurada. Cualquier rotura o desperfecto causado durante el transporte, deber� ser comunicado a Gloria Botonero en un plazo máximo de 24 horas desde la recepción del paquete, de lo contrario se entenderá que se ha recibido en perfecto estado y no procederá la reclamación de la misma.<br><br>
 La mercancía que viaje por otro medio de transporte, será responsabilidad del cliente.';
 //TEXTOS MAILS  envio pedido , restauraci�n contrase�a etc etc

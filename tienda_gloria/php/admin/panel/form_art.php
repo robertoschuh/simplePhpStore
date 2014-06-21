@@ -3,17 +3,14 @@
 
 
 
-<?
-
-require ("../../fns.php");
+<?php
+e ("../../fns.php");
 require ("../admin_fns.php");
 
 @session_start();
 
 
-
-
-if (session_is_registered("admin_user")) 
+if ($_SESSION['admin_user'])
 {
 	//Conseguimos un array con todas los nombres de las categorias y sus catid
 
@@ -23,20 +20,16 @@ if (session_is_registered("admin_user"))
 
 	if ( !$cats_array )
 
-	echo "No se han encontrado categorías , si existen categorías consulte con su administrador. Gracias ";
+	echo "No se han encontrado categor?as , si existen categor?as consulte con su administrador. Gracias ";
 	$url="add_art.php";
 	display_form_add_art ($cats_array,$url) ;
 }
 else
 
 {
-  echo "Usted no tiene autorización para ver esto, si es el administrador consulte con el soporte técnico, Gracias<br>";
+  echo "Usted no tiene autorizaci?n para ver esto, si es el administrador consulte con el soporte t?cnico, Gracias<br>";
  echo "<a href='admin/acces.html'>Volver</a>";
 
 
  exit;
 }
-
-?>
-
-

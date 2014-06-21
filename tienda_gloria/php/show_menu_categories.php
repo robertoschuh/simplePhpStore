@@ -18,11 +18,11 @@ $news_add=Novedades;
 
 $menu=show_categories ();
 //Url que abrir� mostrando caractr�sticas de esta categor�a
-$url = "categories.php?catid="."2"; 
-$url_escaparate = "escaparate.php"; 
+$url = "categories.php?catid="."2";
+$url_escaparate = "escaparate.php";
 
 
-if ( session_is_registered("admin_user") )
+if ( $_SESSION['admin_user'] )
 {
 	echo "
 		   <a title='�ltimos art�culos a�adidos' href='almacen.php'
@@ -30,27 +30,27 @@ if ( session_is_registered("admin_user") )
 		 ";
 }
 ?>                                                </td>
-    
+
   </tr>
-  
+
    <tr bgcolor="#3D7CBC">
-	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">      
+	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">
   <a title='Escaparate' href='<?php echo $url_escaparate ?>'  target='mainFrame' class='categories_menu_news'>
   <?php echo  "Escaparate" ?></a>    </tr>
-  
-  
-  
-  
-  
+
+
+
+
+
    <tr bgcolor="#3D7CBC">
-	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">      
+	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">
   <a title='�ltimos art�culos a�adidos' href='<?php echo $url ?>'  target='mainFrame' class='categories_menu_news'>
   <?php echo  $news_add ?></a>    </tr>
-  
-  
+
+
   <tr bgcolor="#3D7CBC">
     <td height="19">
-	
+
 	<?php
 display_menu($menu);
 ?></td>

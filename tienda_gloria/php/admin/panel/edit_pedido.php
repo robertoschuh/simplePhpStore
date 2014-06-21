@@ -1,4 +1,4 @@
-<?
+<?php
 @session_start();
 require ("../../fns.php");
 require ("../pedidos_fns.php");
@@ -15,8 +15,8 @@ include ("upload.php");
 </head>
 
 <body>
-<?
-if (!session_is_registered("admin_user")) 
+<?php
+if (!$_SESSION['admin_user'])
 {
 	echo " ";
 	exit;
@@ -26,25 +26,25 @@ if (isset($_POST['add']))  {
 
 $add=add_new_art($_POST['ref_art'],$_POST['ref'],$_POST['items_art']);
 if ($add==3)
-echo "<p class='msg'>No se ha podido añadir el artículo al pedido, 
-	posiblemente se encuentre ya añadido al pedido,</p>
-	<p class='msg'> y sino por favor inténtelo más tarde, Gracias</p>";
-	 
+echo "<p class='msg'>No se ha podido a?adir el art?culo al pedido,
+	posiblemente se encuentre ya a?adido al pedido,</p>
+	<p class='msg'> y sino por favor int?ntelo m?s tarde, Gracias</p>";
+
 else if ($add==1)
-echo "<p class='ok'>Artículo añadido al pedido $ref, Gracias</p>";
+echo "<p class='ok'>Art?culo a?adido al pedido $ref, Gracias</p>";
 
 else if ($add==2)
-echo "<p class='ok'>PROBLEMAS añadiendo artículo al pedido $ref,por favor inténtelo más tarde, Gracias</p>";
+echo "<p class='ok'>PROBLEMAS a?adiendo art?culo al pedido $ref,por favor int?ntelo m?s tarde, Gracias</p>";
 
 }
 if ($_GET['ref'])
 	$ref=$_GET['ref'];
 else
 	$ref=$_POST['ref'];
-//Comprobamos si hay artículos en el pedido	
+//Comprobamos si hay art?culos en el pedido
  if (!$article=edit_pedido($ref))
  {
- 	echo "<p class='msg'><h3>Pedido vacío, por favor añada artículos</h3></p>";
+ 	echo "<p class='msg'><h3>Pedido vac?o, por favor a?ada art?culos</h3></p>";
  	exit;
 }
 
@@ -53,12 +53,12 @@ if (isset($_POST['ok']))  {
 
 
 	if ( !update_articles_pedido($_POST['art']) )
- 	echo "<p class='msg'>No se han podido actualizar los artículos, 
-			disculpe las molestias</p>,<p> inténtelo mas tarde, Graciasw</p>";
-	
+ 	echo "<p class='msg'>No se han podido actualizar los art?culos,
+			disculpe las molestias</p>,<p> int?ntelo mas tarde, Graciasw</p>";
+
  	else
- 	echo "<p class='msg'>Pedido actualizado correctamente</p>"; 
-		
+ 	echo "<p class='msg'>Pedido actualizado correctamente</p>";
+
 }
 include('vistas/edit_pedido_html.php');
  ?>

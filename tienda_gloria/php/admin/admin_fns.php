@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 FUNCIONES A IMPLEMENTAR PARA EL PANEL DE ADMINISTRACI�N DE LA TIENDA
 function user_admin() //Comrpueba que eres el administrador y puedes entrar al panel de administraci�n de la tienda
@@ -7,7 +7,7 @@ function change_cat() //Cambiar nombre de categor�a
 function del_cat() // borrar categor�a de la tienda
 function add_art() //a�adir nuevo art�culo a la tienda
 function del_art() //Borrar art�culo
-function list_ships() //Listar pedidos 
+function list_ships() //Listar pedidos
 funcion archiv_ship() //Archivar pedidos
 function del_ship() //Borrar pedidos
 function ask_catid() //Consulta todos los catid de la tabla Categories
@@ -34,7 +34,7 @@ function login($username, $password)
   if (!$result)
      return 0;
 
-  if (mysql_num_rows($result)>0) //Si encuentra almenos 1 registro 
+  if (mysql_num_rows($result)>0) //Si encuentra almenos 1 registro
      return 1;
   else
      return 0;
@@ -54,12 +54,12 @@ function email_exists  ($email) {
   if (!$result)
      return 0;
 
-  if (mysql_num_rows($result)>0) //Si encuentra almenos 1 registro 
+  if (mysql_num_rows($result)>0) //Si encuentra almenos 1 registro
      return 1;
   else
      return 0;
 }
-function panel_control () 
+function panel_control()
 {
 ?>
 <script language="javascript" type="text/javascript">
@@ -69,34 +69,20 @@ function abrirVentana(){
 
 ventana_secundaria = window.open("salir.php","miventana","width=800,height=600,menubar=no")
 window.close()
-} 
+}
 </script>
 <?php
 //Si estamos viendo la tienda
-//if ($url=="/tienda_gloria/header.php") 
+//if ($url=="/tienda_gloria/header.php")
 //Si estamos en el panel de control (o en cualquier sitio con acceso del administrador)
 $categorias="categories_menu.php";
 $articulos="articles_menu.php";
 $salir="salir.php";
 $tienda= "../../../index.php ";
-$pedidos="consulta_pedidos.php"; 
+$pedidos="consulta_pedidos.php";
 $stock="stock.php";
 $tiket="tiket.php";
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-<title>Panel de Administración</title>
-<link href="file:///Z|/opt/lampp/htdocs/gloria.css" rel="stylesheet" type="text/css" />
-<link href="gloria.css" rel="stylesheet" type="text/css" />
-<style type="text/css">
-</style>
-<link href="../../gloria.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<p>&nbsp;</p>
-<p>&nbsp;</p>
 <table width="75%" border="0" align="center" cellpadding="9" cellspacing="5">
   <tr class='encabezadcos_tablas '>
     <td colspan="9" class="panel"><div align="center" class="Estilo1">MODO ADMINISTRADOR </div></td>
@@ -107,7 +93,7 @@ $tiket="tiket.php";
 	<div align="center">
 	<a href="<?php echo $categorias ?>" target="_self" class="opciones_tablas">CATEGORIAS</a></div></td>
     <td width="165">
-	<div align="center"><a href="<?php echo $articulos ?>" target="_self" class="opciones_tablas">ART&Iacute;CULOS</a></div></td>
+	<div align="center"><a href="<?php echo $articulos ?>" target="_self" class="opciones_tablas">ARTÍCULOS</a></div></td>
   <td width="165" >
   <div align="center"><a href="<?php echo $pedidos ?>" target="_self" class="opciones_tablas">PEDIDOS</a></div></td>
     <td width="165" >
@@ -119,24 +105,43 @@ $tiket="tiket.php";
  <td width='165'>
  <div align='center'><a href='promo.php' target='_self '  class="opciones_tablas">NOTICIAS</a></div></td>
   <td width='165' class="opciones_tablas" ><a href="get_refs.php" target="_self" class="opciones_tablas">REFS</a></td>
-    	
-
-
-
-	
-	
-
-
-	
-    <td width="220"><div align="center"><form><input type=button value="Salir" onClick="abrirVentana()"> 
+    <td width="220"><div align="center"><form><input type=button value="Salir" onClick="abrirVentana()">
 	</form></a></div></td>
   </tr>
 </table>
-
-</body>
-</html>
-
 <?php
+/*
+$output = "
+<table width='75%' border='0' align='center' cellpadding='9' cellspacing='5'>
+  <tr class='encabezadcos_tablas '>
+    <td colspan='9' class='panel'><div align='center' class='Estilo1'>MODO ADMINISTRADOR </div></td>
+  </tr>
+  <tr class='fondo_filas_panel'>
+
+  <td width='203'>
+  <div align='center'>
+  <a href='<?php echo $categorias ?>' target='_self' class='opciones_tablas'>CATEGORIAS</a></div></td>
+    <td width='165'>
+  <div align='center'><a href='<?php echo $articulos ?>' target='_self' class='opciones_tablas'>ART&Iacute;CULOS</a></div></td>
+  <td width='165' >
+  <div align='center'><a href='<?php echo $pedidos ?>' target='_self' class='opciones_tablas'>PEDIDOS</a></div></td>
+    <td width='165' >
+  <div align='center'><a href='<?php echo $stock ?>' target='_self' class='opciones_tablas'>STOCK</a></div></td>
+      <td width='165' >
+    <div align='center'><a href='<?php echo $tiket ?>' target='_self' class='opciones_tablas'>FACTURA</a></div></td>
+
+
+ <td width='165'>
+ <div align='center'><a href='promo.php' target='_self '  class='opciones_tablas'>NOTICIAS</a></div></td>
+  <td width='165' class='opciones_tablas' ><a href='get_refs.php' target='_self' class='opciones_tablas'>REFS</a></td>
+    <td width='220'><div align='center'><form><input type=button value='Salir' onClick='abrirVentana()'>
+  </form></a></div></td>
+  </tr>
+</table>";
+
+return $output;
+*/
+
 }
 //Menu categorias
 //Crea p�gina con el mune de las categor�as
@@ -148,8 +153,9 @@ function login_box()
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-<title>Documento sin t&iacute;tulo</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Tienda administración</title>
 </head>
 <body>
 <form id="form1" name="form1" method="post" action="index.php">
@@ -163,7 +169,7 @@ function login_box()
  <tr>
   <td colspan="2" ><input name="Submit" type="submit" id="Submit" value="Entrar" /></td>
   </tr>
-   
+
 </form>
 </body>
 </html>
@@ -186,8 +192,8 @@ $pwd=trim(md5($password));
   if (!$result)
      return 0;
 
-//Si encuentra almenos 1 registro 
-if (mysql_num_rows($result)>0) 
+//Si encuentra almenos 1 registro
+if (mysql_num_rows($result)>0)
 	{
     	$user=mysql_fetch_array($result);
   		return $user;
@@ -205,7 +211,7 @@ if (!empty($old_user))
   {
     // if they were logged in and are now logged out
     echo "Logged out.<br>";
-   
+
   }
   else
   {
@@ -220,7 +226,7 @@ else
 
 }
 }
-//Promociones 
+//Promociones
 function promo () {
 
 // connect to db
@@ -236,9 +242,9 @@ function promo () {
   if (mysql_num_rows($result)>0)
     {
 		$promo=mysql_fetch_array($result);
-		
+
 		if ($promo['value']==1)
-	
+
 	 	return $promo['promo'];
 	}
   else
@@ -260,9 +266,9 @@ function ver_promo () {
   if (mysql_num_rows($result)>0)
     {
 		$promo=mysql_fetch_array($result);
-		
+
 		if ($promo);
-	
+
 	 	return $promo['promo'];
 	}
   else
@@ -273,11 +279,11 @@ function imagen_proportion ($img) {
 
 $img_nueva_anchura=320;
 $img_nueva_altura=320;
-    // crear imagen nueva 
-    //$thumb = ImageCreate($img_nueva_anchura,$img_nueva_altura); 
-$thumb = imagecreatetruecolor($img_nueva_anchura,$img_nueva_altura); 
-    // redimensionar imagen original copiandola en la imagen 
- imagecopyresized ($thumb,$img,0,0,0,0,$img_nueva_anchura,$img_nueva_altura,ImageSX($img),ImageSY($img));  
+    // crear imagen nueva
+    //$thumb = ImageCreate($img_nueva_anchura,$img_nueva_altura);
+$thumb = imagecreatetruecolor($img_nueva_anchura,$img_nueva_altura);
+    // redimensionar imagen original copiandola en la imagen
+ imagecopyresized ($thumb,$img,0,0,0,0,$img_nueva_anchura,$img_nueva_altura,ImageSX($img),ImageSY($img));
 ImageJPEG($thumb,$img,85);
 }
 
@@ -286,11 +292,11 @@ $conn = db_connect();
 $query = "update usuarios
              set promo='0'
 			 where email='$email' ";
-			 
+
  $result = @mysql_query($query);
    if (!$result)
      return false;
-	 
+
 	 return true;
 
 
@@ -300,26 +306,26 @@ function change_pwd ($pwd,$email) {
 $conn = db_connect();
 $pwd=trim(md5($pwd));
 $query = "update usuarios
-             set password ='".$pwd."' where email='".$email."'";			 	
+             set password ='".$pwd."' where email='".$email."'";
  $result = mysql_query($query);
    if (!$result)
      return false;
-	 
+
 	 return true;
 
 
 
-} 
+}
 function update_quienes_page($campo1,$campo2) {
 $conn = db_connect();
 $query = "update whom_textos
              set campo1='$campo1',
-			 	 campo2='$$campo2' 
-				 ";			 
+			 	 campo2='$$campo2'
+				 ";
 $result = mysql_query($query);
    if (!$result)
      return false;
-	 
+
 	 return true;
 }
 
@@ -337,9 +343,9 @@ function ask_quienes_page () {
   if (mysql_num_rows($result)>0)
     {
 		$textos=mysql_fetch_array($result);
-		
+
 		if ($textos);
-	
+
 	 	return $textos;
 	}
   else
@@ -359,9 +365,9 @@ function ask_como_comprar_page () {
   if (mysql_num_rows($result)>0)
     {
 		$textos=mysql_fetch_array($result);
-		
+
 		if ($textos);
-	
+
 	 	return $textos;
 	}
   else
@@ -369,83 +375,83 @@ function ask_como_comprar_page () {
 }
 //function update_como_comprar_page ($array_textos)
 	function update_como_comprar_page ($cabecera1,$texto1,$cabecera2,$texto2,$cabecera3,$texto3,$cabecera4,$texto4,
-									$cabecera5,$texto5,$cabecera6,$texto6,$cabecera7,$texto7)							
+									$cabecera5,$texto5,$cabecera6,$texto6,$cabecera7,$texto7)
  {
 $conn = db_connect();
 
  /*$query = "update how_textos
              set campo1_header='$array_textos[campo1_header]',
-			 	 
-				 campo1='$array_textos[campo1]', 
-				 
-				 campo2_header='$array_textos[campo2_header]', 
 
-			 	 campo2='$array_textos[campo2]', 
+				 campo1='$array_textos[campo1]',
 
-			 	 campo3_header='$array_textos[campo3_header]', 
+				 campo2_header='$array_textos[campo2_header]',
 
-			 	 campo3='$array_textos[campo3]', 
+			 	 campo2='$array_textos[campo2]',
 
-			 	 campo4_header='$array_textos[campo4_header]', 
+			 	 campo3_header='$array_textos[campo3_header]',
 
-			 	 campo4='$array_textos[campo4]', 
+			 	 campo3='$array_textos[campo3]',
 
-			 	 campo5_header='$array_textos[campo5_header]', 
+			 	 campo4_header='$array_textos[campo4_header]',
 
-			 	 campo5='$array_textos[campo5]', 
+			 	 campo4='$array_textos[campo4]',
+
+			 	 campo5_header='$array_textos[campo5_header]',
+
+			 	 campo5='$array_textos[campo5]',
 
 			 	 campo6_header='$array_textos[campo6_header]',
-				 
-				 campo6='$array_textos[campo6]', 
 
-			 	 campo7_header='$array_textos[campo7_header]', 
+				 campo6='$array_textos[campo6]',
+
+			 	 campo7_header='$array_textos[campo7_header]',
 
 			 	 campo7='$array_textos[campo7]'
 				 ";*/
-				 
+
 $query = "update how_textos
              set campo1_header='$cabecera1',
-			 	 
-				 campo1='$texto1', 
-				 
-				 campo2_header='$cabecera2', 
 
-			 	 campo2='$texto2', 
+				 campo1='$texto1',
 
-			 	 campo3_header='$cabecera3', 
+				 campo2_header='$cabecera2',
 
-			 	 campo3='$texto3', 
+			 	 campo2='$texto2',
 
-			 	 campo4_header='$cabecera4', 
+			 	 campo3_header='$cabecera3',
 
-			 	 campo4='$texto4', 
+			 	 campo3='$texto3',
 
-			 	 campo5_header='$cabecera5', 
+			 	 campo4_header='$cabecera4',
 
-			 	 campo5='$texto5', 
+			 	 campo4='$texto4',
+
+			 	 campo5_header='$cabecera5',
+
+			 	 campo5='$texto5',
 
 			 	 campo6_header='$cabecera6',
-				 
-				 campo6='$texto6', 
 
-			 	 campo7_header='$cabecera7', 
+				 campo6='$texto6',
+
+			 	 campo7_header='$cabecera7',
 
 			 	 campo7='$texto7'
-				 ";				 
+				 ";
 
-			 
+
  $result = mysql_query($query);
- 
+
    if (!$result)
      return false;
-	 
+
 	 return true;
 }
 function login_panel_admin () {
 ?>
 <form id="form1" name="form1" method="post" action="index.php" a>
  <table align="center" cellpadding="15" cellspacing="9" >
- <tr> 
+ <tr>
  	<td colspan='2' bordercolor="#CCCCCC" bgcolor="#CCCCCC" class='panel'> <div align="center"><strong>Acceso al Panel de Control del Administrador </strong></div></td>
 	</tr>
 	<tr>
@@ -459,7 +465,7 @@ function login_panel_admin () {
 		  </div></td>
 	</tr>
 	<tr>
-    
+
     <td bgcolor="#E5EDE9" class='login' colspan="2" align="center">
     <!-- pass a session id to the query string of the script to prevent ie caching -->
 <img src="seguridad/securimage_show.php?sid=<?php echo md5(uniqid(time())); ?>"><BR/>
@@ -469,7 +475,7 @@ function login_panel_admin () {
 <tr>
 		<td colspan='2' >    <div align="center">
 		  <input name="Submit" type="submit" id="Submit" value="Acceder Panel de Control"  />
-	    </div></td>	   
+	    </div></td>
     </tr>
   </table>
 </form>
@@ -486,16 +492,16 @@ $user="Visitante";
 <tr> <td  colspan="5" align="left" class='usuariobienvenido'><b>Sr/Sra:  </b><?php echo $user ;?> </td>
   </tr>
    <tr> <td  colspan="5" align="left" class='usuariobienvenido'>
-<?php 
+<?php
 if  ( $_SESSION["valid_user"] )
 {
 ?>
    <a href='../../../tienda_gloria/index.php?loged_of=1' target="_parent" class='volver '> Salir</a> </td>
  </td>
- <?php 
+ <?php
 }
 ?>
-  </tr> 
+  </tr>
  </table>
 
 <?php
@@ -519,13 +525,13 @@ $query = "update usuarios
 				 telf='$telf',
 				  celular='$celular'
 				  where email='$email2'
-				  
+
 				 ";
-			 
+
 $result = mysql_query($query);
    if (!$result)
      return false;
-	 
+
 	 return true;
 }
 function pais_value($country) {
@@ -556,20 +562,20 @@ function pais_value($country) {
  $value=12;
    if (strtolower($country)=="austria")
  $value=13;
- 
+
  return $value;
- 
+
  }
  function fecha() {
 $date=date("j,m,Y");
 $date = str_replace (",", "-",$date);
 return $date;
 }
-//redondeo a dos decimales	
+//redondeo a dos decimales
 function redondear_dos_decimal($valor) {
 $float_redondeado=round($valor * 100) / 100;
 return $float_redondeado;
-} 				
+}
 function pet($emailMd5) {
 $connect=db_connect();
 if (!$connect)
@@ -588,11 +594,11 @@ $pet="SELECT CodPet from pets WHERE Md5='".trim($email)."' ";
   // check if username is unique
   $res=mysql_query($pet);
   $row=mysql_fetch_array($res);
-  
+
 if(!$row )
   return 0;
-  
-	
+
+
     $delete_pet = " DELETE from pets
              WHERE Md5='".$email."' ";
 mysql_query($delete_pet);

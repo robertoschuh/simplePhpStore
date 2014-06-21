@@ -1,15 +1,17 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
+
 function db_connect()
 {
 
-      $result = mysql_pconnect("localhost", "wwwglor_gloria", "t5(GUO3?oE%{");
+      $result = mysql_pconnect("localhost", "root", "nubi");
 	  if (!$result)
       return false;
-	 	
 
-	$local=mysql_select_db("wwwglor_botonero");
+
+	$local=mysql_select_db("wwwglor_gloria");
 	 if (!$local)
- 	 
+
       return false;
 else
    return $result;
@@ -24,5 +26,3 @@ function db_result_to_array($result)
 
    return $res_array;
 }
-
-?>

@@ -1,7 +1,7 @@
 <?
 require_once ("../../fns.php");
 require_once ("../admin_fns.php");
-if (session_is_registered("admin_user")) 
+if ($_SESSION['admin_user'])
 
 
 panel_control ();
@@ -13,12 +13,12 @@ panel_control ();
 <td> </td>
 <td> </td>
 
-<td align="left"> <a href='<?=$PHP_SELF."?opt=quienes" ?>'" >¿Quienes somos? </a> </td> 
+<td align="left"> <a href='<?=$PHP_SELF."?opt=quienes" ?>'" >?Quienes somos? </a> </td>
 </tr>
 </table>
 <?
 
-//Cambiamos los textos de las páginas
+//Cambiamos los textos de las p?ginas
 
 
 
@@ -31,37 +31,37 @@ mod_page_form_quienes_somos ();
 
 if ($mod_quienes )
 {
-	//Actualizamos la página de Queines somos
+	//Actualizamos la p?gina de Queines somos
 	if ( update_quienes_page( $_POST['campo1'],$_POST['campo2'] )  )
-	echo "<center>Actualización correcta<br></center>";
+	echo "<center>Actualizaci?n correcta<br></center>";
 	else
-	
-	echo "<center>Actualización INCORRECTA<br></center>";
-	
+
+	echo "<center>Actualizaci?n INCORRECTA<br></center>";
+
 
 }
 if ( $boton_como_comprar )
 {
-	
-	//Actualizamos la página de Como comprar
-	
-	if ( 
-	update_como_comprar_page( $_POST['campo1_header'],$_POST['campo1'] ,$_POST['campo2_header'],$_POST['campo2'] 
+
+	//Actualizamos la p?gina de Como comprar
+
+	if (
+	update_como_comprar_page( $_POST['campo1_header'],$_POST['campo1'] ,$_POST['campo2_header'],$_POST['campo2']
 	,$_POST['campo3_header'],$_POST['campo3'],$_POST['campo4_header'],$_POST['campo4'],$_POST['campo5_header'],$_POST['campo5']
-	,$_POST['campo6_header'],$_POST['campo6'],$_POST['campo7_header'],$_POST['campo7']) 
-	
+	,$_POST['campo6_header'],$_POST['campo6'],$_POST['campo7_header'],$_POST['campo7'])
+
 	)//Cierro el If
 
 
-	//Si se lleva acabo la actualización correctamente 
-	echo "<center>Actualización correcta<br></center>";
+	//Si se lleva acabo la actualizaci?n correctamente
+	echo "<center>Actualizaci?n correcta<br></center>";
 	else
-	echo "<center>Actualización INCORRECTA<br></center>";
+	echo "<center>Actualizaci?n INCORRECTA<br></center>";
 
 
 }
-	
-	
+
+
 ?>
 <link href="../../../gloria.css" rel="stylesheet" type="text/css">
 

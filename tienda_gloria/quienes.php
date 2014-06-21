@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Gloria Botonero</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
 
@@ -21,7 +21,7 @@ body {
 </style>
 </HEAD>
 <BODY leftMargin=0 topMargin=0 MARGINHEIGHT="0" MARGINWIDTH="0">
-<?
+<?php
 @session_start();
 
 if (!isset($_SESSION["init"]) )
@@ -30,7 +30,7 @@ if (!isset($_SESSION["init"]) )
 <a href='http://www.gloriabotonero.com/tienda_gloria/index.php' target="_parent"><center><h2> Ir a Tienda de <br>
 																							Gloriabotonero.com</h2></center> </a> 
 
-<?
+<?php
 exit;
 	}
 require ("php/fns.php");
@@ -65,7 +65,7 @@ Utilizamos materiales muy diversos, entre los que podemos destacar: barro, mader
     </div></td>
   </tr>
 </table>
-<?
+<?php
 
 foother () ;
 

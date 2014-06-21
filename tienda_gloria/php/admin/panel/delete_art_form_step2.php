@@ -14,24 +14,24 @@
 @session_start();
 
 require ("../../fns.php");
-require ("../admin_fns.php");	
+require ("../admin_fns.php");
 
-$catid=$_POST['catid'];		
-if (!session_is_registered("admin_user")) 
+$catid=$_POST['catid'];
+if (!$_SESSION['admin_user'])
 {
-  echo "Usted no tiene autorización para ver esto, si es el administrador consulte con el soporte técnico, Gracias<br>";
- echo "<a href='admin/acces.html'>Volver</a>"; 
- exit; 
+  echo "Usted no tiene autorizaci?n para ver esto, si es el administrador consulte con el soporte t?cnico, Gracias<br>";
+ echo "<a href='admin/acces.html'>Volver</a>";
+ exit;
 }
 
 
 	panel_control ();
-	
+
 		$arts=get_all_arts_from_categorie($catid);
 		if ($arts==NULL)
 		{
-			echo "<br><br>No hay Artículos en esta categoría , porfavor seleccione otra, Gracias";
-			echo "<br><a href='delete_art_form_step1.php'>Atrás</a>";
+			echo "<br><br>No hay Art?culos en esta categor?a , porfavor seleccione otra, Gracias";
+			echo "<br><a href='delete_art_form_step1.php'>Atr?s</a>";
 			exit;
 		}
 ?>
@@ -43,18 +43,18 @@ if (!session_is_registered("admin_user"))
 
     <tr bgcolor="#E9E9F8">
       <td><div align="center">
-        Seleccione categoria 
+        Seleccione categoria
           <select name="artid" class='box'>
           <?
-		//	Listamos todos los artículos de una categoría previamente seleccionada en "step 1/2 "
-		
+		//	Listamos todos los art?culos de una categor?a previamente seleccionada en "step 1/2 "
+
 
 
 		$catid=$_POST[catid];
 		//recojemos el valor de catid en la variable $catid  por medio de $_POST
-		
-	
-				foreach ($arts as $row) 
+
+
+				foreach ($arts as $row)
 		{
 		    $artid=$row['artid'];
 			$art_name=$row['art_name'];

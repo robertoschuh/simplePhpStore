@@ -1,38 +1,45 @@
-<link href="../../../gloria.css" rel="stylesheet" type="text/css" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:dc="http://purl.org/dc/terms/"
+  xmlns:foaf="http://xmlns.com/foaf/0.1/"
+  xmlns:og="http://ogp.me/ns#"
+  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xmlns:sioc="http://rdfs.org/sioc/ns#"
+  xmlns:sioct="http://rdfs.org/sioc/types#"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 
 <head>
 <title> Salir </title>
-
-</head>
+<link href="../../../gloria.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript">
 function cerrarVentana(){
-//la referencia de la ventana es el objeto window del popup. Lo utilizo para acceder al método close
+//la referencia de la ventana es el objeto window del popup. Lo utilizo para acceder al m?todo close
 window.close()
 }
-</script> 
+</script>
 </head>
 <body>
 
-<?
-
-
-//Salimos del panel de control Log Off y nos devuelve mensaje 
+<?php
+//Salimos del panel de control Log Off y nos devuelve mensaje
 require ("../../fns.php");
 require ("../admin_fns.php");
 @session_start();
 
-session_unregister("admin_user") ;
-session_unset();
+unset($_SESSION["admin_user"]) ;
 
-if (session_unregister("admin_user") )
+if (!isset($_SESSION["admin_user"]))
 {
-	echo "<h2 class='salir'>Usted Ha salido con éxito del Pandel del Administrador , Gracias</h2><br>";
+	echo "<h2 class='salir'>Usted Ha salido con ?xito del Pandel del Administrador , Gracias</h2><br>";
 	session_destroy() ;
-?>	
+?>
 <form>
 <input type=button value="Cerrar" onClick="cerrarVentana()">
-</form> 
+</form>
 
-<?
+<?php
 }
 ?>
+</body>

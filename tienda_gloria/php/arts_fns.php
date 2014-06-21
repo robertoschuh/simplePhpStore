@@ -1,4 +1,6 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
+
 function get_arts($catid)
 {
    // Petici�n a la base de datos de una lista de categor�as
@@ -527,21 +529,22 @@ function menu_articles()
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-<title>Borrar art�culos</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<title>Borrar artículos</title>
 <link href="../gloria.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <div class="menu_articulos"><table width="75%" border="0" align="center" cellpadding="15" cellspacing="9">
   <tr bgcolor="#CED0C9">
     <td colspan="3"><div  class='menu' align="center" >
-      <div align="center">Men&uacute; Art�culos </div>
+      <div align="center">Menú Artículos </div>
     </div></td>
   </tr>
   <tr bgcolor="#CED0C9">
     <td><div align="center"><a href="form_art.php">Insertar</a></div></td>
     <td><div align="center"><a href="delete_art_form_step1.php">Borrar</a></div></td>
-	<td><div align="center"><font color="#000066"> Aparecer� la opci�n "modificar" junto a cada art�culo en la ventana de tienda</font></div></td>
+	<td><div align="center"><font color="#000066"> Aparecerá la opción "modificar" junto a cada artículo en la ventana de tienda</font></div></td>
 </tr>
 </table>
 </div>
@@ -694,7 +697,13 @@ function last_articles_add()
 function arts_info ($artid) {
  $conn = db_connect();
 
-//funci�n que nos devuelve el precio y demas datos de cada art�culo 
+ // Set query to Utf8
+ mysql_query("SET character_set_results = 'utf8', character_set_client = 'utf8',"
+     . " character_set_connection = 'utf8', character_set_database = 'utf8', "
+     . "character_set_server = 'utf8'", $conn);
+
+ 
+// función que nos devuelve el precio y demas datos de cada artículo 
 $result= mysql_query("SELECT *
 					 FROM articles
 					 WHERE artid='$artid' ");							
@@ -703,7 +712,8 @@ if (!$result)
  $num_arts = mysql_num_rows($result);	
  if ($num_arts ==0)
       return false;  
-$arts = mysql_fetch_array($result);		
+$arts = mysql_fetch_array($result);
+
 return $arts;
 }				
 function escaparate() 
@@ -757,23 +767,27 @@ return $result; //guarda los resultados en un array
 }	
 function display_refs($refs) {
 ?>
+
 <table width="60%" align="center" border='0'>
 <tr>
 <td class="pedido_items">Referencia</td > <td class="pedido_items">Nombre</td>
 <td class="pedido_items">Precio</td>
 </tr>
+
 <?php
 $contador=0;
 foreach ($refs as $row) {
-echo "<tr> <td class='items'> $row[ref] </td> <td class='items'>$row[art_name] </td>
-			<td class='items'>$row[art_price] �</td> </tr>
+echo "<tr> <td class='items'>". utf8_encode($row['ref']) ."</td> <td class='items'>". utf8_encode($row['art_name']) ."</td>
+			<td class='items'>" . $row['art_price'] ." €</td> </tr>
 	<tr><td colspan='3'> <hr> </td></tr>
 	"; 
 	$contador++;
 	}	
 ?>
+
 <tr> <td colspan='3'>Total artículos: <?php echo $contador ?></td></tr>
 </table>
+
 <?php
 }	
 function  ask_art_by_ref($ref) {

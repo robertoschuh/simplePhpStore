@@ -1,5 +1,5 @@
 <?php
-ini_set('error_reporting', 0);
+
 @session_start();
 if (!isset($_SESSION['init']))
     $_SESSION['init'] = 1;

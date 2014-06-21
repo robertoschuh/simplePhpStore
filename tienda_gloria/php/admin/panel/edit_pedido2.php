@@ -15,8 +15,8 @@ include ("upload.php");
 </head>
 
 <body>
-<?
-if (!session_is_registered("admin_user")) 
+<?php
+if (!$_SESSION['admin_user'])
 {
 	echo "XTT";
 	exit;
@@ -26,25 +26,25 @@ if (isset($add) ) {
 
 $add=add_new_art($ref_art,$ref,$items_art);
 if ($add==3)
-echo "<p class='msg'>No se ha podido añadir el artículo al pedido, 
-	posiblemente se encuentre ya añadido al pedido,</p>
-	<p class='msg'> y sino por favor inténtelo más tarde, Gracias</p>";
-	 
+echo "<p class='msg'>No se ha podido a?adir el art?culo al pedido,
+	posiblemente se encuentre ya a?adido al pedido,</p>
+	<p class='msg'> y sino por favor int?ntelo m?s tarde, Gracias</p>";
+
 else if ($add==1)
-echo "<p class='ok'>Artículo añadido al pedido $ref, Gracias</p>";
+echo "<p class='ok'>Art?culo a?adido al pedido $ref, Gracias</p>";
 
 else if ($add==2)
-echo "<p class='ok'>PROBLEMAS añadiendo artículo al pedido $ref,por favor inténtelo más tarde, Gracias</p>";
+echo "<p class='ok'>PROBLEMAS a?adiendo art?culo al pedido $ref,por favor int?ntelo m?s tarde, Gracias</p>";
 
 }
 if ($_GET['ref'])
 	$ref=$_GET['ref'];
 else
 	$ref=$_POST['ref'];
-//Comprobamos si hay artículos en el pedido	
+//Comprobamos si hay art?culos en el pedido
  if (!$article=edit_pedido($ref))
  {
- 	echo "<p class='msg'><h3>Pedido vacío, por favor añada artículos</h3></p>";
+ 	echo "<p class='msg'><h3>Pedido vac?o, por favor a?ada art?culos</h3></p>";
  	exit;
 }
 
@@ -53,12 +53,12 @@ if (isset($ok))  {
 
 
 	if ( !update_articles_pedido($art) )
- 	echo "<p class='msg'>No se han podido actualizar los artículos, 
-			disculpe las molestias</p>,<p> inténtelo mas tarde, Graciasw</p>";
-	
+ 	echo "<p class='msg'>No se han podido actualizar los art?culos,
+			disculpe las molestias</p>,<p> int?ntelo mas tarde, Graciasw</p>";
+
  	else
- 	echo "<p class='msg'>Pedido actualizado correctamente</p>"; 
-		
+ 	echo "<p class='msg'>Pedido actualizado correctamente</p>";
+
 }
 
  ?>
@@ -69,7 +69,7 @@ if (isset($ok))  {
 </tr>
 
  <form name='edit' action="<?=$PHP_SELF ?>" >
- 
+
 
  <table border="0" cellpadding="3" cellspacing="3">
  <tr>
@@ -88,35 +88,27 @@ if (isset($article) ){
  $i++;
 	}
 }
-
 ?>
-<tr > 	
+
+<tr >
 <td colspan="4"><input type="submit" name="ok"  value="ACTUALIZAR PEDIDO"/></td>
-</tr>	
-			
-<input type="hidden" name="ref"  value="<?=$ref ?>"/>	
-
-
+</tr>
+<input type="hidden" name="ref"  value="<?=$ref ?>"/>
 </form>
-
 </table>
 <form name="insert" action="<?=$PHP_SELF ?>">
  <table  >
 <tr>
-<th> Insertar artículo</th>
+<th> Insertar art?culo</th>
 </tr>
 <tr>
-<td>REF artículo</td><td><input type="text" name="ref_art"  /></td></tr>
+<td>REF art?culo</td><td><input type="text" name="ref_art"  /></td></tr>
 <td>Cantidad</td><td><input type="text" name="items_art"  /></td></tr>
 <td colspan="2" align="left">
 <input type="hidden" name="ref"  value="<?=$ref ?>"/>
-<input type="submit" name="add"  value="AÑADIR ARTICULO" /></td>
+<input type="submit" name="add"  value="A?ADIR ARTICULO" /></td>
 </tr>
-	
-
 </table>
 </form>
-
-
 </body>
 </html>

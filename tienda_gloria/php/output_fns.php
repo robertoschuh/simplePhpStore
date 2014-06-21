@@ -1,4 +1,6 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
+
 function extension_check($id_ext)
 {
 //Devuelve la extensi�n de la imagen del art�culo en cuestion
@@ -255,7 +257,7 @@ include ("idiomas/idiomas_fns.php");
     </tr>
     <tr>
       <td colspan="2" align="center"><label>
-        <input type="submit" name="action" id="Submit" value="<?php echo $no_more_promo?>" />        </label></td>
+        <input type="submit" name="action" id="Submit" value="<?php echo $no_more_promo; ?>" />        </label></td>
     </tr>
     
   </table>
@@ -278,12 +280,12 @@ function restore_pwd_form() {
     <tr>
       <td width="60" class="tablas_items" >email</td>
       <td width="144"><label>
-        <input type="text" name="email" id="email" />
+              <input type="text" name="email" id="email" placeholder="Email" />
       </label></td>
     </tr>
     <tr>
       <td class="tablas_items" >Repetir email</td>
-      <td>        <input type="text" name="email2" id="email2" />
+      <td>        <input type="text" name="email2" id="email2" placeholder="Repetir Email" />
 </td>
     </tr>
 	  <tr>
@@ -300,34 +302,31 @@ function restore_pwd_form() {
 
 }
 function change_pwd_form () {
+ 
 ?>
-	<form id="form1" name="form1" method="post" action=<?php  echo $_SERVER['PHP_SELF'] ?> >
-  <table width="220" border="0" class="box_no_more_promo">
-    <tr>
-      <td colspan="2"><div align="center">Login</div></td>
-    </tr>
-    <tr>
-      <td width="60" class="tablas_items" >Contrase&ntilde;a</td>
-      <td width="144"><label>
-        <input type="text" name="password" id="password" />
-      </label></td>
-    </tr>
-    <tr>
-      <td class="tablas_items" >Contrase&ntilde;a (repetir)</td>
-      <td>        <input type="text" name="password2" id="password2" />
-</td>
-    </tr>
-	  <tr>
-        <td colspan="2" align="center"><label>
-		 <input type="hidden" name="email" id="email" value="<?php echo $_GET['email']?>"/>
-          <input type="submit" name="Submit" id="Submit" value="OK" />          </label></td>
-    </tr>
-   
-    
+<h3>Por favor establezca una nueva contraseña) </h3>
+<form id="form1" name="form1" method="post" action=<?php  echo $_SERVER['PHP_SELF'] ?> >
+    <table  border="0" style="margin:0 auto;">
+        <tr>
+          <td colspan="2"><div align="center">Login</div></td>
+        </tr>
+        <tr>
+          <td width="60" class="tablas_items" >Contraseña</td>
+          <td width="144"><label>
+                  <input type="text" name="password" id="password" placeholder="Nueva contraseña" />
+          </label></td>
+        </tr>
+        <tr>
+          <td class="tablas_items" >Contraseña (repetir)</td>
+          <td>        <input type="text" name="password2" id="password2" placeholder="Repetir contraseña" />
+      </td>
+        </tr>
+              <tr>
+            <td colspan="2" align="center"><label>
+                     <input type="hidden" name="email" id="email" value="<?php echo $_GET['email']?>"/>
+              <input type="submit" name="Submit" id="Submit" value="OK" />          </label></td>
+        </tr>
   </table>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
 </form>
 <?php
 
@@ -451,24 +450,23 @@ $textos=ask_como_comprar_page ();
 }
 
 function texto_carrito () {
-
 ?>
-<div id="recordatorio">
+    <div id="recordatorio">
 
 
-<h2>RECUERDE </h2>
+    <h2>RECUERDE </h2>
 
-<table align="center">
-<tr>
-<td align="left">
-<ul >
-<li>Si desea añadir algún artículo a su compra haga clic en<b> seguir comprando</b>. </li>
-<li>Para modificar algunos de sus datos, introduzca la informaci�n correcta y haga clic en <b>Actualizar mis datos</b>.</li>
-<li>Elija el modo de pago y envío.</li>
-<li>Revise sus datos y si son correctos haga clic en <b>Hacer pedido</b>.</li>
-</ul>
-</td>
-</tr>
-</table>
-</div>
-<?php }?>
+    <table align="center">
+    <tr>
+    <td align="left">
+    <ul >
+    <li>Si desea añadir algún artículo a su compra haga clic en<b> seguir comprando</b>. </li>
+    <li>Para modificar algunos de sus datos, introduzca la informaci�n correcta y haga clic en <b>Actualizar mis datos</b>.</li>
+    <li>Elija el modo de pago y envío.</li>
+    <li>Revise sus datos y si son correctos haga clic en <b>Hacer pedido</b>.</li>
+    </ul>
+    </td>
+    </tr>
+    </table>
+    </div>
+<?php }

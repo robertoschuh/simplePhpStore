@@ -1,36 +1,35 @@
-<link href="../../gloria.css" rel="stylesheet" type="text/css" />
-<?
+<?php
 require_once("../fns.php");
 require_once("admin_fns.php");
-
+?><div style="margin: 150px auto; text-align: center;"> <?php
 
 if ($_POST) {
 if ( trim($_POST['password'])===trim($_POST['password2']) )
 	{
 		//Cambiamos su Pwd
 		if ( change_pwd (trim($_POST['password']),trim($_POST['email'])) )
-		echo "<h3>Se ha modificado con éxito su contraseña, Gracias</h3>
+		echo "<h3>Se ha modificado con Ã©xito su contraseÃ±a, Gracias</h3>
 		<a href='http://www.gloriabotonero.com'>Ir a TIENDA </a>";
 		else
-		echo "<h3>No se ha podido llevar a cabo su gestión, porfavor inténtelo más tarde, Gracias</h3>";
+		echo "<h3>No se ha podido llevar a cabo su gestiÃ³n, porfavor intÃ©ntelo mÃ¡s tarde, Gracias</h3>";
 		exit;
 	}
 else  {
-echo "<h3>Las contraseñas no coinciden, por favor vuelva a introducirlas</h3>";
-      echo "<a href='javascript:history.back(1)'>Volver Atrás</a>";
+echo "<h3>Las contraseÃ±as no coinciden, por favor vuelva a introducirlas</h3>";
+      echo "<a href='javascript:history.back(1)'>Volver AtrÃ¡s</a>";
       exit;
 	}
 }
 
-//comrpobamps que exista petición vigente , sino salimos
+//comrpobamps que exista peticiï¿½n vigente , sino salimos
 if ( !comprueba_pet($_GET['coddeerrttyasd'] ) ){
-echo "No existe petición o ya la ha utilizado para modificar su contraseña";
+echo "No existe peticiÃ³n o ya la ha utilizado para modificar su contraseÃ±a";
 echo "<a href='http://www.gloriabotonero.com'><h3>Ir a TIENDA </h3></a>";
 exit;
 }
 
 //Mostramos el formulario para cambiar el pwd
 change_pwd_form () ;
-exit;
 
-?>
+?></div><?php
+exit;

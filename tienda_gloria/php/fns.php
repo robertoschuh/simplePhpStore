@@ -1,4 +1,6 @@
 <?php
+header("Content-Type: text/html;charset=utf-8");
+
 //Todas las funciones reunidas en este archivo
 require_once ("output_fns.php");
 require_once ("db_fns.php");

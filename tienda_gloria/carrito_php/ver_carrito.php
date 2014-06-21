@@ -1,4 +1,4 @@
-﻿<link href="carrito.css" rel="stylesheet" type="text/css">
+<link href="carrito.css" rel="stylesheet" type="text/css">
 <link href="../gloria.css" rel="stylesheet" type="text/css">
 <head>
 <title>Introduce Producto</title>

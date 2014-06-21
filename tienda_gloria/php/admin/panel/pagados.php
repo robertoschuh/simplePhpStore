@@ -8,19 +8,19 @@
 </head>
 
 <body>
-<?
+<?php
 @session_start();
 require ("../../fns.php");
 require ("../admin_fns.php");
 require ("../pedidos_fns.php");
 //Enviamos los pedidos que ya se han cobrado a una tabla de la bd para poder acceder a ellos en un futuro
 
-$admin_user=$_SESSION['admin_user']; 
-if (!session_is_registered("admin_user")) 
+$admin_user=$_SESSION['admin_user'];
+if (!$_SESSION['admin_user'])
 {
-  echo "Usted no tiene autorización.<br>";
- echo "<a href='admin/acces.html'>Volver</a>"; 
-  
+  echo "Usted no tiene autorizaci?n.<br>";
+  echo "<a href='admin/acces.html'>Volver</a>";
+
 }
 else
 {
@@ -41,10 +41,10 @@ $conn = db_connect();
 }
 
 else
-echo "<center>Ok elija otra opción del panel de control (arriba)</center>";	
+echo "<center>Ok elija otra opci?n del panel de control (arriba)</center>";
 ?>
 
-<?
+<?php
 }
 
 ?>

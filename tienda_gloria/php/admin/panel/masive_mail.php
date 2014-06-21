@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<?
+<?php
 require ("../admin_fns.php");
 require ("../pedidos_fns.php");
 require ("../../fns.php");
@@ -15,11 +15,11 @@ include("../../idiomas/idiomas_fns.php");
 
 @session_start();
 
-if (!session_is_registered("admin_user")) 
+if (!$_SESSION['admin_user'])
 {
-  echo "Usted no tiene autorización, si es el administrador consulte con el soporte técnico, Gracias<br>";
- echo "<a href='admin/acces.html'>Volver</a>"; 
- exit; 
+  echo "Usted no tiene autorizaci?n, si es el administrador consulte con el soporte t?cnico, Gracias<br>";
+ echo "<a href='admin/acces.html'>Volver</a>";
+ exit;
 }
 
 panel_control ();
@@ -30,8 +30,8 @@ if ( $_POST['asunto'] && $_POST['mensaje'] )
 {
 	$envio_mail=masive_mail( $_POST['asunto'] ,$_POST['mensaje']);
 	if ($envio_mail)
-		echo "Se ha enviado con éxito a $envio_mail clientes el mail, Gracias.";
-	else 
+		echo "Se ha enviado con ?xito a $envio_mail clientes el mail, Gracias.";
+	else
 		echo "EL mail NO se ha podido enviar";
 }
 ?>

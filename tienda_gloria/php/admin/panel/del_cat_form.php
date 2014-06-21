@@ -10,16 +10,16 @@ require ("../admin_fns.php");
 
 
 
-if (!session_is_registered("admin_user")) 
+if (!$_SESSION['admin_user'])
 {
-  echo "Usted no tiene autorización para ver esto, si es el administrador consulte con el soporte técnico, Gracias<br>";
- echo "<a href='admin/acces.html'>Volver</a>";  
+  echo "Usted no tiene autorizaci?n para ver esto, si es el administrador consulte con el soporte t?cnico, Gracias<br>";
+ echo "<a href='admin/acces.html'>Volver</a>";
 }
 
 panel_control ();
-$cats_array=get_all_cats(); //Obtenemos array con la lista de todas las categorías
+$cats_array=get_all_cats(); //Obtenemos array con la lista de todas las categor?as
 
-display_cats_arts_delete ($cats_array, $option="1"); //Mostamos formulario para poder borrar artículo en concreto
+display_cats_arts_delete ($cats_array, $option="1"); //Mostamos formulario para poder borrar art?culo en concreto
 													//inicializamos option a 1 porque se trata de las categorias
 													//cuando se trate de los articulos pondremos 2
 

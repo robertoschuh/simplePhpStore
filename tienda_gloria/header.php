@@ -1,14 +1,14 @@
-﻿<?php
+<?php
 if (isset($_SESSION['admin_user'])) {
-$admin_user=$_SESSION['admin_user']; 
+    $admin_user=$_SESSION['admin_user']; 
 }
 //require ("php/fns.php");
 require_once ("php/fns.php");
 require_once ("php/admin/admin_fns.php");
 if (!  ($_SESSION['idioma' ] == 2 ) )
 {
-$info="info.php";
-$quienes="quienes.php";
+    $info="info.php";
+    $quienes="quienes.php";
 }
 else
 {
@@ -20,7 +20,8 @@ $quienes="quienes_eng.htm";
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 
 <title>Gloria Botonero</title>
 <link href="gloria.css" rel="stylesheet" type="text/css" />
@@ -43,7 +44,7 @@ $quienes="quienes_eng.htm";
     <a href='<?php echo $info ?>' target='mainFrame' class='bread'  > <?php echo $how ?></a>&nbsp;
               <?php
 	$result=promo ();
-	if (!$result==0) {
+	if (!$result == 0) {
 ?><a href='php/ver_promo.php' target='mainFrame' class='bread'  ><?php echo $promo; ?></a><?php } ?>&nbsp;
 <a href='<?php echo $url_contacto ?>' target='mainFrame' class='bread' ><?php echo $contact ?></a>&nbsp;
 </div>

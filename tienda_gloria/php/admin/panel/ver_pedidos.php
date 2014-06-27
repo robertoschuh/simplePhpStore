@@ -11,10 +11,10 @@
 
 <?php
 
-require ("../../fns.php");
-require ("../admin_fns.php");
-require ("../pedidos_fns.php");
-require ("../render_pedidos_fns.php");
+require_once ("../../fns.php");
+require_once ("../admin_fns.php");
+require_once ("../pedidos_fns.php");
+require_once ("../render_pedidos_fns.php");
 
 $servidos = $_GET['servidos'];
 

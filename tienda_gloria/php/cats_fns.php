@@ -119,11 +119,11 @@ $result = mysql_query($query);
 
 
 function show_menu_categories() {
-require ("fns.php");
+    require ("fns.php");
 
-$menu=show_categories ();
+    $menu = show_categories ();
 
-display_menu($menu);
+    display_menu($menu);
 
 }
 
@@ -146,12 +146,12 @@ $query = "SELECT *
    if ($num_arts == 0)
        return false;
    $result = db_result_to_array($result);
+  
    return $result; //guarda los resultados en un array
 
 }
 function display_menu($menu)
 {
-@session_start();
 ?>
 <head>
 <script language="javascript" type="text/javascript">

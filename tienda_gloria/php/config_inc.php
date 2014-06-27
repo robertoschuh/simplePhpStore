@@ -1,6 +1,6 @@
 <?php
 //Datos de envío de correos
-$url="http://www.gloriabotonero.com/tienda_gloria";
+$url="http://gloriabotonero.local/tienda_gloria";
 $panel_control=$url."/tienda_gloria/php/admin/panel/acces.php";
 $mail_webmaster="info@gloriabotonero.com";
 // To send HTML mail, the Content-type header must be set
@@ -19,7 +19,7 @@ Tel&eacute;fono y Fax + (34) 955904274
 Móvil + (34) 615623896 </p><br>
 <p>
 <b>E-mail</b>: info@gloriabotonero.com<br>
-<b>Soporte técnico</b>: rob@masquebits.com <br>
+<b>Soporte técnico</b>: soporte@masquebits.com <br>
 <b>Web:</b> www.gloriabotonero.com </p><br>
 ";
 //$banner="<img src='../banner.jpg' alt='Tienda Gloria Botonero'/>";

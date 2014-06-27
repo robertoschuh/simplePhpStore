@@ -1,5 +1,5 @@
 <link href="../gloria.css" rel="stylesheet" type="text/css" />
-<META http-equiv=content-type content="text/html; charset=iso-8859-1">
+<META http-equiv=content-type content="text/html; charset=utf-8">
 
 <table width="100%" border="0" cellpadding="5" cellspacing="1">
   <tr bgcolor="#336699" >
@@ -51,8 +51,6 @@ if ( $_SESSION['admin_user'] )
   <tr bgcolor="#3D7CBC">
     <td height="19">
 
-	<?php
-display_menu($menu);
-?></td>
+<?php display_menu($menu); ?></td>
   </tr>
 </table>

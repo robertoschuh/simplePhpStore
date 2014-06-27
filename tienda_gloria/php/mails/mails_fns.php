@@ -289,7 +289,7 @@ function mail_confirm_form($email,$ref,$portes) {
 	<td align="left" colspan="2">Mensaje</td>
 	</tr>
 	<tr>
-    <td colspan="2"><textarea name="mensaje" cols="65" rows="20"></textarea></td>
+    <td colspan="2"><textarea name="mensaje" cols="65" rows="20" class="message_email"></textarea></td>
   </tr>
 
   <tr>
@@ -308,9 +308,9 @@ function mail_confirm ($texto,$email,$asunto,$ref,$envio) {
 //datos de config de los correos
 include("../config_inc.php");;
 
-$pedido=pedido($ref,$envio);
+$pedido = pedido($ref,$envio);
 
-$cliente=datos_cliente($ref);
+$cliente = datos_cliente($ref);
 
 
 //fecha actual
@@ -327,22 +327,23 @@ $buscar="NO HAY EXISTENCIAS";
 if (!ereg($buscar,$asunto) )
 {
 $mensaje="<h4><font color='blue'>Estimado cliente:</h4></font><br>
-A continuaci&oacute;n le facilitamos los detalles de la compra que ha realizado en nuestra p&aacute;gina web:</p>
-<b>Pedido n&uacute;mero: ". $ref."</b> con fecha: ". $date ."</p>
+A continuación le facilitamos los detalles de la compra que ha realizado en nuestra página web:</p>
+<b>Pedido número: ". $ref."</b> con fecha: ". $date ."</p>
 <br>";
 
-$mensaje.="$texto";
+$mensaje.= "$texto";
 
-$mensaje.="</br>".$pedido."<br>";
+$mensaje.="</br>" . $pedido . "<br>";
 
-$mensaje.="<br>".$cliente."<br>";
+$mensaje.="<br>" . $cliente . "<br>";
 
 }
 else
 $mensaje="<br><br><br><br><br><br>".$texto."<br><br><br><br><br><br><br><br><br><br>";
 
-$mensaje.=$datos_vendedor;
+$mensaje.= $datos_vendedor;
 //llamamos a las clases phpmailer
+/*
 require('class.phpmailer.php');
 require('class.smtp.php');
 
@@ -375,20 +376,26 @@ return false;
 } else {
 return true;
 }
-/*
-$headers  = 'MIME-Version: 1.0\r\n';
-$headers .= 'Content-type: text/html; charset=iso-8859-1\r\n';
-$headers .= 'From: '.$remitente.' <'.$remitente.'>\r\n';
-$headers .= 'To: '.$email.' <'.$email.'>\r\n';
-//$headers .= 'Reply-To: '.$myname.' <$myreplyemail>\r\n';
+*/
+
+// Para enviar un correo HTML, debe establecerse la cabecera Content-type
+$cabeceras  = 'MIME-Version: 1.0' . "\r\n";
+$cabeceras .= 'Content-type: text/html; charset=charset=UTF-8' . "\r\n";
+$cabeceras .= 'To: ' . $email .' < ' . $email  . ">\r\n";
+
+//$cabeceras .= 'To: ' . $email .' < ' . $email . '>, tienda <gloriabotonero@gmail.com>' . "\r\n";
+$cabeceras .= 'From: Recordatorio <info@gloriabotonero.com>' . "\r\n";
+
 
  //indicamos el inicio de nuestro lcodigo php
-if ( mail($email, $asunto, $mensaje,$headers) )
 
-return true;
-else
-return false;
-*/
+if ( mail($to, '=?UTF-8?B?'.base64_encode($asunto).'?=', $mensaje, $cabeceras) ){
+    return true;
+}
+else {
+    return false;
+}
+
 }
 function restore_pwd ($email)  {
 

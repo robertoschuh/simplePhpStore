@@ -523,7 +523,7 @@ return 0;
  ?>
  <table border='0' width='100%' class='mail'><tr><td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td></tr>
 <tr bgcolor='#9292C8'>
-<td> Art�culo </td> <td> Unidades </td>
+<td> Artículo </td> <td> Unidades </td>
 </tr>
 <?php
 $total=0;
@@ -532,22 +532,20 @@ $total=0;
  $total=$total+$row['precio'];
 ?>
 <tr bgcolor="#CBCED8">
-<td><?php echo $row['nombre'] ?></td><td><?php echo $row['precio'] ?> �</td>
+<td><?php echo $row['nombre'] ?></td><td><?php echo $row['precio'] ?> €</td>
 </tr>
 <?php
 }
 ?>
 <tr>
-    <td colspan="2" align="right"><b>Total: </b><?php echo $total ;?> &euro;</td>
+    <td colspan="2" align="right"><b>Total: </b><?php echo $total ;?> €</td>
 </tr>
 </table>
 <?php
 return ob_get_clean();
 }
 function datos_cliente($ref) {
-?>
-<link href="../../gloria.css" rel="stylesheet" type="text/css" />
-<?php
+
 $conn = db_connect();
 $result = mysql_query("SELECT *
 		       FROM pedidos
@@ -559,9 +557,10 @@ $pedido =mysql_fetch_array($result);
 ob_start();
 ?>
 <table border='0' width='100%' class='mail'><tr>
-<td colspan='3' class='carrito_ver'><b>Sus datos de env&iacute;o</b></td>
+<td colspan='3' class='carrito_ver'><b>Sus datos de envío</b></td>
 </tr>
-<tr bgcolor='#9292C8'><td class="mini_text"> Nombre </td><td class="mini_text"> Direcci�n</td><td class="mini_text"> Ciudad</td> 	                      <td class="mini_text">Provincia </td><td class="mini_text">CP</td><td class="mini_text"> Pa�s</td>
+<tr bgcolor='#9292C8'><td class="mini_text"> Nombre </td><td class="mini_text"> Dirección</td><td class="mini_text"> Ciudad</td> 	                      
+    <td class="mini_text">Provincia </td><td class="mini_text">CP</td><td class="mini_text"> País</td>
 </tr>
 <tr bgcolor="#CBCED8">
 <td class="mini_text"><?php echo $pedido['name'] ?> </td><td class="mini_text"> <?php echo $pedido['address'] ?>
@@ -570,7 +569,7 @@ ob_start();
 </td><td class="mini_text"> <?php echo $pedido['country'] ?> </td>
 </tr>
 <tr bgcolor='#9292C8'>
-<td class="mini_text"> Email</td> <td class="mini_text">Tel�fono</td> <td class="mini_text"> Movil</td>
+<td class="mini_text"> Email</td> <td class="mini_text">Teléfono</td> <td class="mini_text"> Movil</td>
 <td class="mini_text"> Fecha</td>
 </tr>
 <tr bgcolor="#CBCED8">
@@ -599,7 +598,7 @@ function update_articles_pedido($article) {
 //return count($articles);
 $conn = db_connect();
 for ($i=0;$i<count($article);$i++) {
-//En el caso de que seleccione -1 no se actualiza el art�culo ,sino que se borra
+//En el caso de que seleccione -1 no se actualiza el artículo ,sino que se borra
 if ($article[$i][1] == -1)
 $sSQL=" DELETE from pedidos_articulos
         WHERE pedidoid ='".$article[$i][0]."'  ";

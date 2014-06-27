@@ -5,6 +5,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Panel de control tienda</title>
 <link href="../../../gloria.css" rel="stylesheet" type="text/css" />
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="../../js/admin.js" type="text/javascript" />
 </head>
 
 <body>

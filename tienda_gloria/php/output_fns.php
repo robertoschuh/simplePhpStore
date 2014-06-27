@@ -470,3 +470,8 @@ function texto_carrito () {
     </table>
     </div>
 <?php }
+
+function to_view ($data, $path) {
+
+    include($path);
+}

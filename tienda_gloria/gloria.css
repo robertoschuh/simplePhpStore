@@ -657,3 +657,24 @@ border:hidden
 }
 
 
+/* panel administración */
+DIV.pedido  {    
+    border: 1px solid;
+    border-radius: 13px;
+    padding: 0px 20px;
+    margin: 12px 10px;
+    background: #CDF5A1;
+    float: left;
+}
+
+.hide_cls {
+    display: none;
+}
+.selected_cls {
+    background: #5E7E2D;
+    color: #000;
+    font-weight: bolder;
+ }
+DIV.pedido UL li {
+    list-style: circle
+}

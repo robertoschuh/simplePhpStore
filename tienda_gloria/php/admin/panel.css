@@ -1,0 +1,25 @@
+BODY {font-family: 'Dosis', sans-serif;}
+
+/* panel administración */
+DIV.pedido  {    
+    border: 1px solid;
+    border-radius: 13px;
+    padding: 0px 20px;
+    margin: 12px 10px;
+    background: #CDF5A1;
+    float: left;
+}
+
+.hide_cls {
+    display: none;
+}
+.selected_cls {
+    background: #5E7E2D;
+    color: #fff;
+    font-weight: bolder;
+    font-size: 14px;
+    font-family: cursive;
+ }
+DIV.pedido UL li {
+    list-style: circle
+}

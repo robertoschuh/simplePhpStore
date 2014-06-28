@@ -60,6 +60,7 @@ function email_exists  ($email) {
      return 0;
 }
 function panel_control()
+
 {
 ?>
 <script language="javascript" type="text/javascript">
@@ -72,6 +73,7 @@ window.close()
 }
 </script>
 <?php
+
 //Si estamos viendo la tienda
 //if ($url=="/tienda_gloria/header.php")
 //Si estamos en el panel de control (o en cualquier sitio con acceso del administrador)
@@ -110,41 +112,10 @@ $tiket="tiket.php";
   </tr>
 </table>
 <?php
-/*
-$output = "
-<table width='75%' border='0' align='center' cellpadding='9' cellspacing='5'>
-  <tr class='encabezadcos_tablas '>
-    <td colspan='9' class='panel'><div align='center' class='Estilo1'>MODO ADMINISTRADOR </div></td>
-  </tr>
-  <tr class='fondo_filas_panel'>
-
-  <td width='203'>
-  <div align='center'>
-  <a href='<?php echo $categorias ?>' target='_self' class='opciones_tablas'>CATEGORIAS</a></div></td>
-    <td width='165'>
-  <div align='center'><a href='<?php echo $articulos ?>' target='_self' class='opciones_tablas'>ART&Iacute;CULOS</a></div></td>
-  <td width='165' >
-  <div align='center'><a href='<?php echo $pedidos ?>' target='_self' class='opciones_tablas'>PEDIDOS</a></div></td>
-    <td width='165' >
-  <div align='center'><a href='<?php echo $stock ?>' target='_self' class='opciones_tablas'>STOCK</a></div></td>
-      <td width='165' >
-    <div align='center'><a href='<?php echo $tiket ?>' target='_self' class='opciones_tablas'>FACTURA</a></div></td>
-
-
- <td width='165'>
- <div align='center'><a href='promo.php' target='_self '  class='opciones_tablas'>NOTICIAS</a></div></td>
-  <td width='165' class='opciones_tablas' ><a href='get_refs.php' target='_self' class='opciones_tablas'>REFS</a></td>
-    <td width='220'><div align='center'><form><input type=button value='Salir' onClick='abrirVentana()'>
-  </form></a></div></td>
-  </tr>
-</table>";
-
-return $output;
-*/
 
 }
 //Menu categorias
-//Crea p�gina con el mune de las categor�as
+//Crea página con el mune de las categorías
 
 //Cajita de login para entrar en el "panel de control"
 function login_box()

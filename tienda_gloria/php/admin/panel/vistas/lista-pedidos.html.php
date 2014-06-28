@@ -1,6 +1,7 @@
 <?php
     
 function to_view_articulos($articles) {
+    ?>Mostrar todos los pedidos desplegados <input type="checkbox" value="1" id="desplegados" /><?php
           $pedidos= array();
 
     foreach ($articles as $row) {

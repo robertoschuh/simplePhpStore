@@ -10,7 +10,6 @@
 	
 	table, p
 	{
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 11px;
 	}
 
@@ -330,7 +329,7 @@ A.categories_menu:hover {color:#003366;text-decoration:none;}
 	color: #CFD1EB;
 } 
 
-.fondo_filas_panel {background-color:; text-decoration:none}
+.fondo_filas_panel {text-decoration:none}
 
 .frame{height:900px; width:900px ; azimuth:center; margin:0px 0px 0px 200px; background-color:#8AADAE; border:medium; margin-top:0px}
 
@@ -657,24 +656,3 @@ border:hidden
 }
 
 
-/* panel administración */
-DIV.pedido  {    
-    border: 1px solid;
-    border-radius: 13px;
-    padding: 0px 20px;
-    margin: 12px 10px;
-    background: #CDF5A1;
-    float: left;
-}
-
-.hide_cls {
-    display: none;
-}
-.selected_cls {
-    background: #5E7E2D;
-    color: #000;
-    font-weight: bolder;
- }
-DIV.pedido UL li {
-    list-style: circle
-}

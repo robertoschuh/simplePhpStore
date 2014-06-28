@@ -12,5 +12,13 @@ $(document).ready(function() {
         pedido.removeClass( "hide_cls" ).addClass( "selected_cls" );
         });  
     
+    //desplegados
+    $("#desplegados").click( function(){
+        if( $(this).is(':checked') ) {
+            $( ".pedido ul" ).removeClass( "hide_cls" ).addClass( "selected_cls" );    
+        } else {
+            $( ".pedido ul" ).removeClass( "selected_cls" ).addClass( "hide_cls" );    
+        }
+    });
 });
 

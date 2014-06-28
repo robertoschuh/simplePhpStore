@@ -13,12 +13,11 @@
 require ("../../fns.php");
 require ("../admin_fns.php");
 
-if (!$_SESSION['admin_user'])
-//if (!$_SESSION["admin_user"] )
-{
-echo "acces denied";
-exit;
+if (!$_SESSION['admin_user']){
+    echo "acces denied";
+    exit;
 }
+
 panel_control () ;
 
 $refs = get_refs();

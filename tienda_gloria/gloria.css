@@ -656,3 +656,20 @@ border:hidden
 }
 
 
+/* system messages */
+
+div.status {
+    background-color: #f8fff0;
+    background-image: url(../../misc/message-24-ok.png);
+    border-color: #be7;
+    color: #234600;
+ 
+}
+div.messages {
+    background-position: 8px 8px;
+    background-repeat: no-repeat;
+    border: 1px solid;
+    margin: 6px auto;
+    padding: 10px 10px 10px 50px;
+    width: 50%;
+}

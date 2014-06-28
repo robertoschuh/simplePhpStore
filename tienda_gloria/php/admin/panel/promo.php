@@ -29,9 +29,9 @@ $activar=$_GET['activar'];
 	$result = mysql_query($query );
 
 		if ($result)
-	echo "Promoci?n DESACTIVADA";
+	echo "Promoción DESACTIVADA";
 	else
-	echo "la promoci?n no se ha podido Descativar";
+	echo "la promoción no se ha podido Descativar";
 	}
 //pARA cuando decidamos ACTIVAR la promoci?n
 	if ($activar==1)
@@ -43,9 +43,9 @@ $activar=$_GET['activar'];
 	$result = mysql_query($query );
 
 		if ($result)
-	echo "Promoci?n ACTIVADA";
+	echo "Promoción ACTIVADA";
 	else
-	echo "la promoci?n no ha podido ser Activada";
+	echo "la promoción no ha podido ser Activada";
 	}
 }
 
@@ -60,18 +60,27 @@ $promo=$_POST['promo'];
 
 	$result = mysql_query($query);
 
-	if (!$result)
-	echo "La nueva promoci?n NO se ha actualizado correctamente";
-	else
-	echo "La nueva promoci?n SI se ha actualizado correctamente";
-	echo $promo;
-
+        $msg = '';
+	if (!$result){
+            $msg = "La nueva promoción NO se ha actualizado correctamente.";
+        }
+	else {
+            $msg = "La nueva promoción se ha actualizado correctamente.";
+        }
+      
+    
 
 }
 
 if ($_SESSION['admin_user'])
 {
 	panel_control ();
+        
+        if (!empty($msg)){
+              ?><div class="messages status"><?php
+                  print $msg;
+             ?></div><?php
+        }
 	$promo=promo ();
 	?>
 	<table align='center'>
@@ -83,7 +92,7 @@ if ($_SESSION['admin_user'])
 	<form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" name="form_promo">
 	<table align='center'>
 	<tr>
-	<td><textarea name="promo" cols="140" rows="19"> <?php echo  utf8_encode($promo);  ?> </textarea> </td>
+	<td><textarea name="promo" cols="140" rows="19"> <?php echo  $promo;  ?> </textarea> </td>
 	</tr>
 	<tr>
    <td>  <input type="submit" name="Submit" value="modificar promoción" /></td>
@@ -92,6 +101,7 @@ if ($_SESSION['admin_user'])
 
 	</form>
 <?php
+  
 }
 else{
   echo "Usted no tiene permiso para acceder a este lugar";

@@ -1,6 +1,6 @@
 <?php
 echo "<div class='articulos'><td width='150px'> <table align='center' bgcolour='yellow'><tr><td  width='100%'>".$title."</td>	       </tr>
-<tr><td  align='center' align='center' class='nombre' >".$name."</td></tr>
+<tr><td  align='center' align='center' class='nombre' >".utf8_encode($name)."</td></tr>
 		<tr ><td class='ref' align='center'>Ref: ".$ref."</td></tr>
 	    <tr><td> <a href=".$url." class='images_links'><img src=../../tienda_gloria/php/admin/panel/img/arts/peq/".$img." class='img_med' alt=$name> 	         </a></td> </tr>
 		<tr><td class='descript' ><a href=$url class='ampliar'>Ampliar</a></td> </tr>
@@ -22,7 +22,7 @@ echo "<div class='articulos'><td width='150px'> <table align='center' bgcolour='
 					echo "<tr><td class='agotado'>Existencias: ". $existencias['unidades']."</td> </tr>";
 
 				if(isset($_SESSION["admin_user"]) )
-				if ($cat==2) //si estamos en novedades
+				if ($cat == 2) //si estamos en novedades
 				echo "<tr><td align='center'>
 							<a href='admin/panel/mod_art_form.php?artid=$row[artid]&ref=$ref&catid=$row[catid]&cat=2' 	  		       						class='modificar'> Modificar</a> </td> </tr>";
 				else

@@ -16,8 +16,8 @@ else
 $news_add=Novedades;
 
 
-$menu=show_categories ();
-//Url que abrir� mostrando caractr�sticas de esta categor�a
+$menu = show_categories ();
+// Category URL.
 $url = "categories.php?catid="."2";
 $url_escaparate = "escaparate.php";
 

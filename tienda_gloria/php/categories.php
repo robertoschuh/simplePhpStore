@@ -93,7 +93,7 @@ if ($catid != "especial")
   <a href='show_arts.php?catid=<?php echo $catid ?>' class="enlace_imagen">
   <img src="admin/panel/img/cats/<?php echo $img ?>" alt="i" class="img_big_cat " /></a>
   <a href="'show_arts.php?catid=$catid' class='ver_articulos'&gt;$show_articles"></a><br />
-  <span class="descripcion_ver_articulo"><?php echo  $cat_details ?></td>
+  <span class="descripcion_ver_articulo"><?php echo utf8_encode($cat_details); ?></td>
 </tr>
 </table>
 </div>

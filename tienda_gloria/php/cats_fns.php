@@ -1,11 +1,11 @@
 <?php
-//aqu� iran las funciones que muestran resultados en pantalla
+// Render functions
 
 function display_categories($cat_array)
 {
   if (!is_array($cat_array))
   {
-     echo "No hay categor�as actualmente disponibles<br>";
+     echo "No hay categorías actualmente disponibles<br>";
      return;
   }
 
@@ -187,7 +187,7 @@ document.all.table.td.background="../img/boton2.jpg";
   	<tr>
 
  	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onMouseOver="this.className='botones_cats_over' ">
-   <a  title='<?php echo $details; ?>' href='<?php  echo $url; ?>'  target='content' class='categories_menu' ><?php echo  $title; ?></a> </td>
+            <a  title='<?php echo utf8_encode($$details); ?>' href='<?php  echo $url; ?>'  target='content' class='categories_menu' ><?php echo  utf8_encode($title); ?></a> </td>
 	<?php
 	if ($_SESSION['admin_user'])
 	 echo "<td align='right'> Pos:  $pos </span></td>";

@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
 <script language="JavaScript">
 
@@ -40,7 +40,7 @@ $total=$_SESSION['portes'] + ($_SESSION['suma_total']*1.16) ;
 
         <td colspan="6">GLORIA BOTONERO <br />
 N.I.F. 52240218-L <br />
-C/ Carreras nº 58 <br />
+C/ Carreras nï¿½ 58 <br />
 41400 Ecija (Sevilla) <br />
 Tfno.Fax 955904274 <br />
 Email gloriabotonero@yahoo.es</td>
@@ -72,7 +72,7 @@ Email gloriabotonero@yahoo.es</td>
 		<table width="100%" border="1" cellpadding="5" cellspacing="5" bordercolor="#003366" align="center">
           <tr>
             <td width="20%"><div align="center">Referencia</div></td>
-            <td width="53%"><div align="center">Artículo</div></td>
+            <td width="53%"><div align="center">Artï¿½culo</div></td>
             <td width="53%"><div align="center">Unidades</div></td>
             <td width="27%"><div align="center">Precio</div></td>
 			<td width="27%"><div align="center">Total</div></td>
@@ -82,7 +82,7 @@ Email gloriabotonero@yahoo.es</td>
 		  <?
 		  
 		 
-		  //Llenamos la tabla con todos los artículos del pedido
+		  //Llenamos la tabla con todos los artï¿½culos del pedido
 		  for ($i=0 ; $i<=count($_SESSION['pedidos']) ; $i++)
 			{
 			 //Para que no muestre las filas vacias
@@ -102,10 +102,10 @@ Email gloriabotonero@yahoo.es</td>
 					
 						if (stock_discount ($artid_array['artid'], $_SESSION['pedidos'][$i][2]  ) )
 						echo "<i>Se han descontado correctamente la cantidad de:<b>  ".$_SESSION['pedidos'][$i][2].
-						"  </b>del artículo:  <b>". $_SESSION['pedidos'][$i][1]. " </b>del stock.</i> <br>";
+						"  </b>del artï¿½culo:  <b>". $_SESSION['pedidos'][$i][1]. " </b>del stock.</i> <br>";
 						else
 						echo "NO se han podido descontar del stock la cantidad de:<b>  ".$_SESSION['pedidos'][$i][2].
-						"  </b>del artículo:  <b>".$_SESSION['pedidos'][$i][1]. "  </b>, inténtelo más tarde.
+						"  </b>del artï¿½culo:  <b>".$_SESSION['pedidos'][$i][1]. "  </b>, intï¿½ntelo mï¿½s tarde.
 						".$artid_array['artid']." <br>";
 						
 					}
@@ -124,17 +124,17 @@ Email gloriabotonero@yahoo.es</td>
 			}
 			?>
 			<tr>
-			<td width="27%" colspan="5" align="right"><? echo "<h5>Total:</h5> ". $_SESSION['suma_total'] ." € +". ($_SESSION[		            'suma_total']/100)*16 ." € de IVA";?> </td>
+			<td width="27%" colspan="5" align="right"><? echo "<h5>Total:</h5> ". $_SESSION['suma_total'] ." ï¿½ +". ($_SESSION[		            'suma_total']/100)*16 ." ï¿½ de IVA";?> </td>
 			<tr>
-			<td colspan="3" align="right"> Portes = <? echo $_SESSION['portes']." €" ?> </td>
-			<td colspan="2"> RE = <? echo $_SESSION['re']." €" ?> </td>
+			<td colspan="3" align="right"> Portes = <? echo $_SESSION['portes']." ï¿½" ?> </td>
+			<td colspan="2"> RE = <? echo $_SESSION['re']." ï¿½" ?> </td>
 			</tr> 
 			<tr>
 			<td width="27%" colspan="5" align="right"><?
 			if ($_SESSION['re'])
 			{
 			//Si esta activado el RE 
-			 echo "<h5>Total</h5> ". 1.04*$total." €"; ?> </td>
+			 echo "<h5>Total</h5> ". 1.04*$total." ï¿½"; ?> </td>
 			<?
 			}
 		//Si NO esta activado el RE 
@@ -142,7 +142,7 @@ Email gloriabotonero@yahoo.es</td>
 		   if (!$_SESSION['re'])
 			{
 			//Si esta activado el RE 
-			 echo "<h5>Total</h5> ".$total." €"; ?> </td>
+			 echo "<h5>Total</h5> ".$total." ï¿½"; ?> </td>
 			<?
 			}
 			?>

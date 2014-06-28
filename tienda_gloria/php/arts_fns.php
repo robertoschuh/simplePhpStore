@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
+
 
 function get_arts($catid)
 {
@@ -107,7 +107,7 @@ if (!is_array($art_array))
   <?php
   $categorie=get_categorie_name ($_GET['catid']);
   ?>
-  <tr> <td  colspan="5" align="center" class='titulo_categoria_despliegue'> <?php echo $categorie['cat_name']?> </td>
+  <tr> <td  colspan="5" align="center" class='titulo_categoria_despliegue'> <?php echo utf8_encode($categorie['cat_name']); ?> </td>
   </tr>
    <tr> <td  colspan="5" align="left" class='usuariobienvenido'><?php is_registered_user (); ?> </td>
   </tr> 
@@ -129,23 +129,22 @@ if (!is_array($art_array))
 		$size=130;
 		$img=imagen_proportion ($ruta,$size);*/
 	
-	if(!$_SESSION["novedades"])
-	
-	$cat=$row ["catid"];
-	else
-	{
-		$cat=2;
-		$novedades="show_las_articles.php";
+	if(!$_SESSION["novedades"]) {	
+            $cat = $row ["catid"];
+        }
+	else{
+            $cat=2;
+            $novedades = "show_las_articles.php";
 	}
-	$title=corta_texto($title, 15);
+	$title = corta_texto($title, 15);
 
 
-	$details_short=corta_texto($details, 18);
+	$details_short = corta_texto($details, 18);
 	$url = "show_article_individual.php?artid=$row[artid]&cat=$row[catid]"; //descativado mientras no exista ese enlace
 	$ref=$row["ref"];
 	//Comprobamos si hay existencias de ese producto
 	$existencias=get_almacen($row[artid]);
-	//limitamos el n�mero de caracteres que aparecera en la breve descripci�n de art�culo
+	//limitamos el número de caracteres que aparecera en la breve descripción de artículo
     $price=$row["art_price"];
 	$name=$row["art_name"];
  //Creamos las filas quef contendr� los art�culos

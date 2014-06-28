@@ -435,7 +435,7 @@ function display_form_add_art($cats_list)
 <table width="20%"  align="center" cellpadding="5" cellspacing="5">
 
   <tr bgcolor="#E3E3ED">
-  <th colspan='2'> Datos del art�culo </th>
+  <th colspan='2'> Datos del artículo </th>
   </tr>
  <tr bgcolor="#E3E3ED">
     <td align='right' > Nombre </td>
@@ -483,7 +483,7 @@ function display_form_add_art($cats_list)
   </tr>
   
   <tr bgcolor="#E3E3ED">
-    <td colspan="3"  align='center'> <div align="left">Elija en qu&eacute; categor&iacute;a
+    <td colspan="3"  align='center'> <div align="left">Elija en quee categoría
         <select name="catid" id="catid" class='box'>
           <?php
 		
@@ -502,7 +502,7 @@ function display_form_add_art($cats_list)
     <th width="480"><div align="left">Precio 
       <input name="price" type="text" id="price" size="10" class='box'/>
     &euro;</div></th>
-    <td>Escapar�te
+    <td>Escaparate
     <input name="escaparate" type="checkbox" /></td>
    </tr>
   <tr bgcolor="#E3E3ED">

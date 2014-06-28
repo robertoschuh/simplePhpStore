@@ -153,21 +153,11 @@ $query = "SELECT *
 function display_menu($menu)
 {
 ?>
-<head>
 <script language="javascript" type="text/javascript">
 function imagenfondo() {
 document.all.table.td.background="../img/boton2.jpg";
 }
 </script>
-<style type="text/css">
-<!--
-.Estilo1 {
-	font-size: medium;
-	font-weight: bold;
-}
--->
-</style>
-</head>
 <body>
 <?php
  foreach ($menu as $row)
@@ -197,7 +187,7 @@ document.all.table.td.background="../img/boton2.jpg";
   	<tr>
 
  	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onMouseOver="this.className='botones_cats_over' ">
-   <a  title='<? echo $details ?>' href='<? echo $url ?>'  target='mainFrame' class='categories_menu' ><? echo  $title ?></a> </td>
+   <a  title='<?php echo $details; ?>' href='<?php  echo $url; ?>'  target='content' class='categories_menu' ><?php echo  $title; ?></a> </td>
 	<?php
 	if ($_SESSION['admin_user'])
 	 echo "<td align='right'> Pos:  $pos </span></td>";

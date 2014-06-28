@@ -23,7 +23,7 @@ $quienes="quienes_eng.htm";
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-<title>Gloria Botonero</title>
+<title>Gloria Botonero hgeader</title>
 <link href="gloria.css" rel="stylesheet" type="text/css" />
 </head>
 
@@ -38,15 +38,15 @@ $quienes="quienes_eng.htm";
         <p align="center">
         <img src="../banner.jpg" alt="banner" width="486" height="101" border="0" usemap="#Map4" /></p>
 <div id='tabla_menu' align="center"> 
-    <a href='php/show_last_articles.php ' target='mainFrame'  class='bread' >Inicio</a>&nbsp;
-    <a href='<?php echo $url_cart ?>' target='mainFrame' class='bread' ><?php echo $cart ?></a> &nbsp;
-    <a href='<?php echo $quienes ?>' target='mainFrame' class='bread'  ><?php echo $whom ?></a> &nbsp;
-    <a href='<?php echo $info ?>' target='mainFrame' class='bread'  > <?php echo $how ?></a>&nbsp;
+    <a href='php/show_last_articles.php '  class='bread' target='content'>Inicio</a>&nbsp;
+    <a href='<?php echo $url_cart ?>'  class='bread' target='content' ><?php echo $cart ?></a> &nbsp;
+    <a href='<?php echo $quienes ?>' class='bread' target='content'  ><?php echo $whom ?></a> &nbsp;
+    <a href='<?php echo $info ?>' class='bread'  target='content' > <?php echo $how ?></a>&nbsp;
               <?php
 	$result=promo ();
 	if (!$result == 0) {
-?><a href='php/ver_promo.php' target='mainFrame' class='bread'  ><?php echo $promo; ?></a><?php } ?>&nbsp;
-<a href='<?php echo $url_contacto ?>' target='mainFrame' class='bread' ><?php echo $contact ?></a>&nbsp;
+?><a href='php/ver_promo.php'  class='bread'  target='content'><?php echo $promo; ?></a><?php } ?>&nbsp;
+<a href='<?php echo $url_contacto ?>' class='bread' target='content' ><?php echo $contact ?></a>&nbsp;
 </div>
       </div></td>   
     </tr>

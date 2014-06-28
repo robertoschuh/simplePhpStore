@@ -25,8 +25,8 @@ $url_escaparate = "escaparate.php";
 if ( $_SESSION['admin_user'] )
 {
 	echo "
-		   <a title='�ltimos art�culos a�adidos' href='almacen.php'
-		  target='mainFrame' class='categories_menu_news'>� Almacen</a>
+		   <a title='últimos artículos añadidos' href='almacen.php'
+		  target='mainFrame' class='categories_menu_news'>Almacen</a>
 		 ";
 }
 ?>                                                </td>
@@ -35,7 +35,7 @@ if ( $_SESSION['admin_user'] )
 
    <tr bgcolor="#3D7CBC">
 	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">
-  <a title='Escaparate' href='<?php echo $url_escaparate ?>'  target='mainFrame' class='categories_menu_news'>
+  <a title='Escaparate' href='<?php echo $url_escaparate ?>'  target='content' class='categories_menu_news'>
   <?php echo  "Escaparate" ?></a>    </tr>
 
 
@@ -44,7 +44,7 @@ if ( $_SESSION['admin_user'] )
 
    <tr bgcolor="#3D7CBC">
 	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">
-  <a title='�ltimos art�culos a�adidos' href='<?php echo $url ?>'  target='mainFrame' class='categories_menu_news'>
+  <a title='últimos artículos añadidos' href='<?php echo $url ?>'  target='content' class='categories_menu_news'>
   <?php echo  $news_add ?></a>    </tr>
 
 

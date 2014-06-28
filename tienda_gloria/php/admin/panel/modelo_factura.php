@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"" />
 <title>Factura</title>
 <link href="../../../gloria.css" rel="stylesheet" type="text/css" />
 <script language="JavaScript">
@@ -20,55 +20,56 @@ function AbreVentanaPortes()  {
 </head>
 
 <body background="../../../img/marcadAgua.jpg">
-<?
+<?php
 @session_start();
 require ("../../fns.php");
 require ("../admin_fns.php");
 require ("../stock_fns.php");
 require ("../pedidos_fns.php");
 
-if ($_GET['salir']==1)
-session_destroy();
+if ($_GET['salir'] == 1){
+    session_destroy();
+}
 
-//Variables de sesión con los datos de  la factura ,fecha y número
+//Variables de sesiï¿½n con los datos de  la factura ,fecha y nï¿½mero
 if ($_POST['fecha'] )
-$_SESSION['factura']['fecha']=$_POST['fecha'];
+$_SESSION['factura']['fecha'] = $_POST['fecha'];
 if ($_POST['num_fact'] )
-$_SESSION['factura']['num_fact']=$_POST['num_fact'];
+$_SESSION['factura']['num_fact'] = $_POST['num_fact'];
 if ($_POST['forma_pago'] )
 $_SESSION['forma_pago'] = $_POST['forma_pago'];
 
-//Si hemos rellenado los datos del clientes creamos la sesión cliente
+//Si hemos rellenado los datos del clientes creamos la sesiï¿½n cliente
 if ($_POST['cliente'] )
 {
 if ($_POST['rsocial'] )
-$_SESSION[cliente][rsocial]=$_POST['rsocial'];
+$_SESSION[cliente][rsocial] = $_POST['rsocial'];
 if ($_POST['nif'] )
-$_SESSION[cliente][nif]=$_POST['nif'];
+$_SESSION[cliente][nif] = $_POST['nif'];
 if ($_POST['adress'] )
-$_SESSION[cliente][adress]=$_POST['adress'];
+$_SESSION[cliente][adress] = $_POST['adress'];
 if ($_POST['city'] )
-$_SESSION[cliente][city]=$_POST['city'];
+$_SESSION[cliente][city] = $_POST['city'];
 if ($_POST['cp'] )
-$_SESSION[cliente][cp]=$_POST['cp'];
+$_SESSION[cliente][cp] = $_POST['cp'];
 if ($_POST['state'] )
-$_SESSION[cliente][state]=$_POST['state'];
+$_SESSION[cliente][state] = $_POST['state'];
 if ($_POST['telf'] )
-$_SESSION[cliente][telf]=$_POST['telf'];
+$_SESSION[cliente][telf] = $_POST['telf'];
 if ($_POST['celular'] )
-$_SESSION[cliente][celular]=$_POST['celular'];
+$_SESSION[cliente][celular] = $_POST['celular'];
 if ($_POST['email'] )
-$_SESSION[cliente][email]=$_POST['email'];
+$_SESSION[cliente][email] = $_POST['email'];
 
 }
 
-if (!$_GET['continuar'])
-{
-$continuar=1;
-$next=0;
+if (!$_GET['continuar']){
+    $continuar=1;
+    $next=0;
 }
-else if ($_GET['continuar'])
-$continuar=$_GET['continuar'];
+else if ($_GET['continuar']) {
+    $continuar = $_GET['continuar'];
+}
 
 
 /*
@@ -82,46 +83,45 @@ $descuento = descuento opcional
  <tr >
  <td align="left">
  
-   <?
-echo "<a href='$PHP_SELF?imprimir=0'>$datos_factura </a>";
-
-
-?>   </td>
+<?php
+echo "<a href='" .$_SERVER["PHP_SELF"]. "?imprimir=0'> $datos_factura </a>";
+?>   
+ </td>
  <td width="100%"  align="left">
    <table width="80"  border="0" >
   <tr>
       <td ><label> 
-      <div align="left" class='items'><? echo  $_SESSION[cliente][rsocial] ?> </div>
+      <div align="left" class='items'><?php echo  $_SESSION['cliente']['rsocial'] ?> </div>
       </label></td>
   </tr>
   <tr>
-      <td ><div align="left" class='items'> NIF: <? echo  $_SESSION[cliente][nif] ?></div></td>
+      <td ><div align="left" class='items'> NIF: <?php echo  $_SESSION['cliente']['nif'] ?></div></td>
   </tr>
   <tr>
-      <td ><div align="left" class='items'><? echo  $_SESSION[cliente][adress] ?></div></td>
+      <td ><div align="left" class='items'><?php echo  $_SESSION['cliente']['adress'] ?></div></td>
   </tr>
   <tr>
-      <td ><div align="left" class='items'><? echo $_SESSION[cliente][city] ?> <? echo  $_SESSION[cliente][cp] ?> </div></td>
+      <td ><div align="left" class='items'><?php echo $_SESSION['cliente']['city'] ?> <? echo  $_SESSION[cliente][cp] ?> </div></td>
   </tr>
    <tr>
-      <td ><div align="left" class='items'> <? echo  $_SESSION[cliente][state] ?> </div></td>
+      <td ><div align="left" class='items'> <?php echo  $_SESSION['cliente']['state'] ?> </div></td>
   </tr>
 
 
     
 
   <tr>
-    <td align="left" ><div class='items'><? echo  $_SESSION[cliente][telf]."-".$_SESSION[cliente][celular] ?></div>
+    <td align="left" ><div class='items'><?php echo  $_SESSION['cliente']['telf']."-".$_SESSION['cliente']['celular'] ?></div>
       <div align="right"></div></td>
   </tr>
   <tr>
-    <td ><div align="left" class='items'><? echo  $_SESSION[cliente][email] ?></div>
+    <td ><div align="left" class='items'><?php echo  $_SESSION['cliente']['email'] ?></div>
       <div align="right"></div>
       <div align="right"></div></td>
   </tr>
 </table>
 </table>
-<?
+<?php
 if (!$_GET['pagina'] )
  $pagina=1;
  else
@@ -143,12 +143,12 @@ $next=0;
 <table border="1" width="80%" align="left">    
   <tr>
   <td>
-  <? echo "Página ".$pagina; ?>   </td>
+  <?php echo "PÃ¡gina ".$pagina; ?>   </td>
   
       <td> Fecha:
-<? echo $_SESSION['factura']['fecha'] ?>          </td>
+<?php echo $_SESSION['factura']['fecha'] ?>          </td>
           <td>
-          Número factura: <? echo $_SESSION['factura']['num_fact'] ?>          </td>
+          NÃºmero de factura: <?php echo $_SESSION['factura']['num_fact'] ?>          </td>
 </td>
 </tr>
 </table>
@@ -156,14 +156,14 @@ $next=0;
 <table align="center" cellpadding="0" cellspacing="0" width="101%">
     <tr>
       <td width="10%" class="enunciados" align="center">Referencia</td>
-            <td width="50%" class="enunciados" align="center">Artículo</td>
+            <td width="50%" class="enunciados" align="center">ArtÃ­culo</td>
       <td width="10%" class="enunciados" align="center">Unidades</td>
       <td width="10%" class="enunciados" align="center">Precio</td>
 	  <td width="20%" class="enunciados" align="center">Total</td>
   </tr>
   
     <span class="enunciados">
-    <?
+    <?php
 /*
 Comprobamos se se han activado variables
 como RE , discount etc etc
@@ -181,7 +181,7 @@ $_SESSION['discount']=$_POST['discount'];
 if ($_POST['discount']==-1)
  unset( $_SESSION['discount']);
  
- //Llenamos la tabla con todos los artículos del pedido
+ //Llenamos la tabla con todos los artï¿½culos del pedido
  $j=0; //contador para paginar resultado
 
  
@@ -192,7 +192,7 @@ if ($_POST['discount']==-1)
 		  	if ($_SESSION['pedidos'][$i][2] * $_SESSION['pedidos'][$i][3] !=0 && $continuar==1 )
 		  		{	
 					//Comprobamos de que esta referencia existe en nuestra Bd
-					if ( ask_exists($_SESSION['pedidos'][$i][0])==0 && $_GET['imprimir']!=1)
+					if ( ask_exists($_SESSION['pedidos'][$i][0]) == 0 && $_GET['imprimir']!=1)
 					$color="yellow";
 					
 					else 
@@ -206,10 +206,10 @@ if ($_POST['discount']==-1)
 					
 						if (stock_discount ($artid_array['artid'], $_SESSION['pedidos'][$i][2]  ) )
 						echo "<i>Se han descontado correctamente la cantidad de:<b>  ".$_SESSION['pedidos'][$i][2].
-						"  </b>del artículo:  <b>". $_SESSION['pedidos'][$i][1]. " </b>del stock.</i> <br>";
+						"  </b>del artÃ­culo:  <b>". $_SESSION['pedidos'][$i][1]. " </b>del stock.</i> <br>";
 						else
 						echo "NO se han podido descontar del stock la cantidad de:<b>  ".$_SESSION['pedidos'][$i][2].
-						"  </b>del artículo:  <b>".$_SESSION['pedidos'][$i][1]. "  </b>, inténtelo más tarde.
+						"  </b>del artÃ­culo:  <b>".$_SESSION['pedidos'][$i][1]. "  </b>, intÃ©ntelo mÃ¡s tarde.
 						".$artid_array['artid']." <br>";
 						
 						
@@ -218,14 +218,14 @@ if ($_POST['discount']==-1)
 		  ?>
     </span>
     <tr>
-    <td bgcolor="<? echo $color ?>"  class='items' align="center"><? echo $_SESSION['pedidos'][$i][0] ?></td>
-    <td   class='items' align="center"><? echo $_SESSION['pedidos'][$i][1] ?></td>
-    <td  class='items' align="center"><? echo $_SESSION['pedidos'][$i][2] ?></td>
-    <td  class='items' align="center"><? echo $_SESSION['pedidos'][$i][3] ?> €</td>
-	<td  class='items' align="center"><? echo $_SESSION['pedidos'][$i][2] * $_SESSION['pedidos'][$i][3] ;
-			?> €</td></tr>
+    <td bgcolor="<? echo $color ?>"  class='items' align="center"><?php echo $_SESSION['pedidos'][$i][0] ?></td>
+    <td   class='items' align="center"><?php echo $_SESSION['pedidos'][$i][1] ?></td>
+    <td  class='items' align="center"><?php echo $_SESSION['pedidos'][$i][2] ?></td>
+    <td  class='items' align="center"><?php echo $_SESSION['pedidos'][$i][3] ?> â‚¬</td>
+	<td  class='items' align="center"><?php echo $_SESSION['pedidos'][$i][2] * $_SESSION['pedidos'][$i][3] ;
+			?> â‚¬</td></tr>
 
-		  	<?
+		  	<?php
 			$j++;
 			//$_SESSION['suma_total']+=$_SESSION['pedidos'][$i][2] * $_SESSION['pedidos'][$i][3];
 			}
@@ -238,12 +238,12 @@ if ($_POST['discount']==-1)
 			{
 				?>
 				<table align="center" width="60%">	
-				<?	
+				<?php	
 				if ($next >0)
 					{
 				?>	
 				<td><a href='<? $PHP_SELF ?>?continuar=1&next=<? echo $next-$articulos_por_page ?>&pagina=<? echo $pagina-1 ?>'>Anteriores  </a> </td>
-				<?
+				<?php
 					}
 				if ($j > 4)
 				{
@@ -255,7 +255,7 @@ if ($_POST['discount']==-1)
 			?>
 			 </tr>
 
-			<?
+			<?php
 		
 			//Calculamos el total con iva , re y descuento si lo hubiera
 
@@ -270,7 +270,7 @@ if ($_POST['discount']==-1)
 </table>
 <div align="center"></div>
 <div align="center"></div>
-<?
+<?php
 
 if ($_GET['VerTotal']==1)
 {
@@ -280,22 +280,22 @@ if ($_GET['VerTotal']==1)
 
 
   <tr>
-  <td align="center" class="enunciados"> Forma de pago:  <? echo  $_SESSION['forma_pago'] ?>   </td>
-   <td align="center" class='items' width="20%" >Suma: <? echo $_SESSION['suma_total'] ?> € </td>
+  <td align="center" class="enunciados"> Forma de pago:  <?php echo  $_SESSION['forma_pago'] ?>   </td>
+   <td align="center" class='items' width="20%" >Suma: <?php echo $_SESSION['suma_total'] ?> â‚¬ </td>
   </tr>
   	<tr>
         <td> </td>
 
 	<td align="center" class='items'>
-	Portes:</h5> <? echo $_SESSION['portes'] ?> €	</td>
+	Portes:</h5> <?php echo $_SESSION['portes'] ?> â‚¬	</td>
 	</tr>
-    <?
+    <?php
 	if ($_SESSION['discount'] )
 	{
 	?>
     <td> </td>
 	<td align="center" class='items' width="20%"  >
-	Descuento:</h5> <? echo $_SESSION['discount']; ?> €	</td>
+	Descuento:</h5> <?php echo $_SESSION['discount']; ?> â‚¬	</td>
 	<?
 	}
 	?>
@@ -303,22 +303,22 @@ if ($_GET['VerTotal']==1)
             <td> </td>
 
 	<td align="center" class='items' width="20%" >
-	IVA </h5>  16% :<? echo ($_SESSION['suma_total']+$_SESSION['portes']-$_SESSION['discount'])*0.16 ;?>
+	IVA </h5>  16% :<?php echo ($_SESSION['suma_total']+$_SESSION['portes']-$_SESSION['discount'])*0.16 ;?>
 	<tr>
     <tr>
         <td> </td>
 
 	<td align="center" class='items' width="20%" >
-	RE:</h5>  4% : <? echo ($_SESSION['suma_total']+$_SESSION['portes'] -$_SESSION['discount'] ) * 0.04 ;?></td>
+	RE:</h5>  4% : <?php echo ($_SESSION['suma_total']+$_SESSION['portes'] -$_SESSION['discount'] ) * 0.04 ;?></td>
 	</tr>
 
     
-		<?
+		<?php
 	if ($_SESSION['re'])
 	{
 	?>
 	
-	<?
+	<?php
 	}
 	?>
 	
@@ -330,7 +330,7 @@ if ($_GET['VerTotal']==1)
 
     <td align="center" class='items' width="20%"  >
 	
-	Total:</h5> <? echo $apagar." € ";?></td>
+	Total:</h5> <? echo $apagar." ï¿½ ";?></td>
   </tr>
 	<tr>  </tr>
   </table>
@@ -338,15 +338,15 @@ if ($_GET['VerTotal']==1)
 <br /><br /><br /><br /><br /><br /><br /><br />
   <table border="0">
  <tr>
- <td align='left'  class='peq'>La mercancía enviada por Gloria Botonero mediante la agencia Tourline Express está asegurada. Cualquier rotura o desperfecto causado durante el transporte, deberá ser comunicado a Gloria Botonero en un plazo máximo de 24 horas desde la recepción del paquete, de lo contrario se entenderá que se ha recibido en perfecto estado y no procederá la reclamación de la misma."
+ <td align='left'  class='peq'>La mercancÃ­a enviada por Gloria Botonero mediante la agencia Tourline Express estÃ¡ asegurada. Cualquier rotura o desperfecto causado durante el transporte, deberÃ¡ ser comunicado a Gloria Botonero en un plazo mÃ¡ximo de 24 horas desde la recepciÃ³n del paquete, de lo contrario se entenderÃ¡ que se ha recibido en perfecto estado y no procederÃ¡ la reclamaciÃ³n de la misma."
 
-"La mercancía que viaje por otro medio de transporte, será responsabilidad del cliente".</td>
+"La mercancÃ­a que viaje por otro medio de transporte, serÃ¡ responsabilidad del cliente".</td>
 </tr>
 </table>
-<?
+<?php
 }
-//Mostrar menú administrador SOLO si imprimir no vale 1 ,sino hemos dado clik a Pantalla imprimir
-if ($_GET['imprimir']!=1)
+// Show admin menu.
+if ($_GET['imprimir'] != 1)
 {
 ?>
 <table width="100%" border="1" cellpadding="8" cellspacing="8">
@@ -362,19 +362,19 @@ if ($_GET['imprimir']!=1)
   <tr>
     <td width="10%" valign="top" class="anadir_cesta"><a href="<? $PHP_SELF ?>?next=<? echo $next ?>&amp;pagina=<? echo $pagina ?>">ACTUALIZAR</a></td>
     <td width="9%" valign="top" class="anadir_cesta"><span class="anadir_cesta">
-      <? 
+      <?php 
 	if ($_SESSION['re'])
 	{
 	 ?>
       <a href="<? $PHP_SELF ?>?re=2&next=<? echo $next ?>&pagina=<? echo $pagina ?> " >
-      <?
+      <?php
 	 echo "Descativar RE</a>";
 	 }
 	 else if (!$_SESSION['re'])
 	 {
 	 ?>
       <a href="<? $PHP_SELF ?>?re=1&next=<? echo $next ?>&pagina=<? echo $pagina ?> " >
-      <?
+      <?php
 	 echo "Activar RE</a>";
 	 }
 
@@ -395,7 +395,7 @@ if ($_GET['imprimir']!=1)
       </div>
     </form></td>
     <td width="11%" valign="top" class="anadir_cesta"><a href="<? $PHP_SELF ?>?imprimir=1&amp;next=<? echo $next ?>
-	&amp;pagina=<? echo $pagina ?>">Imprimir p&aacute;gina: <? echo $pagina ?></a></td>
+	&amp;pagina=<? echo $pagina ?>">Imprimir pÃ¡gina: <? echo $pagina ?></a></td>
     <td width="9%" valign="top" class="anadir_cesta"><p><a href="<? $PHP_SELF ?>?imprimir=1&amp;next=<? echo $next ?>&amp;VerTotal=1">TOTAL</a></p>
     <p><a href='<? $PHP_SELF ?>?stock_discount=1'>STOCK</a><a href='<? $PHP_SELF ?>?salir=1'></a></p></td>
     <td width="38%" valign="top" class="anadir_cesta">
@@ -433,7 +433,7 @@ if ($_GET['imprimir']!=1)
             <td colspan="2"><div align="center" class="input">Datos Cliente </div></td>
           </tr>
           <tr>
-            <td width="45%"><div align="right">Raz&oacute;n social </div></td>
+            <td width="45%"><div align="right">RazÃ³n social </div></td>
             <td width="55%"><label>
               
               <div align="left">
@@ -448,7 +448,7 @@ if ($_GET['imprimir']!=1)
             </div></td>
           </tr>
           <tr>
-            <td><div align="right">Direcci&oacute;n</div></td>
+            <td><div align="right">DirecciÃ³n</div></td>
             <td><div align="left">
               <input name="adress" type="text" id="adress" />
             </div></td>
@@ -472,13 +472,13 @@ if ($_GET['imprimir']!=1)
             </div></td>
           </tr>
           <tr>
-            <td><div align="right">Tel&eacute;fono</div></td>
+            <td><div align="right">TelÃ©fono</div></td>
             <td><div align="left">
               <input name="telf" type="text" id="telf" />
             </div></td>
           </tr>
           <tr>
-            <td><div align="right">Movil</div></td>
+            <td><div align="right">MÃ³vil</div></td>
             <td><div align="left">
               <input name="celular" type="text" id="celular" />
             </div></td>
@@ -501,7 +501,7 @@ if ($_GET['imprimir']!=1)
      </td>
   </tr>
 </table>
-<?
+<?php
 }
 ?>
 </body>

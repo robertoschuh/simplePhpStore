@@ -23,3 +23,15 @@ DIV.pedido  {
 DIV.pedido UL li {
     list-style: circle
 }
+
+DIV.pedido_manual {
+    margin: 0 auto;
+    border: 1px solid;
+    border-radius: 8px;
+    width: 50%;
+    background:  url('../../../img/FACTURA.jpg') #DEE6F5;
+}
+
+DIV.logo_factura {
+    float: left;
+}

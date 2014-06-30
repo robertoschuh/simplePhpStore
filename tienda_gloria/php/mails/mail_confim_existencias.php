@@ -89,7 +89,7 @@ if (!$_SESSION['admin_user'])
 <?php
 //Si hemos recibido por hidden el campo ref
 if ( $_POST['ref'] )
-$ref=$_POST['ref'];
+$ref = $_POST['ref'];
 
  
 
@@ -97,17 +97,17 @@ $ref=$_POST['ref'];
 	if ( $_POST['mensaje'] && $_POST['email'] && $_SESSION['admin_user'] )	
 	{
 	
-            if (!mail_confirm ( $_POST['mensaje'] ,$_POST['email'] ,$_POST['asunto'],$_POST['ref'],$_POST['portes']  ) )
+            if ( !mail_confirm($_POST['mensaje'] ,$_POST['email'] ,$_POST['asunto'],$_POST['ref'],$_POST['portes']) )
 
                     {
-                            echo "Su Mail NO se ha enviado correctamente, inténtelo de nuevo porfavor";
-                            echo $_POST['email'];
-                            echo $_POST['mensaje'];
+                            echo "<div class='messages status'>Su Mail NO se ha enviado correctamente, inténtelo de nuevo porfavor";
+                            echo "No sa ha podido enviar a ".$_POST['email'];
+                            echo "</div>";
                     }
                     else
                     {
-                    echo "Mail de confirmación correctamente enviado,en breve será redireccionado, Gracias<br>";
-                    echo "	<meta http-equiv='refresh' content='1;URL=../../php/admin/panel/consulta_pedidos.php?ref=$ref'> ";
+                    echo "<div class='messages status'>Mail de confirmación correctamente enviado a " .$_POST['email'] .",en breve será redireccionado, Gracias<br>";
+                //    echo "	<meta http-equiv='refresh' content='1;URL=../../php/admin/panel/consulta_pedidos.php?ref=$ref'> ";
 
                     }
 	

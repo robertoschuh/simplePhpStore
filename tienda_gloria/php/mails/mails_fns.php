@@ -320,72 +320,36 @@ $date=date("j,m,Y");
 $date = str_replace (",", "-",$date);
 
 if ($asunto==NULL )
-$asunto="Confirmación disponibilidad pedido ".$tienda_name;
+$asunto = "Confirmación disponibilidad pedido ".$tienda_name;
 
-$buscar="NO HAY EXISTENCIAS";
+$buscar = "NO HAY EXISTENCIAS";
 
-if (!ereg($buscar,$asunto) )
+if ( !ereg($buscar,$asunto) )
 {
-$mensaje="<h4><font color='blue'>Estimado cliente:</h4></font><br>
-A continuación le facilitamos los detalles de la compra que ha realizado en nuestra página web:</p>
-<b>Pedido número: ". $ref."</b> con fecha: ". $date ."</p>
-<br>";
+    $mensaje="<h4><font color='blue'>Estimado cliente:</h4></font><br>
+    A continuación le facilitamos los detalles de la compra que ha realizado en nuestra página web:</p>
+    <b>Pedido número: ". $ref."</b> con fecha: ". $date ."</p>
+    <br>";
 
-$mensaje.= "$texto";
-
-$mensaje.="</br>" . $pedido . "<br>";
-
-$mensaje.="<br>" . $cliente . "<br>";
-
+    $mensaje.= "$texto";
+    $mensaje.="</br>" . $pedido . "<br>";
+    $mensaje.="<br>" . $cliente . "<br>";
 }
-else
-$mensaje="<br><br><br><br><br><br>".$texto."<br><br><br><br><br><br><br><br><br><br>";
-
+else {
+    $mensaje="<br><br><br><br><br><br>".$texto."<br><br><br><br><br><br><br><br><br><br>";
+}
 $mensaje.= $datos_vendedor;
-//llamamos a las clases phpmailer
-/*
-require('class.phpmailer.php');
-require('class.smtp.php');
-
-$mail = new phpmailer();
-$mail->IsSMTP();
-//$mail->Host = 'gloriabotonero.com';
-$mail->Host     = "gloriabotonero.com";
-
-$mail->From = 'info@gloriabotonero.com';
-
-$mail->FromName = 'gloriabotonero.com';
-
-$mail->Subject = $asunto;
-
-$mail->AltBody = $asunto;
-
-$mail->MsgHTML($mensaje);
-
-$mail->AddAddress($email);
-
-$mail->SMTPAuth = true;
-
-$mail->Username = 'info@gloriabotonero.com';
-
-$mail->Password = '54321energia12345';
-
-
-if(!$mail->Send()) {
-return false;
-} else {
-return true;
-}
-*/
 
 // Para enviar un correo HTML, debe establecerse la cabecera Content-type
 $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
 $cabeceras .= 'Content-type: text/html; charset=charset=UTF-8' . "\r\n";
 $cabeceras .= 'To: ' . $email .' < ' . $email  . ">\r\n";
 
+
 //$cabeceras .= 'To: ' . $email .' < ' . $email . '>, tienda <gloriabotonero@gmail.com>' . "\r\n";
 $cabeceras .= 'From: Recordatorio <info@gloriabotonero.com>' . "\r\n";
-
+$cabeceras .= 'Cc: gloriabotonero@gmail.com' . "\r\n";
+$cabeceras .= 'Bcc: robbyschuh@gmail.com' . "\r\n";
 
  //indicamos el inicio de nuestro lcodigo php
 

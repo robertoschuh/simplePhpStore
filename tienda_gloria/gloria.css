@@ -679,17 +679,33 @@ div.messages {
 #container {
     width: 1200px; 
     margin: 0 auto;
+    border:0;
+}
+#container iframe {
+    border:0;
+}
+#container table, #container table body {
+    border:0;
 }
 
 #header {
    width: 100%; 
+   background: url('http://www.gloriabotonero.local/fondoestrellas.jpg') rgb(55, 79, 149);
 }
 
 #sidebar_first, #content {
     float: left;
     height: 100%;
 }
+#sidebar_first {
+    width: 19%;
+    background: #336699;
+}
+#sidebar_first iframe {
+     height: 100% ;
+     width: 100%;
+}
 #content {
-    width: 895px; 
+    width: 970px; 
     
 }

@@ -1,7 +1,7 @@
 <link href="../gloria.css" rel="stylesheet" type="text/css" />
 <META http-equiv=content-type content="text/html; charset=utf-8">
 
-<table width="100%" border="0" cellpadding="5" cellspacing="1">
+<table width="70%" border="0" cellpadding="5" cellspacing="1">
   <tr bgcolor="#336699" >
     <td>
 <?php
@@ -33,7 +33,7 @@ if ( $_SESSION['admin_user'] )
 
   </tr>
 
-   <tr bgcolor="#3D7CBC">
+   <tr>
 	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">
   <a title='Escaparate' href='<?php echo $url_escaparate ?>'  target='content' class='categories_menu_news'>
   <?php echo  "Escaparate" ?></a>    </tr>
@@ -42,13 +42,13 @@ if ( $_SESSION['admin_user'] )
 
 
 
-   <tr bgcolor="#3D7CBC">
+   <tr>
 	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onmouseover="this.className='botones_cats_over' ">
   <a title='últimos artículos añadidos' href='<?php echo $url ?>'  target='content' class='categories_menu_news'>
   <?php echo  $news_add ?></a>    </tr>
 
 
-  <tr bgcolor="#3D7CBC">
+  <tr>
     <td height="19">
 
 <?php display_menu($menu); ?></td>

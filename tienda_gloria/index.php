@@ -52,7 +52,7 @@ if (isset($_GET['language'])) {
     <div id="header"><iframe src="header.php" width="100%" scrolling = "no"></iframe></div>
 
 <div id="sidebar_first">
-    <iframe src="php/show_menu_categories.php" height="100%" scrolling = "auto"></iframe>
+    <iframe src="php/show_menu_categories.php" scrolling = "auto"></iframe>
 
 </div>
 <div id="content">

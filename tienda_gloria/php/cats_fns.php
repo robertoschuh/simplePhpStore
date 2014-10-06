@@ -119,11 +119,11 @@ $result = mysql_query($query);
 
 
 function show_menu_categories() {
-    require ("fns.php");
+require ("fns.php");
 
-    $menu = show_categories ();
+$menu=show_categories ();
 
-    display_menu($menu);
+display_menu($menu);
 
 }
 
@@ -146,104 +146,97 @@ $query = "SELECT *
    if ($num_arts == 0)
        return false;
    $result = db_result_to_array($result);
-  
    return $result; //guarda los resultados en un array
 
 }
-function display_menu($menu)
-{
-?>
-<head>
-<script language="javascript" type="text/javascript">
-function imagenfondo() {
-document.all.table.td.background="../img/boton2.jpg";
-}
-</script>
-<style type="text/css">
-<!--
-.Estilo1 {
-	font-size: medium;
-	font-weight: bold;
-}
--->
-</style>
-</head>
-<body>
-<?php
- foreach ($menu as $row)
-  {
-    //RECORDAR: language es una variable de sesi�n que valdr� uno para "espa�ol" y 2 para "ingl�s"
-	$catid=$row["catid"];
-	$stock=$row["stock"];
-	$pos=$row['pos'];
+function display_menu($menu) {
+    ?>
+    <head>
+    <script language="javascript" type="text/javascript">
+    function imagenfondo() {
+    document.all.table.td.background="../img/boton2.jpg";
+    }
+    </script>
+    <style type="text/css">
+    <!--
+    .Estilo1 {
+    	font-size: medium;
+    	font-weight: bold;
+    }
+    -->
+    </style>
+    </head>
+    <body>
+    <?php
+    foreach ($menu as $row) {
+        //RECORDAR: language es una variable de sesi�n que valdr� uno para "espa�ol" y 2 para "ingl�s"
+        $catid = $row["catid"];
+        $stock = $row["stock"];
+        $pos = $row['pos'];
 
-    $title = $row["cat_name"];
-	if(!$_SESSION['idioma']==2)//Si es diferente a 2 la variable de sesi�n language , muestra las cateorias en espa�ol
-	{
-    	$title = $row["cat_name"];
-		$details=$row["cat_details"];
-	}
-	elseif($_SESSION['idioma']==2)//Si es igual a 2 muestras las categorias en ingl�s
-	{
-		$title = $row["cat_name_eng"];
-		$details=$row["cat_details_eng"];
-	}
-	//Deajmos abierta la posibilidad de incorporar m�s idiomas a la bd
+        $title = $row["cat_name"];
+        if (!$_SESSION['idioma'] == 2) {//Si es diferente a 2 la variable de sesi�n language , muestra las cateorias en espa�ol
+            $title = $row["cat_name"];
+            $details = $row["cat_details"];
+        } elseif ($_SESSION['idioma'] == 2) {//Si es igual a 2 muestras las categorias en ingl�s
+            $title = $row["cat_name_eng"];
+            $details = $row["cat_details_eng"];
+        }
+        //Deajmos abierta la posibilidad de incorporar m�s idiomas a la bd
 
-	$url = "categories.php?catid=$catid"; //descativado mientras no exista ese enlace
-	?>
+        $url = "categories.php?catid=$catid"; //descativado mientras no exista ese enlace
+        ?>
 
-	<table width="100%"  border="0" class="fondo_categorias"  >
-  	<tr>
+        	<table width="100%"  border="0" class="fondo_categorias"  >
+          	<tr>
 
- 	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onMouseOver="this.className='botones_cats_over' ">
-   <a  title='<? echo $details ?>' href='<? echo $url ?>'  target='mainFrame' class='categories_menu' ><? echo  $title ?></a> </td>
-	<?php
-	if ($_SESSION['admin_user'])
-	 echo "<td align='right'> Pos:  $pos </span></td>";
-	 ?>
+         	<td  class='botones_cats' onMouseOut="this.className='botones_cats' " onMouseOver="this.className='botones_cats_over' ">
+           <a  title='<?php echo $details ?>' href='<? echo $url ?>'  target='mainFrame' class='categories_menu' ><?php echo  utf8_encode($title); ?></a> </td>
+        <?php
+        if ($_SESSION['admin_user'])
+            echo "<td align='right'> Pos:  $pos </span></td>";
+        ?>
 
-  </tr>
-
- <?php
-	}
-?>
-
-</table>
-
-<?php
-}
-function mod_cat_form ($cats)
-{
-?>
-<form action="mod_cat_form2.php" method="post" name="form2" id="form2">
-<table width="75%" align="center" cellpadding="9" cellspacing="4">
-	<tr bgcolor="#DEDEF4"> <td colspan='2'> Modificar Categoría  </td>
-	</tr>
-	<tr bgcolor="#DEDEF4"> <td width="85%"> Nombre</td>
-	<td width="15%"><label>
-
-	  <select name="catid" class='box'>
-	  <?php
-	foreach ($cats as $row)
-	{
-            $catid=$row[catid];
-            $cat_name=$row['cat_name'];
-	?>
-
-        <option value='<? echo $catid ?>'><?php echo $cat_name ?></option>
-
+          </tr>
 
         <?php
-        }
-        ?>
-</select>
-</div></td>
+    }
+    ?>
 
-	<tr bgcolor="#DEDEF4"> <td colspan='2'><input type="submit" name="Submit2" value="Siguiente" /></td></tr>
-</table>
-	</form>
-<?php
+    </table>
+
+            <?php
+        }
+
+function mod_cat_form ($cats){
+?>
+    <form action="mod_cat_form2.php" method="post" name="form2" id="form2">
+    <table width="75%" align="center" cellpadding="9" cellspacing="4">
+            <tr bgcolor="#DEDEF4"> <td colspan='2'> Modificar Categoría  </td>
+            </tr>
+            <tr bgcolor="#DEDEF4"> <td width="85%"> Nombre</td>
+            <td width="15%"><label>
+
+              <select name="catid" class='box'>
+                      <?php
+                      foreach ($cats as $row) {
+                          $catid = $row[catid];
+                          $cat_name = $row['cat_name'];
+                          ?>
+
+                          <option value='<?php echo $catid ?>'><?php echo $cat_name ?></option>
+
+
+                          <?php
+                      }
+                      ?>
+            </select>
+              </div></td>
+
+            <tr bgcolor="#DEDEF4"> <td colspan='2'><input type="submit" name="Submit2" value="Siguiente" /></td></tr>
+    </table>
+            </form>
+    <?php
 }
 
 
@@ -259,13 +252,13 @@ function display_form_add_cat ()
 
     <tr bgcolor="#EFF3F5">
       <td>
-        <div align="center">Nombre de Categor&iacute;a
+        <div align="center">Nombre de Categoría
           <input name="cat_name" type="text" id="cat_name" class='box' />
          </div></td>
       <td width="46%">English
         <input name="cat_name_eng" type="text" id="cat_name_eng" class='box' /></td></tr>
     <tr bgcolor="#EFF3F5">
-      <td><div align="center">Detalle de Categor&iacute;a
+      <td><div align="center">Detalle de Categoría
         <input name="cat_details" type="text" id="cat_details" class='box' />
       </div></td>
       <td>Details
@@ -273,7 +266,7 @@ function display_form_add_cat ()
 		<tr bgcolor="#E3E3ED">
 
 
-      <td>Im&aacute;gen
+      <td>Imágen
         <input type="file" name="file" class='box'/></td>
       <td>&nbsp;</td>
 	</tr>
@@ -305,14 +298,14 @@ function menu_categorias (){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
-<title>Men� Categor�as</title>
+<title>Menú Categorías</title>
 </head>
 
 <body>
 <table width="75%" border="0" align="center" cellpadding="15" cellspacing="9">
   <tr bgcolor="#C7D4C5">
     <td colspan="3"> <div  class='menu' align="center" >
-      <div align="center"><span class="Estilo1">Men&uacute; Categor&iacute;as</span></div>
+      <div align="center"><span class="Estilo1">Menú Categorías</span></div>
     </div> </td>
   </tr>
   <tr bgcolor="#C7D4C5">
@@ -358,112 +351,106 @@ function delete_cat ($catid)
 }
 }
 //BORRAR CATEGORIAS O ART�CULOS DE CATEGORIAS SEG�N EL VALOR DE OPTION  SI ES 1 SE TRATA DE CATEGORIAS SI ES 2 DE ARTICULOS
-function display_cats_arts_delete ($list,$option) {
+function display_cats_arts_delete($list, $option) {
 //@session_start();
-if ($option==1)
+    if ($option == 1)
+        $url = "del_cat.php";
 
-$url="del_cat.php";
+    if ($option == 2)
+        $url = "";
+    echo "<form id='form1' name='form1' method='post' action='$url' ";
+    ?>
+      <p>&nbsp;</p>
+      <table width="75%" border="0" align="center" cellpadding="9" cellspacing="9">
+      <tr bgcolor="#CCCCCC">
+        <td><label> </label>
+            <div align="center">Categoría
+              <select name="cats" class='box'>
+                        <?php
+                        //Listamos TODAS las categorías para seleccionar la que deseamos ver sus artículos
+                        foreach ($list as $row) {
+                            $catid = $row['catid'];
+                            $cat_name = $row['cat_name'];
+                            echo "<option value=$catid/>$cat_name</option>";
+                        }
+                        ?>
+                </select>
+                        <?php
+                        //Si quremos borrar una categoria
+                        if ($option == 1) {
 
-if ($option==2)
-$url="";
-echo "<form id='form1' name='form1' method='post' action='$url' ";
-?>
-  <p>&nbsp;</p>
-  <table width="75%" border="0" align="center" cellpadding="9" cellspacing="9">
-  <tr bgcolor="#CCCCCC">
-    <td><label> </label>
-        <div align="center">Categor&iacute;a
-          <select name="cats" class='box'>
-              <? //Listamos TODAS las categor�as para seleccionar la que deseamos ver sus art�culos
-		foreach ($list as $row)
-		{
-		$catid=$row['catid'];
-		$cat_name=$row['cat_name'];
-		echo "<option value=$catid/>$cat_name</option>";
+                            echo "  <input type='submit' name='Submit' value='Borrar' />";
+                            echo "<br>";
 
-		}
-		?>
-            </select>
-           <?php
-	//Si quremos borrar una categoria
-	if ($option==1)
-	{
-
-		echo "  <input type='submit' name='Submit' value='Borrar' />";
-		echo "<br>";
-
-	//Solamente si hemos decidido borrar solo una categoria NO art�culos
-	echo "</form>";
-		exit;
-	}
+                            //Solamente si hemos decidido borrar solo una categoria NO art�culos
+                            echo "</form>";
+                            exit;
+                        }
 
 
-		//Si queremos borrar un art�culo en concreto de una categor�a en concreto
-	if ($option==2)
-	 	{
+                        //Si queremos borrar un art�culo en concreto de una categor�a en concreto
+                        if ($option == 2) {
 
- 		//Obtenemos lista de los art�culos de esa categor�a en concreto
-		$catid=$_GET['catid'];
-		$art_array=get_arts($catid);
-?>
-            <select name="arts">
-              <?php	 //Listamos todos los art�culos de la categor�a seleccionada previamente
-		 foreach ($art_array as $row)
-  {
+                            //Obtenemos lista de los art�culos de esa categor�a en concreto
+                            $catid = $_GET['catid'];
+                            $art_array = get_arts($catid);
+                            ?>
+                    <select name="arts">
+                        <?php
+                        //Listamos todos los art�culos de la categor�a seleccionada previamente
+                        foreach ($art_array as $row) {
 
 
-	//$img=($row["artid"])."art.jpg";
-     $title = $row["art_name"];
-	//$details= $row["art_details"];
-	 $artid=$row["artid"];
-    //$price=$row["art_price"];
-			echo "<option value=$artid/>$art_name</option>";
- }
-  	?>
-            </select>
-      </div></td>
-  </tr>
-  <tr bgcolor="#CCCCCC">
-    <td> <input type='submit' name='Submit' value='Seleccionar' /></td>
-  </tr>
-  <tr>
-  <td><a href='../../../demo_marcos.html'>Volver Tienda</a> </td>
-  </tr>
-</table>
+                            //$img=($row["artid"])."art.jpg";
+                            $title = $row["art_name"];
+                            //$details= $row["art_details"];
+                            $artid = $row["artid"];
+                            //$price=$row["art_price"];
+                            echo "<option value=$artid/>$art_name</option>";
+                        }
+                        ?>
+                    </select>
+              </div></td>
+          </tr>
+          <tr bgcolor="#CCCCCC">
+            <td> <input type='submit' name='Submit' value='Seleccionar' /></td>
+          </tr>
+          <tr>
+          <td><a href='../../../demo_marcos.html'>Volver Tienda</a> </td>
+          </tr>
+        </table>
 
-</form>
-<?php
-}// Fin del segundo if
+        </form>
+        <?php
+    }// Fin del segundo if
 }
-function update_categories($newname,$newname_eng,$catid,$details,$details_eng,$id_ext,$stock,$new_pos,$old_pos)
-{
-$conn = db_connect();
+
+function update_categories($newname, $newname_eng, $catid, $details, $details_eng, $id_ext, $stock, $new_pos, $old_pos) {
+    $conn = db_connect();
 //Comprobamos si ys est� ocupada la POSici�n de la categor�a
- $conn = db_connect();
- $query = "SELECT pos
+    $conn = db_connect();
+    $query = "SELECT pos
              FROM categories
 			 WHERE pos=$new_pos";
-$result = mysql_query($query);
-   //Solo actualizar si existe ese pos
-   if (mysql_num_rows ($result) > 0)
-   {
-   //Si ya est� ocupada esa posici�n aumentamos en todas una posici�n desde la que a�adimos en adelante
-   if (mysql_num_rows($result)>0 )
-     $result =mysql_query("UPDATE categories
+    $result = mysql_query($query);
+    //Solo actualizar si existe ese pos
+    if (mysql_num_rows($result) > 0) {
+        //Si ya est� ocupada esa posici�n aumentamos en todas una posici�n desde la que a�adimos en adelante
+        if (mysql_num_rows($result) > 0)
+            $result = mysql_query("UPDATE categories
              			   set pos=pos + 1
 			              WHERE pos >= $new_pos
 						  AND pos < $old_pos
 						  ");
 //Actualizamos la posici�n de la categor�a que queremos cambiar
-  if ($result)
-    $result=mysql_query ( "update categories
+        if ($result)
+            $result = mysql_query("update categories
                             set pos='$new_pos'
-                            where catid='$catid' " );
-   }
+                            where catid='$catid' ");
+    }
 //Si la id_ext no es NULL , es decir si se sube una imagen de remplazo
-if ($id_ext!=NULL)
-{
-   $query = "UPDATE categories
+    if ($id_ext != NULL) {
+        $query = "UPDATE categories
              SET cat_name='$newname' ,
 			 	 cat_name_eng='$newname_eng' ,
 			 	 cat_details='$details',
@@ -471,27 +458,25 @@ if ($id_ext!=NULL)
 				  id_ext='$id_ext',
 				  stock='$stock'
 			 WHERE catid='$catid' ";
-}
-else
-{
-$query = "UPDATE categories
+    } else {
+        $query = "UPDATE categories
              SET cat_name='$newname' ,
 			 	 cat_name_eng='$newname_eng' ,
 			 	 cat_details='$details',
 				 cat_details_eng='$details_eng',
 				 stock='$stock'
 			 WHERE catid='$catid' ";
+    }
+    $result = mysql_query($query);
+    if (!$result)
+        return false;
+    else
+        return true;
 }
-   $result = mysql_query($query);
-   if (!$result)
-     return false;
-   else
-     return true;
 
-}
 function get_all_cats()
 {
-   // Petici�n a la base de datos de una lista de categor�as
+   // Petición a la base de datos de una lista de categorías
    $conn = db_connect();
    $query = "SELECT catid,cat_name
              FROM categories
@@ -508,52 +493,50 @@ function get_all_cats()
 
 //Obtener listado de todos los art�culos de una categor�a determinada
 function ask_catid() {
-$conn = db_connect();
-$query = "SELECT catid FROM categories";
-$result=mysql_query($query);
-if (!result)
-return false;
-$result = db_result_to_array($result);
-return $result;
-//guarda los resultados en un array
+    $conn = db_connect();
+    $query = "SELECT catid FROM categories";
+    $result=mysql_query($query);
+    if (!result)
+    return false;
+    $result = db_result_to_array($result);
+    return $result;
+    //guarda los resultados en un array
 }
 //Esta funci�n nos sirve para saber el �ltimo id de art�culos o categorias (artid y catid)
 function last_catid($id) {
- $i=0;
- foreach ($id as $row)
-
- 	{
-	$last_id=$row[0];
-	}
-	return $last_id++;
+    $i = 0;
+    foreach ($id as $row) {
+        $last_id = $row[0];
+    }
+    return $last_id++;
 }
+
 //CONSULTAS A LAS BASE DE DATOS PARA OBTENER LISTADO DE TODAS LAS CATEGORIAS
 
-function avisar_stock ($stock)
-{
-$conn = db_connect();
-$query = "SELECT articles.artid ,
-          FROM articles,categories
-		  WHERE catid=$catid
-		  AND articles.unidades <= $stock
-		   ";
-$result=mysql_query($query);
-if (!$result)
-return false;
-$result = db_result_to_array($result);
-return $result;
-//guarda los resultados en un array
+function avisar_stock ($stock){
+    $conn = db_connect();
+    $query = "SELECT articles.artid ,
+              FROM articles,categories
+                      WHERE catid=$catid
+                      AND articles.unidades <= $stock
+                       ";
+    $result=mysql_query($query);
+    if (!$result)
+    return false;
+    $result = db_result_to_array($result);
+    return $result;
+    //guarda los resultados en un array
 }
 function last_pos () {
-$conn = db_connect();
-$query = "SELECT pos
-          FROM categories
-		  ORDER by pos desc
-		   ";
-$result=mysql_query($query);
-if (!$result)
-return false;
-$result = db_result_to_array($result);
-return $result[0][0]+1;
-//guarda los resultados en un array
+    $conn = db_connect();
+    $query = "SELECT pos
+              FROM categories
+                      ORDER by pos desc
+                       ";
+    $result=mysql_query($query);
+    if (!$result)
+    return false;
+    $result = db_result_to_array($result);
+    return $result[0][0]+1;
+    //guarda los resultados en un array
 }

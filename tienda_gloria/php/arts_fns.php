@@ -1,5 +1,6 @@
 <?php
 header("Content-Type: text/html;charset=utf-8");
+include ("idiomas/idiomas_fns.php");
 
 function get_arts($catid)
 {
@@ -18,79 +19,74 @@ function get_arts($catid)
    $result = db_result_to_array($result);
    return $result; //guarda los resultados en un array
 }
-function display_arts ($art_array)
-{
-@session_start();
-include ("idiomas/idiomas_fns.php");
-$admin_user=$_SESSION['admin_user'];
-$idioma=$_SESSION['idioma'];
+function display_arts($art_array) {
 
-  if (!is_array($art_array))
-  {
-   echo "<table class='no_hay_articulos'> <tr> <td>$no_articles</td></tr></table>";
-   exit;
-  }
- ?>
-<link href="../gloria.css" rel="stylesheet" type="text/css" />
- <tr>
- <?php 
-  $i=0; //inicializamos contador a 0 para las columnas de art�culos
- ?>
+    $admin_user = $_SESSION['admin_user'];
+    $idioma = $_SESSION['idioma'];
 
-  <table align="center" >
-  <?php  
-  $categorie=get_categorie_name ( $_GET['catid']);
-  ?>
-  <tr> <td colspan="4"   align="center" class='titulo_categoria_despliegue'> <? echo $categorie ['cat_name']?> </td>
-  </tr>
-  </table>
-<?php
- foreach ($art_array as $row)  
-  {
-  	$id_ext= $row["id_ext"];
-	$ext=extension_check($id_ext);
-	if (($row["id_ext"])==4 )
-	$img="demo.jpeg"; //sino hay ninguna imagen asociada a ese art�culo, se carga esta por defecto
-	else
-	$img=($row["artid"])."art.$ext";
+    if (!is_array($art_array)) {
+        echo "<table class='no_hay_articulos'> <tr> <td>" .$no_articles. "</td></tr></table>";
+        exit;
+    }
+?>
+    <link href="../gloria.css" rel="stylesheet" type="text/css" />
+     <tr>
+    <?php
+    $i = 0; //inicializamos contador a 0 para las columnas de art�culos
+    ?>
 
-	/*	$ruta="../../on/php/admin/panel/img/arts/$img";
-		$anchura = ImageSX($ruta);
-		$altura = ImageSY($ruta);  
+      <table align="center" >
+    <?php
+    $categorie = get_categorie_name($_GET['catid']);
+    ?>
+      <tr> <td colspan="4"   align="center" class='titulo_categoria_despliegue'> <?php echo $categorie ['cat_name'] ?> </td>
+      </tr>
+      </table>
+    <?php
+    foreach ($art_array as $row) {
+        $id_ext = $row["id_ext"];
+        $ext = extension_check($id_ext);
+        if (($row["id_ext"]) == 4)
+            $img = "demo.jpeg"; //sino hay ninguna imagen asociada a ese art�culo, se carga esta por defecto
+        else
+            $img = ($row["artid"]) . "art.$ext";
 
-		$size=130;
-		$img=imagen_proportion ($ruta,$size);*/
-	
-	if(!$_SESSION["novedades"])
-	
-	$cat=$row ["catid"];
-	else
-	{
-		$cat=2;
-		$novedades="show_las_articles.php";
-	}
-	$title=corta_texto($title, 15);
-	$details_short=corta_texto($details, 18);
-	$url = "show_article_individual.php?artid=$row[artid]&cat=$row[catid]"; //descativado mientras no exista ese enlace
-	$ref=$row["ref"];
-	//Comprobamos si hay existencias de ese producto
-	$existencias=get_almacen($row[artid]);
-	//limitamos el n�mero de caracteres que aparecera en la breve descripci�n de art�culo
-        $price=$row["art_price"];
-	$name=$row["art_name"];
- //Creamos las filas que contendr� los art�culos
-if ($existencias['unidades'] != -1 or  session_is_registered("admin_user") )
-{
-  include('vistas/articulos-lista.html.php');
+        /* 	$ruta="../../on/php/admin/panel/img/arts/$img";
+          $anchura = ImageSX($ruta);
+          $altura = ImageSY($ruta);
+
+          $size=130;
+          $img=imagen_proportion ($ruta,$size); */
+
+        if (!$_SESSION["novedades"])
+            $cat = $row ["catid"];
+        else {
+            $cat = 2;
+            $novedades = "show_las_articles.php";
+        }
+        $title = corta_texto($title, 15);
+        $details_short = corta_texto($details, 18);
+        $url = "show_article_individual.php?artid=$row[artid]&cat=$row[catid]"; //descativado mientras no exista ese enlace
+        $ref = $row["ref"];
+        //Comprobamos si hay existencias de ese producto
+        $existencias = get_almacen($row[artid]);
+        //limitamos el número de caracteres que aparecera en la breve descripci�n de art�culo
+        $price = $row["art_price"];
+        $name = $row["art_name"];
+        //Creamos las filas que contendr� los art�culos
+        if ($existencias['unidades'] != -1 || $_SESSION['admin_user']) {
+            include('views/articulos-lista.html.php');
+        }
+    }
 }
-}
-}//fin de la funci�n display_arts 
+
+//fin de la funci�n display_arts 
+
 function display_arts_numbero_fijo ($art_array)
 {
-@session_start();
 include ("idiomas/idiomas_fns.php");
-$admin_user=$_SESSION['admin_user'];
-$idioma=$_SESSION['idioma'];
+$admin_user = $_SESSION['admin_user'];
+$idioma = $_SESSION['idioma'];
 if (!is_array($art_array))
   {
    echo "<table class='no_hay_articulos'> <tr> <td>$no_articles</td></tr></table>";
@@ -105,7 +101,7 @@ if (!is_array($art_array))
  ?>
   <table align="center"  width="100%">
   <?php
-  $categorie=get_categorie_name ($_GET['catid']);
+  $categorie = get_categorie_name ($_GET['catid']);
   ?>
   <tr> <td  colspan="5" align="center" class='titulo_categoria_despliegue'> <?php echo $categorie['cat_name']?> </td>
   </tr>
@@ -114,47 +110,45 @@ if (!is_array($art_array))
  <tr>
 <?php
  foreach ($art_array as $row) 
-  {		
-	$id_ext= $row["id_ext"];
-	$ext=extension_check($id_ext);
-	if (($row["id_ext"])==4 )
-	$img="demo.jpeg"; //sino hay ninguna imagen asociada a ese art�culo, se carga esta por defecto
-	else
-	$img=($row["artid"])."art.$ext";
+  {
+        $id_ext = $row["id_ext"];
+        $ext = extension_check($id_ext);
+        if (($row["id_ext"]) == 4)
+            $img = "demo.jpeg"; //sino hay ninguna imagen asociada a ese art�culo, se carga esta por defecto
+        else
+            $img = ($row["artid"]) . "art.$ext";
 
-	/*	$ruta="../../on/php/admin/panel/img/arts/$img";
-		$anchura = ImageSX($ruta);
-		$altura = ImageSY($ruta);  
+        /* 	$ruta="../../on/php/admin/panel/img/arts/$img";
+          $anchura = ImageSX($ruta);
+          $altura = ImageSY($ruta);
 
-		$size=130;
-		$img=imagen_proportion ($ruta,$size);*/
-	
-	if(!$_SESSION["novedades"])
-	
-	$cat=$row ["catid"];
-	else
-	{
-		$cat=2;
-		$novedades="show_las_articles.php";
-	}
-	$title=corta_texto($title, 15);
+          $size=130;
+          $img=imagen_proportion ($ruta,$size); */
+
+        if (!$_SESSION["novedades"])
+            $cat = $row ["catid"];
+        else {
+            $cat = 2;
+            $novedades = "show_las_articles.php";
+        }
+        $title = corta_texto($title, 15);
 
 
-	$details_short=corta_texto($details, 18);
-	$url = "show_article_individual.php?artid=$row[artid]&cat=$row[catid]"; //descativado mientras no exista ese enlace
-	$ref=$row["ref"];
-	//Comprobamos si hay existencias de ese producto
-	$existencias=get_almacen($row[artid]);
-	//limitamos el n�mero de caracteres que aparecera en la breve descripci�n de art�culo
-    $price=$row["art_price"];
-	$name=$row["art_name"];
- //Creamos las filas quef contendr� los art�culos
-if ($existencias['unidades'] != -1 or  session_is_registered("admin_user") )
-{
-//view
-    include('views/articulos-lista-num-fijo.html.php');
-}}
-?>
+        $details_short = corta_texto($details, 18);
+        $url = "show_article_individual.php?artid=$row[artid]&cat=$row[catid]"; //descativado mientras no exista ese enlace
+        $ref = $row["ref"];
+        //Comprobamos si hay existencias de ese producto
+        $existencias = get_almacen($row[artid]);
+        //limitamos el n�mero de caracteres que aparecera en la breve descripci�n de art�culo
+        $price = $row["art_price"];
+        $name = $row["art_name"];
+        //Creamos las filas quef contendr� los art�culos
+        if ($existencias['unidades'] != -1 or session_is_registered("admin_user")) {
+            //view
+            include('views/articulos-lista-num-fijo.html.php');
+        }
+    }
+    ?>
 </table>      				 
 </table>	
 <?php
@@ -162,21 +156,20 @@ if ($existencias['unidades'] != -1 or  session_is_registered("admin_user") )
 //Art�culo individual
 function article_individual($artid,$cat)
 {
-include("idiomas/idiomas_fns.php");
 
-$articles_array=get_article($_GET['artid']);
+$articles_array = get_article($_GET['artid']);
 
 //comprobamos la extensi�n de la imagen
-$id_ext=$articles_array[id_ext];
-$ext=extension_check ($id_ext);
+$id_ext = $articles_array[id_ext];
+$ext = extension_check ($id_ext);
 //$artid=$article['artid'];
-$ref=$articles_array['ref'];
+$ref = $articles_array['ref'];
 $cost=$articles_array['art_price'];
 if ( ($articles_array[id_ext]) ==4)
-$img="demo.jpeg";
+$img = "demo.jpeg";
 else
-$img=$artid."art.$ext";
-$catid=$articles_array['catid'];
+$img = $artid."art.$ext";
+$catid = $articles_array['catid'];
 if (!$_SESSION['idioma']==2)
     {	
 		$title = $articles_array["art_name"];
@@ -192,7 +185,7 @@ if (!$_SESSION['idioma']==2)
 		
 
 	}
-	$ref=$articles_array["ref"];
+	$ref = $articles_array["ref"];
 ?>
 <body>
 <table width="425" height="265" border="0" align="center" >
@@ -200,7 +193,7 @@ if (!$_SESSION['idioma']==2)
     <td width="263">
     <p align="center">
 <img oncontextmenu="alert('Opcion deshabilitada');return false"
- oncopy="alert('Opcion deshabilitada');return false" src=../../tienda_gloria/php/admin/panel/img/arts/<? echo $img ?> class='img_big' /></p>
+ oncopy="alert('Opcion deshabilitada');return false" src=../../tienda_gloria/php/admin/panel/img/arts/<?php echo $img ?> class='img_big' /></p>
 <p style="text-align: left;"></p>
     
     </td>
@@ -435,7 +428,7 @@ function display_form_add_art($cats_list)
 <table width="20%"  align="center" cellpadding="5" cellspacing="5">
 
   <tr bgcolor="#E3E3ED">
-  <th colspan='2'> Datos del art�culo </th>
+  <th colspan='2'> Datos del artículo </th>
   </tr>
  <tr bgcolor="#E3E3ED">
     <td align='right' > Nombre </td>
@@ -483,7 +476,7 @@ function display_form_add_art($cats_list)
   </tr>
   
   <tr bgcolor="#E3E3ED">
-    <td colspan="3"  align='center'> <div align="left">Elija en qu&eacute; categor&iacute;a
+    <td colspan="3"  align='center'> <div align="left">Elija en que categoría
         <select name="catid" id="catid" class='box'>
           <?php
 		
@@ -502,7 +495,7 @@ function display_form_add_art($cats_list)
     <th width="480"><div align="left">Precio 
       <input name="price" type="text" id="price" size="10" class='box'/>
     &euro;</div></th>
-    <td>Escapar�te
+    <td>Escaparate
     <input name="escaparate" type="checkbox" /></td>
    </tr>
   <tr bgcolor="#E3E3ED">
@@ -724,10 +717,10 @@ function escaparate()
    //Ordena los art�culos por fecha del �ltimo a�adido al primero
    $query = "SELECT *
              FROM articles
-			 WHERE escaparate=1
+			 WHERE escaparate = 1
 			 ORDER BY artid DESC
 			 ";
-			 
+			
    $result = mysql_query($query);
    if (!$result)
      return false;

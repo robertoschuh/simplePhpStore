@@ -110,9 +110,9 @@ else
 {
 	echo "<div style='text-align:center' class='msg'>Su registro se ha llevado a cabo correctamente, Gracias <p> Introduzca su Email y su Contraseña para poder entrar como usuario registrado</div>";
 	echo "<br>";
-	
-$mail_webmaster="gloriabotonero@gmail.com";
-$mail_webmaster2="proyectos@weblineinformatica.com";
+		
+	$mail_webmaster="gloriabotonero@gmail.com";
+	$mail_webmaster2="proyectos@weblineinformatica.com";
 	$asunto="nuevo registro de usuario";
 	$remitente="From: registro@gloriabotonero.com  \n \r\nContent-type: text/html\r\n";
 	$mensaje="Email: ".$_POST["email"]."<br/> Nombre: ".$_POST["name"]."<br/> Appelidos: ".$_POST["name"]."<br/>
@@ -129,6 +129,6 @@ $mail_webmaster2="proyectos@weblineinformatica.com";
 	}
 	login_box_user($_POST['apagar']);
 	
-}
+	}
 }
 ?>

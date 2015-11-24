@@ -79,7 +79,7 @@ echo "<a href='$PHP_SELF?imprimir=0&ref=$ref'>$datos_factura</a>";;
 </tr>
 <tr><th colspan='5' align='center'>&nbsp;</th></tr>
 <tr><th colspan='5' align='center'>&nbsp;</th></tr>
-<tr><th colspan='5' align='center'>DATOS DE ENVIO </th></tr>
+<tr><th colspan='5' align='center'>DATOS DE ENVÍO </th></tr>
 <tr><td width="68%" colspan='4'   ><?php print  $result['name'] ;?> <?php print " ".$result['surname'] ;?></td>
 </tr>
 <tr><td width="68%" colspan='4'  ><?php print  $result['address'];?>          </tr>

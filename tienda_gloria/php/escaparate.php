@@ -22,7 +22,7 @@ require_once("fns.php");
 
 
 //Recordad ��� funciones de articulos en arts_fns.php
-$result=escaparate();
+$result = escaparate();
 ?>
 <table width='100%'>
 <tr>
@@ -34,7 +34,7 @@ $result=escaparate();
 display_arts_numbero_fijo ($result);
 
 echo "<br><br>";
-foother ();
+footer ();
 ?>
 </body>
 </html>

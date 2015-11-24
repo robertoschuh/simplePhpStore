@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_SESSION['admin_user'])) {
     $admin_user=$_SESSION['admin_user']; 
 }

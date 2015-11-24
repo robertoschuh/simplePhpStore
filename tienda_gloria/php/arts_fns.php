@@ -1,7 +1,4 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
-include ("idiomas/idiomas_fns.php");
-
 function get_arts($catid)
 {
    // Petici�n a la base de datos de una lista de categor�as
@@ -82,8 +79,7 @@ function display_arts($art_array) {
 
 //fin de la funci�n display_arts 
 
-function display_arts_numbero_fijo ($art_array)
-{
+function display_arts_numbero_fijo ($art_array){
 include ("idiomas/idiomas_fns.php");
 $admin_user = $_SESSION['admin_user'];
 $idioma = $_SESSION['idioma'];
@@ -152,93 +148,92 @@ if (!is_array($art_array))
 </table>      				 
 </table>	
 <?php
-}//fin de la funci�n display_arts 
+} 
+//
+////fin de la funci�n display_arts 
 //Art�culo individual
-function article_individual($artid,$cat)
-{
+function article_individual($artid, $cat) {
 
-$articles_array = get_article($_GET['artid']);
+    $articles_array = get_article($_GET['artid']);
 
 //comprobamos la extensi�n de la imagen
-$id_ext = $articles_array[id_ext];
-$ext = extension_check ($id_ext);
+    $id_ext = $articles_array[id_ext];
+    $ext = extension_check($id_ext);
 //$artid=$article['artid'];
-$ref = $articles_array['ref'];
-$cost=$articles_array['art_price'];
-if ( ($articles_array[id_ext]) ==4)
-$img = "demo.jpeg";
-else
-$img = $artid."art.$ext";
-$catid = $articles_array['catid'];
-if (!$_SESSION['idioma']==2)
-    {	
-		$title = $articles_array["art_name"];
-		$details= $articles_array["art_details"];
-		$precio="Precio";
-
-	}
-	else if ($_SESSION['idioma']==2)
-	{	
-		$title = $articles_array["art_name_eng"];
-	    $details= $articles_array["art_details_eng"];
-		$precio="Price";
-		
-
-	}
-	$ref = $articles_array["ref"];
-?>
-<body>
-<table width="425" height="265" border="0" align="center" >
-  <tr>
-    <td width="263">
-    <p align="center">
-<img oncontextmenu="alert('Opcion deshabilitada');return false"
- oncopy="alert('Opcion deshabilitada');return false" src=../../tienda_gloria/php/admin/panel/img/arts/<?php echo $img ?> class='img_big' /></p>
-<p style="text-align: left;"></p>
-    
-    </td>
-    <td width="152"><table width="200" border="0">
+    $ref = $articles_array['ref'];
+    $cost = $articles_array['art_price'];
+    if (($articles_array[id_ext]) == 4)
+        $img = "demo.jpeg";
+    else
+        $img = $artid . "art.$ext";
+    $catid = $articles_array['catid'];
+    if (!$_SESSION['idioma'] == 2) {
+        $title = $articles_array["art_name"];
+        $details = $articles_array["art_details"];
+        $precio = "Precio";
+    } else if ($_SESSION['idioma'] == 2) {
+        $title = $articles_array["art_name_eng"];
+        $details = $articles_array["art_details_eng"];
+        $precio = "Price";
+    }
+    $ref = $articles_array["ref"];
+    ?>
+    <body>
+    <table width="425" height="265" border="0" align="center" >
       <tr>
-        <td class="nombre"><?php echo $title; ?></td>
-      </tr>
-      <tr>
-        <td class="ref" align="center">Ref:<?php echo $ref ?></td>
-      </tr>
-      <tr>
-          <td class="descript"><?php echo $details; ?></td>
-      </tr>
-      <tr>
-        <td class="precio"><?php echo $cost ?> € </td>
-      </tr>
-      <tr>
-        <td class="anadir_cesta">
-		<?php
-		echo "<a href='../carrito_php/mete_producto.php?catid=$catid&nombre=$title&id=$artid&precio=$cost
+        <td width="263">
+        <p align="center">
+    <img oncontextmenu="alert('Opcion deshabilitada');return false"
+     oncopy="alert('Opcion deshabilitada');return false" src=../../tienda_gloria/php/admin/panel/img/arts/<?php echo $img ?> class='img_big' /></p>
+    <p style="text-align: left;"></p>
+        
+        </td>
+        <td width="152">
+            <table width="200" border="0">
+          <tr>
+            <td class="nombre"><?php echo $title; ?></td>
+          </tr>
+          <tr>
+            <td class="ref" align="center">Ref:<?php echo $ref ?></td>
+          </tr>
+          <tr>
+              <td class="descript"><?php echo $details; ?></td>
+          </tr>
+          <tr>
+            <td class="precio"><?php echo $cost ?> € </td>
+          </tr>
+          <tr>
+            <td class="anadir_cesta">
+    <?php
+    echo "<a href='../carrito_php/mete_producto.php?catid=$catid&nombre=$title&id=$artid&precio=$cost
 				&img=$img&ref=$ref'";
-		?>
-		class='anadir_cesta'><?php echo $comprar; ?>
-		</a></td>				
-      </tr>
-	  <tr>
-	  <td></td>
-	  </tr>
-	    <tr>
-	  <td></td>
-	  </tr>
-	    <tr>
-	  <td></td>
-	  </tr>
-	  
-	  <tr>		
-<td align="center">	<a href="javascript:history.back(1)" class="volver">Volver</a></td>
-</tr>
-    </table></td>
-  </tr>
-</table>
 
-</body>
-<?php
+     echo $comprar; ?>
+    		</a>
+            </td>				
+          </tr>
+    	  <tr>
+    	  <td></td>
+    	  </tr>
+    	    <tr>
+    	  <td></td>
+    	  </tr>
+    	    <tr>
+    	  <td></td>
+    	  </tr>
+    	  
+    	  <tr>		
+    <td align="center">	<a href="javascript:history.back(1)" class="volver">Volver</a></td>
+    </tr>
+        </table>
+        </td>
+      </tr>
+    </table>
+
+    </body>
+    <?php
 }
+
 function get_all_arts_from_categorie($catid)
 {
    // Petici�n a la base de datos de una lista de categor�as
@@ -274,27 +269,25 @@ function get_article($artid)
    $result =mysql_fetch_array($result);
    return $result; //guarda los resultados en un array
 }
-//Modificar Art�culo
-function mod_article_form ($article,$unidades,$catid) 
-{
-
+//Mod article form.
+function mod_article_form ($article, $unidades, $catid) {
 	
 	 //Llenamos variables con los valores del array
-		$title_esp=$article['art_name'];
-		$title_eng=$article['art_name_eng'];
+		$title_esp = $article['art_name'];
+		$title_eng = $article['art_name_eng'];
 
-		$details=$article['art_details'];
-		$details_eng=$article['art_details_eng'];
-		$price=$article['art_price'];
-		$artid=$article['artid'];
-		$ext=$article['id_ext'];	
-		$ref=$article['ref'];	
-		$unidades=$unidades['unidades'];
-		$stock=$article['stock'];
+		$details = $article['art_details'];
+		$details_eng = $article['art_details_eng'];
+		$price = $article['art_price'];
+		$artid = $article['artid'];
+		$ext = $article['id_ext'];	
+		$ref = $article['ref'];	
+		$unidades = $unidades['unidades'];
+		$stock = $article['stock'];
 		
 		//Comprobamos si esta marcado la categor�a escaparate
 		
-		$escaparate=comprueba_escaparate($artid);
+		$escaparate = comprueba_escaparate($artid);
 		
 ?>
 <form action="mod_art.php" method="post" enctype="multipart/form-data" name="form1" id="form1">
@@ -302,7 +295,7 @@ function mod_article_form ($article,$unidades,$catid)
 <table width="514" border="0" align="center" cellpadding="5" cellspacing="2">
 
     <tr bgcolor="#8E8EC6">
-      <th height="41" colspan="2" align="center"> Modificar Art&iacute;culo</th>
+      <th height="41" colspan="2" align="center"> Modificar Artículo</th>
   </tr>
     <tr bgcolor="#EDEDF6">
       <td width="259"><div align="right"><span class="Estilo4">Nombre</span></div></td>
@@ -313,20 +306,19 @@ function mod_article_form ($article,$unidades,$catid)
       <td width="229"><input name="art_name_eng" type="text" id="art_name_eng" value="<?php echo $title_eng ?>" maxlength="20" /></td>
   </tr>
      <tr bgcolor="#EDEDF6">
-      <td width="259"><div align="right"><span class="Estilo4">Categor�a</span></div></td>
+         <td width="259"><div align="right"><span class="Estilo4">Categor&iacute;a</span></div></td>
       <td width="229">
      <select name="catid" name="catid">
     <?php
-	$cat_array=get_categories();
-	foreach ($cat_array as $row)
-  {
-  if ($row[catid] == $catid)
-   echo  "<option value='$row[catid]' selected='selected'>$row[cat_name]</option>";
-   else
-      echo  "<option value='$row[catid]' >$row[cat_name]</option>";
-
-   }
-   ?>
+	$cat_array = get_categories();
+	foreach ($cat_array as $row){
+            if ($row[catid] == $catid) {
+                echo "<option value='$row[catid]' selected='selected'>" . $row['cat_name'] . "</option>";
+            } else {
+                echo "<option value='$row[catid]' >" . $row['cat_name'] . "</option>";
+            }
+        }
+    ?>
   	</select> 
       </td>
   </tr>
@@ -345,8 +337,8 @@ function mod_article_form ($article,$unidades,$catid)
       </span></td>
   </tr>
     <tr bgcolor="#EDEDF6">
-      <td><span class="Estilo4">Descripci&oacute;n-ingl&eacute;s</span></td>
-      <td><span class="Estilo4">Descripci&oacute;n-espa&ntilde;ol</span></td>
+      <td><span class="Estilo4">Descripción-inglés</span></td>
+      <td><span class="Estilo4">Descripción-español</span></td>
     </tr>
     <tr bgcolor="#EDEDF6">
       <td><div align="left"><span class="Estilo4">
@@ -356,7 +348,7 @@ function mod_article_form ($article,$unidades,$catid)
       <div align="center"></div></td>
      
       <td><div align="left"><span class="Estilo4">
-     200 caracteres máximo (cuando no te deja escribir m�s es por as alcanzado el límite)
+     200 caracteres máximo (cuando no te deja escribir más es por as alcanzado el límite)
       <input name="art_details" id="art_details" maxlength="200" size="80" value='<?php  echo $details  ?>' />
       </span></div></td>
   </tr>
@@ -365,33 +357,30 @@ function mod_article_form ($article,$unidades,$catid)
       <td><span class="Estilo4">
         <label></label>
         <input name="art_price" type="text" value="<?php echo $price ?>" size="7" maxlength="10" />
-      </span> �</td>
+          </span> &epsiv;</td>
   </tr>
   <tr bgcolor="#EDEDF6">
-	 <td align="right">L�mite existencias</td>
+      <td align="right">L&iacute;mite existencias</td>
 	 <td><input name="stock" type="text" class='box' id="stock" size="8" value="<?php echo $stock ?>"/></td>
    </tr>
    
    <tr bgcolor="#EDEDF6">
-      <td><div align="right"><span class="Estilo4"></span></div></td><td>Imagen (tiene que tener m�ximo 1100px X 1100px
+      <td><div align="right"><span class="Estilo4"></span></div></td><td>Imagen (tiene que tener máximo 1100px X 1100px
               <input type="file" name="file" />
 
       </td>
       <tr>
       <?php
-	  if ($escaparate)
-	  {
-	  ?>
-           <td align='center' colspan='2'>Escapar�te <input name="escaparate" type="checkbox" checked="checked" /></td>
-		<?php
-		}
-		else
-		{
-		?>
-		 <td align='center' colspan='2'>Escapar�te <input name="escaparate" type="checkbox"  />
-		<?php
-		}
-		?>
+              if ($escaparate) {
+                  ?>
+                  <td align='center' colspan='2'>Escaparate <input name="escaparate" type="checkbox" checked="checked" /></td>
+                  <?php
+              } else {
+                  ?>
+                  <td align='center' colspan='2'>Escaparate <input name="escaparate" type="checkbox"  />
+                  <?php
+              }
+              ?>
 </tr>    
   </tr>
     <tr bgcolor="#EDEDF6">
@@ -549,18 +538,19 @@ function menu_articles()
 function add_art($catid,$art_name,$art_name_eng,$art_details,$art_details_eng,$art_price,$id_ext,$ref,$stock,$escaparate)
  {
 $conn = db_connect();
-$date=date("j,�n,�Y");
+$date = date("j, m, Y");
 $query ="insert into articles values
  		('','$catid','$art_name','$art_name_eng','$art_details','$art_details_eng',
 		'$art_price','$id_ext','$ref','$stock','$date','$escaparate' ) 
 		";
-		
-		
-		
+			
 $result=mysql_query($query);
-if (!result)
-return false;
-$mensaje=" El nuevo art�culo se ha a�adido correctamente a la Base de datos";
+
+if (!result) {
+    return false;
+}
+
+$mensaje = " El nuevo artículo se ha añadido correctamente a la Base de datos";
 return $mensaje;
 }	
 //Llenamos el almacen con n� unidades de este producto

@@ -5,14 +5,14 @@
 <td><a href="consulta_pedidos.php?ref=<? echo $ref ?>"> Volver al pedido</a> </td>
 </tr>
 
- <form name='edit' action="<?=$PHP_SELF ?>" method="post" >
+ <form name='edit' action="<?php echo $PHP_SELF ?>" method="post" >
  
 
  <table border="0" cellpadding="3" cellspacing="3">
  <tr>
- <th colspan="2" align="left"> Pedido Ref: <? echo $ref ?> </th>
+ <th colspan="2" align="left"> Pedido Ref: <?php echo $ref ?> </th>
  </tr>
- <?
+ <?php
 $i=0;
 
 if (isset($article) ){
@@ -31,23 +31,23 @@ if (isset($article) ){
 <td colspan="4"><input type="submit" name="ok"  value="ACTUALIZAR PEDIDO"/></td>
 </tr>	
 			
-<input type="hidden" name="ref"  value="<?=$ref ?>"/>	
+<input type="hidden" name="ref"  value="<?php echo $ref ?>"/>	
 
 
 </form>
 
 </table>
-<form name="insert" action="<?=$PHP_SELF ?>" method="post">
+<form name="insert" action="<?php echo $PHP_SELF ?>" method="post">
  <table  >
 <tr>
-<th> Insertar artículo</th>
+<th> Insertar artÃ­culo</th>
 </tr>
 <tr>
-<td>REF artículo</td><td><input type="text" name="ref_art"  /></td></tr>
+<td>REF artÃ­culo</td><td><input type="text" name="ref_art"  /></td></tr>
 <td>Cantidad</td><td><input type="text" name="items_art"  /></td></tr>
 <td colspan="2" align="left">
-<input type="hidden" name="ref"  value="<?=$ref ?>"/>
-<input type="submit" name="add"  value="AÑADIR ARTICULO" /></td>
+<input type="hidden" name="ref"  value="<?php echo $ref ?>"/>
+<input type="submit" name="add"  value="AÃ‘ADIR ARTICULO" /></td>
 </tr>
 	
 

@@ -347,7 +347,7 @@ $cabeceras .= 'To: ' . $email .' < ' . $email  . ">\r\n";
 
 
 //$cabeceras .= 'To: ' . $email .' < ' . $email . '>, tienda <gloriabotonero@gmail.com>' . "\r\n";
-$cabeceras .= 'From: Recordatorio <info@gloriabotonero.com>' . "\r\n";
+$cabeceras .= 'From: Copia de pedido <info@gloriabotonero.com>' . "\r\n";
 $cabeceras .= 'Cc: gloriabotonero@gmail.com' . "\r\n";
 $cabeceras .= 'Bcc: robbyschuh@gmail.com' . "\r\n";
 

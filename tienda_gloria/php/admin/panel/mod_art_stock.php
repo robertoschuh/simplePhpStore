@@ -53,7 +53,7 @@ else
 
 
 $img_id=  $artid;
-$img_name=$img_id++."art.$ext"; //nombramos imagen con el nombre de la KEY del ?ltimo art?culo a?adido y la extensi?n que le corresponda 					                                  //$ext
+$img_name = $img_id++."art.$ext"; //nombramos imagen con el nombre de la KEY del ?ltimo art?culo a?adido y la extensi?n que le corresponda 					                                  //$ext
 
 //Le damos nombre a la imagen
 $img = $_FILES [ 'file' ][ 'name' ]=$img_name;

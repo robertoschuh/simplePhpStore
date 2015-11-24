@@ -1,6 +1,4 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
-
 function extension_check($id_ext)
 {
 //Devuelve la extensi�n de la imagen del art�culo en cuestion
@@ -201,7 +199,7 @@ include("idiomas/idiomas_fns.php");
 
 <?php
 }
-function foother () {
+function footer () {
 
 ?>
 <script LANGUAGE="JavaScript">
@@ -226,8 +224,8 @@ function agregar(){
 
 
 <font size="2">&#064; 2008 Gloria Botonero Belenes y Miniaturas</font><br />
-<font size="2">Administradora<a href='mailto:gloriabotonero@gmail.com' >  Webmaster</a></font> telf: 615 62 38 96 
- <font size="2"> <a href='mailto:robbyschuh@gmail.com' >  Soporte t&eacute;cnico (622 28 19 72)</a> </font> <br />
+<font size="2">Administradora<a href='mailto:gloriabotonero@gmail.com' >  Webmaster</a></font> telf: + (34) 657 51 39 39 
+ <font size="2"> <a href='mailto:rob@masquebits.com' >  Soporte t&eacute;cnico (622 28 19 72)</a> </font> <br />
  <font size="2"><a href="javascript:agregar()">Agregar a favoritos &middot;</a></font> <br />
 .
 
@@ -257,7 +255,7 @@ include ("idiomas/idiomas_fns.php");
     </tr>
     <tr>
       <td colspan="2" align="center"><label>
-        <input type="submit" name="action" id="Submit" value="<?php echo $no_more_promo; ?>" />        </label></td>
+        <input type="submit" name="action" id="Submit" value="<?php echo $no_more_promo?>" />        </label></td>
     </tr>
     
   </table>
@@ -280,12 +278,12 @@ function restore_pwd_form() {
     <tr>
       <td width="60" class="tablas_items" >email</td>
       <td width="144"><label>
-              <input type="text" name="email" id="email" placeholder="Email" />
+        <input type="text" name="email" id="email" />
       </label></td>
     </tr>
     <tr>
       <td class="tablas_items" >Repetir email</td>
-      <td>        <input type="text" name="email2" id="email2" placeholder="Repetir Email" />
+      <td>        <input type="text" name="email2" id="email2" />
 </td>
     </tr>
 	  <tr>
@@ -302,7 +300,8 @@ function restore_pwd_form() {
 
 }
 function change_pwd_form () {
- 
+    
+    
 ?>
 <h3>Por favor establezca una nueva contraseña) </h3>
 <form id="form1" name="form1" method="post" action=<?php  echo $_SERVER['PHP_SELF'] ?> >
@@ -311,13 +310,13 @@ function change_pwd_form () {
           <td colspan="2"><div align="center">Login</div></td>
         </tr>
         <tr>
-          <td width="60" class="tablas_items" >Contraseña</td>
+          <td width="60" class="tablas_items" >Contrase&ntilde;a</td>
           <td width="144"><label>
                   <input type="text" name="password" id="password" placeholder="Nueva contraseña" />
           </label></td>
         </tr>
         <tr>
-          <td class="tablas_items" >Contraseña (repetir)</td>
+          <td class="tablas_items" >Contrase&ntilde;a (repetir)</td>
           <td>        <input type="text" name="password2" id="password2" placeholder="Repetir contraseña" />
       </td>
         </tr>
@@ -450,28 +449,24 @@ $textos=ask_como_comprar_page ();
 }
 
 function texto_carrito () {
+
 ?>
-    <div id="recordatorio">
+<div id="recordatorio">
 
 
-    <h2>RECUERDE </h2>
+<h2>RECUERDE </h2>
 
-    <table align="center">
-    <tr>
-    <td align="left">
-    <ul >
-    <li>Si desea añadir algún artículo a su compra haga clic en<b> seguir comprando</b>. </li>
-    <li>Para modificar algunos de sus datos, introduzca la informaci�n correcta y haga clic en <b>Actualizar mis datos</b>.</li>
-    <li>Elija el modo de pago y envío.</li>
-    <li>Revise sus datos y si son correctos haga clic en <b>Hacer pedido</b>.</li>
-    </ul>
-    </td>
-    </tr>
-    </table>
-    </div>
-<?php }
-
-function to_view ($data, $path) {
-
-    include($path);
-}
+<table align="center">
+<tr>
+<td align="left">
+<ul >
+<li>Si desea añadir algún artículo a su compra haga clic en<b> seguir comprando</b>. </li>
+<li>Para modificar algunos de sus datos, introduzca la informaci�n correcta y haga clic en <b>Actualizar mis datos</b>.</li>
+<li>Elija el modo de pago y envío.</li>
+<li>Revise sus datos y si son correctos haga clic en <b>Hacer pedido</b>.</li>
+</ul>
+</td>
+</tr>
+</table>
+</div>
+<?php }?>

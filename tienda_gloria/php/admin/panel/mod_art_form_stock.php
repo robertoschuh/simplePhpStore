@@ -1,9 +1,8 @@
+<?php @session_start(); ?>
 <link href="../../../gloria.css" rel="stylesheet" type="text/css" />
-<link href="../../../gloria.css" rel="stylesheet" type="text/css" />
-
 <?php
 
-@session_start();
+
 $idioma=$_SESSION['idioma'];
 
 require ("../../fns.php");

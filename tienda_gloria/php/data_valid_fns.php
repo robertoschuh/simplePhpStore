@@ -11,10 +11,11 @@ function filled_out($form_vars)
   return true;
 }
 
-function valid_email($address)
+function valid_email($email)
 {
   // check an email address is possibly valid
-  if (ereg("^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$", $address))
+ // if (ereg("^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-\.]+$", $address))
+  if(filter_var($email, FILTER_VALIDATE_EMAIL))
     return true;
   else
     return false;

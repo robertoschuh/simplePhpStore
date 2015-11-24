@@ -120,11 +120,11 @@ $mensaje="\nEnvio Pedido\n <br><span class='text_mails'>Nombre</span> :
 http://www.gloriabotonero.com/tienda_gloria/php/admin/panel/acces.php
 			</span>"; 
 			
-$mail_webmaster = "gloriabotonero@gmail.com";
+$mail_webmaster="gloriabotonero@gmail.com";
 //correo de control técnico
-$mail_webmaster2 = "proyectos@weblineinformatica.com";
+$mail_webmaster2="proyectos@weblineinformatica.com";
 
-$remitente = "From: info@gloriabotonero.com  \n \r\nContent-type: text/html\r\n";
+$remitente="From: info@gloriabotonero.com  \n \r\nContent-type: text/html\r\n";
 
 
 

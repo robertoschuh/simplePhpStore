@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
 <title>Gloria Botonero belenes y miniaturas</title>
 <link href="../gloria.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -29,30 +29,25 @@ exit;
 }
 if ($catid == -2)
 {
-$_SESSION['novedades']='novedades';
+$_SESSION['novedades'] = 'novedades';
+include ("php/views/escaparate.html.php");
 ?>
-<meta http-equiv="refresh" content="0;URL=escaparate.php" />
 <?php
 exit;
 }
-//Cuando sea cualquier categoría que no sea "ESPECIAL"
-if ($catid != "especial")
-{
-	if ( $categorie= get_details($_GET['catid'] ) );
- 	{
+//Cuando sea cualquier categor�a que no sea "ESPECIAL"
+if ($catid != "especial") {
+    if ($categorie = get_details($_GET['catid']))
+        ;
+    {
 
-	if($_SESSION['idioma']==2 && !session_is_registered("valid_user"))
-	{
-		$cat_details=$categorie['cat_details_eng'];
-		$show_articles="Show articles";
-		echo "	<meta http-equiv='refresh' content='2;URL=categories.php?catid=2' > ";
-
-	}
-	else
-		{
-			 if ($_SESSION['admin_user'])
-
-$wellcomen ="<table width='456' border='0' align='left' cellpadding='8' cellspacing='8' bgcolor='#E3E5FE'>
+        if ($_SESSION['idioma'] == 2 && !session_is_registered("valid_user")) {
+            $cat_details = $categorie['cat_details_eng'];
+            $show_articles = "Show articles";
+            echo "<meta http-equiv='refresh' content='2;URL=categories.php?catid=2' > ";
+        } else {
+            if ($_SESSION['admin_user'])
+                $wellcomen = "<table width='456' border='0' align='left' cellpadding='8' cellspacing='8' bgcolor='#E3E5FE'>
   <tr>
     <td width='450' height='123' bgcolor='#C8CBFD'><p align='center' >Bienvenido Administrador; usted puede: </p>
       <div align='center' >
@@ -63,43 +58,43 @@ $wellcomen ="<table width='456' border='0' align='left' cellpadding='8' cellspac
         &middot;
         Eliminar de la vista del público un artículo temporalmente (-1)<br />
         Recuerde:Unidades =-1 </p>
-        <p>Recuerde que para Borrar e Insertar  puede hacerlo desde el Panel de Control y 		                             tambi&eacute;n para Modificar,Borrar y  Eliminar Categorias, recuerde que tambi&eacute;n desde all&iacute; puede ver TODOS los pedidos de la tienda.</p>
+        <p>Recuerde que para Borrar e Insertar  puede hacerlo desde el Panel de Control y tambi&eacute;n para Modificar,Borrar y  Eliminar Categorias, recuerde que tambi&eacute;n desde all&iacute; puede ver TODOS los pedidos de la tienda.</p>
       </div></td>
   </tr>
 </table>";
-			if (!isset($catid) )
-				{
-				echo "	<meta http-equiv='refresh' content='1;URL=categories.php?catid=-2' > ";
-				exit;
-				}
-		$cat_details=$categorie['cat_details'];
-    		$show_articles="Ver Artículos";
-		}
-
-		//Sino se ha seleccionado categor�a alguna
-	$id_ext= $categorie["id_ext"];
-	$ext=extension_check($id_ext);
-	if (($categorie["id_ext"])==4 )
-	$img="demo.jpeg"; //sino hay ninguna imagen asociada a ese art�culo, se carga esta por defecto
-	else
-	$img=$catid."cat.$ext";
+            if (!isset($catid)) {
+                echo "	<meta http-equiv='refresh' content='1;URL=categories.php?catid=-2' > ";
+                exit;
+            }
+            $cat_details = $categorie['cat_details'];
+            $show_articles = "Ver Artículos";
         }
-?>
-<div align="center">
-<table width="782" class="categorie_position">
-<tr>
-<td width="772" height="200" align="center" valign="middle" >
-<a href='show_arts.php?catid=<?php echo $catid ?>'>
-  <?php echo "<a href='show_arts.php?catid=$catid' class='ver_articulos'>$show_articles</a>"?><br />
-  <a href='show_arts.php?catid=<?php echo $catid ?>' class="enlace_imagen">
-  <img src="admin/panel/img/cats/<?php echo $img ?>" alt="i" class="img_big_cat " /></a>
-  <a href="'show_arts.php?catid=$catid' class='ver_articulos'&gt;$show_articles"></a><br />
-  <span class="descripcion_ver_articulo"><?php echo  $cat_details ?></td>
-</tr>
-</table>
-</div>
-<?php
+
+        //Sino se ha seleccionado categor�a alguna
+        $id_ext = $categorie["id_ext"];
+        $ext = extension_check($id_ext);
+        if (($categorie["id_ext"]) == 4) {
+            $img = "demo.jpeg"; //sino hay ninguna imagen asociada a ese art�culo, se carga esta por defecto
+        } else {
+            $img = $catid . "cat.$ext";
+        }
+    }
+    ?>
+    <div align="center">
+        <table width="782" class="categorie_position">
+        <tr>
+        <td width="772" height="200" align="center" valign="middle" >
+        <a href='show_arts.php?catid=<?php echo $catid ?>'>
+    <?php echo "<a href='show_arts.php?catid=$catid' class='ver_articulos'>$show_articles</a>" ?><br />
+          <a href='show_arts.php?catid=<?php echo $catid ?>' class="enlace_imagen">
+          <img src="admin/panel/img/cats/<?php echo $img ?>" alt="i" class="img_big_cat " /></a>
+          <a href="'show_arts.php?catid=$catid' class='ver_articulos'&gt;$show_articles"></a><br />
+          <span class="descripcion_ver_articulo"><?php echo $cat_details ?></td>
+        </tr>
+        </table>
+    </div>
+    <?php
 } //FIN DEL ELSE
-?>
+    ?>
 </body>
 </html>

@@ -1,9 +1,12 @@
+<?php @session_start(); ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="../../../gloria.css" rel="stylesheet" type="text/css" />
-
-
-<?
-
-@session_start();
+</head>
+<body>
+<?php
 require ("../../fns.php");
 require ("../admin_fns.php");
 include ("upload.php");
@@ -16,21 +19,21 @@ if ($_SESSION['admin_user'])
 panel_control ();
 
 
-$catid=$_POST["catid"];
-$art_name=$_POST["art_name"];
-$art_name_eng=$_POST["art_name_eng"];
-$details=$_POST["details"];
-$details_eng=$_POST["details_eng"];
-$price=$_POST["price"];
-$ref=$_POST["ref"];
-$unidades=$_POST["unidades"];
-$stock=$_POST["stock"];
+$catid = $_POST["catid"];
+$art_name = $_POST["art_name"];
+$art_name_eng = $_POST["art_name_eng"];
+$details = $_POST["details"];
+$details_eng = $_POST["details_eng"];
+$price = $_POST["price"];
+$ref = $_POST["ref"];
+$unidades = $_POST["unidades"];
+$stock = $_POST["stock"];
 if ( $_POST["escaparate"] == "on" )
-$escaparate=1;
+$escaparate = 1;
 
 //dejamos
-if ( $catid==NULL || $art_name==NULL || $details==NULL ||
-	$price==NULL ||$ref==NULL || $unidades==NULL )
+if ( $catid == NULL || $art_name == NULL || $details == NULL ||
+	$price == NULL ||$ref == NULL || $unidades == NULL )
 //asi el ingl?s ser?a obligatorio
 /*if ( $catid==NULL || $art_name==NULL || $details==NULL || $art_name_eng==NULL || $details_eng==NULL ||
 	$price==NULL ||$ref==NULL || $unidades==NULL )*/
@@ -44,30 +47,30 @@ else
 {
 	if (substr_count( $_FILES [ 'file' ][ 'name' ] ,'.jpeg') >0 )
     {
-		$id_ext=0;
-		$ext="jpeg";
+		$id_ext = 0;
+		$ext = "jpeg";
 	}
 	else if (substr_count( $_FILES [ 'file' ][ 'name' ] ,'.jpg') >0 )
 	{
-		$id_ext=1;
-		$ext="jpg";
+		$id_ext = 1;
+		$ext = "jpg";
 	}
 	else if (substr_count( $_FILES [ 'file' ][ 'name' ] ,'.gif') >0 )
 	{
-		$id_ext=2;
-		$ext="gif";
+		$id_ext = 2;
+		$ext = "gif";
 	}
 	else if (substr_count( $_FILES [ 'file' ][ 'name' ] ,'.png') >0 )
 	  {
 
-	 $id_ext=3;
-	$ext="png";
+	 $id_ext = 3;
+	$ext = "png";
 	}
 	else
-	$id_ext=4;
+	$id_ext = 4;
 //enviamos el nombre de la categor?a y los detalles a la funci?n add_cat que lo insertar? en la Bd
 	//$ext si es 0 es jpg si es 1 es jpeg y si es 2 es gif y si es 3 png
-	$result=add_art($catid,$art_name,$art_name_eng,$details,$details_eng,$price,$id_ext,$ref,$stock,$escaparate);
+	$result = add_art($catid,$art_name,$art_name_eng,$details,$details_eng,$price,$id_ext,$ref,$stock,$escaparate);
 
 
 }
@@ -78,30 +81,29 @@ $artid=ask_artid();
 
 
 
-$img_id= last_id($artid); /*Esto nos sirve para obtener la ?ltima id de artid ,nos sirve tanto para loas imagnes como para el almacen*/
+$img_id = last_id($artid); /*Esto nos sirve para obtener la ?ltima id de artid ,nos sirve tanto para loas imagnes como para el almacen*/
 
 //A?adimos el n?mero de unidades de este art?culo a el almacen
-$almacen=add_unidades($img_id,$unidades);
+$almacen = add_unidades($img_id,$unidades);
 
-if (!$almacen)
-{
-echo "Ha habido problema mientras se llenaba el almacen de existencias de este art?culo,<br> probablemente esa referencia ya exista sino consulte con su soporte t?cnico,Gracias<br><br><a href='javascript:history.back(1)' class='volver'>Volver</a>";
-
-exit;
+if (!$almacen){
+    echo "Ha habido problema mientras se llenaba el almacen de existencias de este artículo,<br />"
+    . " probablemente esa referencia ya exista sino consulte con su soporte tícnico,Gracias"
+      . "<br /><br /><a href='javascript:history.back(1)' class='volver'>Volver</a>";
+    exit;
 }
 //Si ha sucedido alg?n error y no se ha podido a?adir la nueva categor?a a la Bd devuelve un mensaje de error
-if (!$result)
-
-echo "No se ha podido almacenar este art?culo, porfavor int?ntelo mas tarde, Gracias<br>";
-
+if (!$result){
+    echo "No se ha podido almacenar este art?culo, porfavor int?ntelo mas tarde, Gracias<br>";
+}
 
 
 
 
 else
 {
-	echo "Art?culo a?adido a la base da datos, Gracias";
- 	echo " <a href='javascript:history.back(-1)'>A?adir Otro</a><br>";
+    echo "Artículo añadido a la base da datos, Gracias";
+    echo " <a href='javascript:history.back(-1)'>A?adir Otro</a><br>";
 
 }
 
@@ -115,18 +117,19 @@ else
 
 
 
-$img_name=$img_id++."art.$ext"; //nombramos imagen con el nombre de la KEY del art?culo a?adido y la extensi?n que le corresponda $ext
+$img_name = $img_id++."art.$ext"; //nombramos imagen con el nombre de la KEY del art?culo a?adido y la extensi?n que le corresponda $ext
 
 
 
-$img = $_FILES [ 'file' ][ 'name' ]=$img_name;
+$img = $_FILES [ 'file' ][ 'name' ] = $img_name;
   //Agregamos la nueva entrada a la base de datos
 
 //Movemos el fichero a la carpeta donde la queremos guardar. y con el nombre deseado.
 
 
-
-upload_image($_FILES [ 'file' ],$destino,$destino_peq,$size,$size_peq);
+if (!upload_image($_FILES [ 'file' ], $destino, $destino_peq, $size, $size_peq)) {
+    echo "No se ha podido subir la imagen, por favor consulte con su técnico, gracias";
+}
 
 
 //move_uploaded_file ( $_FILES [ 'file' ][ 'tmp_name' ], $destino . '/' . $_FILES [ 'file' ][ 'name' ]);
@@ -143,3 +146,4 @@ login_box();
 echo "valor de escaparate: ".$escaparate;
 
 ?>
+</body>

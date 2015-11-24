@@ -1,3 +1,4 @@
+<?php @session_start(); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +11,7 @@
 
 <body>
 <?php
-@session_start();
+
 require ("php/fns.php");
 require ("php/admin/admin_fns.php");
 
@@ -22,9 +23,9 @@ else
 ?>
 <table>
 <tr>
-<TD width="796" valign="top" bgcolor="#FFFFFF">
+<td width="796" valign="top" bgcolor="#FFFFFF">
         <div align="center"></div>
-    </TD>
+    </td>
   </tr>
 </table>
      <table width="100%" border="0" bgcolor="#CBE4E4">

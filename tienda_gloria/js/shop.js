@@ -15,7 +15,7 @@
 		//this.products = stock;
 		this.products = [];
 
-		$http.get('/js/products.json').success(function(data){
+		$http.get('/products-list.json').success(function(data){
 			store.products = data;
 			console.log(store);
 		});

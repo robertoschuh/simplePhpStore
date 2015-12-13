@@ -2,18 +2,25 @@
 
 function db_connect() {
 
-    //$result = mysql_pconnect("vps39665.ovh.net", "www_botonero", "wch88C^9");
-    $result = mysql_pconnect("localhost", "root", "nubi");
-    if (!$result)
-        return false;
+    try{
+        $result = mysql_pconnect("localhost", "root", "nubi");
 
-
-    $local = mysql_select_db("wwwglor_gloria");
-    mysql_query("SET NAMES 'utf8'", $result);
-    if (!$local)
-        return false;
-    else
-        return $result;
+    }catch (Exception $e){
+        echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+    }
+    try{
+        $local = mysql_select_db("wwwglor_gloria");
+        
+    }catch (Exception $e){
+        echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+    }
+    try{
+        mysql_query("SET NAMES 'utf8'", $result);
+    }catch (Exception $e){
+        echo 'Excepción capturada: ',  $e->getMessage(), "\n";
+    }
+ 
+    return $result;
 }
 
 function db_result_to_array($result) {

@@ -9,11 +9,22 @@
   <!-- las propiedades del objeto store solo estarán disponibles dentro del alcance (scope) del 
   contrlador (osea dentro del div que contiene directiva ng-controller) -->
   <body ng-controller = "StoreController as store">
-    <div class="container-fluid">
+  <div class="container-fluid">
       <nav-menu></nav-menu>
-      <categories-home-menu></categories-home-menu>
-    </div>
 
+      <div class="row">
+        <div class="col-xs-2">
+          <categories-home-menu></categories-home-menu>
+        </div>
+
+        <div class="col-xs-10">
+          <fieldset class="form-group">
+           <input type="text" class="form-control" id="search" placeholder="Nombre" ng-model="query" autofocus>
+          </fieldset>
+          <product-thumb></product-thumb>
+        </div>
+      </div> <!-- end row -->
+  </div>    
     <!-- javascripts -->
     <script type="text/javascript" 
     src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>

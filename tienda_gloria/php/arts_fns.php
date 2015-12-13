@@ -1,19 +1,35 @@
 <?php
-function get_arts($catid)
-{
+function get_arts($catid = null)
+{ 
    // Petici�n a la base de datos de una lista de categor�as
-   $conn = db_connect();
+   try{ 
+    $conn = db_connect();
+  } catch (Exception $e) {
+      echo "No puede conectar a la bd".$e->getMessage();
+    } 
    $query = "SELECT artid,catid,art_name,art_name_eng,art_details,art_details_eng,art_price,id_ext,ref
-             FROM articles
-			 WHERE catid='$catid'
-			ORDER BY artid ASC";
+             FROM articles";
+   if($catid != null){          
+    $query .="WHERE catid=" .$catid;         
+	 }		 
+	 $query .=" ORDER BY artid ASC";
+
+   try {
    $result = mysql_query($query);
+   
+    }
+    catch (Exception $e) {
+      echo "No results ".$e->getMessage();
+    }   
    if (!$result)
      return false;
    $num_arts = mysql_num_rows($result);
-   if ($num_arts ==0)
+
+   if ($num_arts == 0){
       return false;
+   }
    $result = db_result_to_array($result);
+   
    return $result; //guarda los resultados en un array
 }
 function display_arts($art_array) {

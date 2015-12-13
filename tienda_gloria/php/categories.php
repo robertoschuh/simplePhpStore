@@ -29,11 +29,11 @@ exit;
 }
 if ($catid == -2)
 {
-$_SESSION['novedades'] = 'novedades';
-include ("php/views/escaparate.html.php");
-?>
-<?php
-exit;
+    $_SESSION['novedades'] = 'novedades';
+    include ("views/escaparate.html.php");
+    ?>
+    <?php
+    exit;
 }
 //Cuando sea cualquier categor�a que no sea "ESPECIAL"
 if ($catid != "especial") {

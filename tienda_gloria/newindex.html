@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="storeAngular">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" type="text/css"
+     href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  </head>
+
+  <!-- las propiedades del objeto store solo estarán disponibles dentro del alcance (scope) del 
+  contrlador (osea dentro del div que contiene directiva ng-controller) -->
+  <body ng-controller = "StoreController as store">
+    <div class="container-fluid">
+      <nav-menu></nav-menu>
+      <categories-home-menu></categories-home-menu>
+    </div>
+
+    <!-- javascripts -->
+    <script type="text/javascript" 
+    src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0-rc.0/angular.min.js"></script>
+    <script type="text/javascript" src="https://code.angularjs.org/1.5.0-rc.0/angular-route.min.js"></script>
+    <script type="text/javascript" src="js/shop.js"></script>
+    <!-- custom directives -->
+    <script type="text/javascript" src="js/products.js"></script>
+    <script type="text/javascript" src="js/nav-menus.js"></script>
+  </body>
+</html>

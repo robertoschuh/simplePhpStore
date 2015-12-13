@@ -1,0 +1,7 @@
+<div class="col-xs-10" >
+    <!-- load product -->
+    <div class="product col-xs-2" ng-repeat="product in store.products">
+     <h2>{{product.name}}</h2>
+     <img ng-src="{{product.images[0].thumb}}" />
+    </div>
+</div>

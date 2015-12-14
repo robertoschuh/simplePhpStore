@@ -8,38 +8,29 @@
 	);
 
 	app.controller('StoreController', ['$http', function($http) {
-		// this is StoreController (in html alias store).
-		//this.products = stock;
+		/*
+		this.selectedCategory = '';
+		this.setGroup = function(catid) {
+			this.selectedCategory = catid;
+		}
+	*/
 		var store = this;
-		this.categories = categories;
 		//this.products = stock;
 		this.products = [];
+		this.categories = [];
 
 		$http.get('/products-list.json').success(function(data){
 			store.products = data;
 			console.log(store);
+		
+		});
+
+		$http.get('/categories-list.json').success(function(data){
+			store.categories = data;
+			console.log(store);
+		
 		});
 
 	}]);
 
-	var categories = [
-			{
-				name: 'category1',
-				description: 'bla bla bla bla'
-
-			},
-			{
-				name: 'category2',
-				description: 'bla bla bla bla'
-
-			},
-			{
-				name: 'category3',
-				description: 'bla bla bla bla'
-
-			}
-
-	];
-	
-	
 })();

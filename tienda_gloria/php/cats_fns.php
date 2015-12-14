@@ -64,6 +64,7 @@ function add_cat($cat_name, $cat_name_eng, $cat_details, $cat_details_eng, $id_e
 function get_categories() {
     // Petici�n a la base de datos de una lista de categor�as
     $conn = db_connect();
+
     //Los ordena seg�n posici�n , a mayor posici�n se muestra antes, de mayor a menor
     $query = "select catid,cat_name,cat_details,id_ext
              FROM categories

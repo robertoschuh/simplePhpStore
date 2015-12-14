@@ -2,18 +2,18 @@
 
 // Return a json product list.
 include ('php/db_fns.php');
-include ('php/arts_fns.php');
+include ('php/cats_fns.php');
 
 try{
-	$products = get_arts();
+	$categories = get_categories();
 
 }catch (Exception $e) {
 	 echo 'Excepción capturada: ',  $e->getMessage(), "\n";
 }
 
-$json = str_replace('\/','/',json_encode($products));
+$json = str_replace('\/','/',json_encode($categories));
 //write to json file
-$fp = fopen('products-list.json', 'w');
+$fp = fopen('categories-list.json', 'w');
 try{
 	fwrite($fp, $json);
 

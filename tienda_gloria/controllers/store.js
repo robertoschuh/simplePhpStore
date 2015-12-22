@@ -1,9 +1,11 @@
 ( function () {
     //"use strict";
 	angular.module('storeAngular', 
-		[
-		'store-products', 
-		'nav-menus'
+		['storeProducts',
+		'storeCategories', 
+		'navMenus',
+		'storeCategoryService',
+		'storeProductService'
 		]
 	).
 
@@ -15,11 +17,8 @@
 		$scope.categories = {};
 
 		// Call factory method from Products.
-		Products.all().success(function(data){
-			
-			$scope.products = data;
-			console.log('Products '+$scope.products);
-		
+		Product.all().success(function(data){		
+			$scope.products = data;	
 		}); 
 		// Call factory method from Category.
 		Category.all().success(function(data){

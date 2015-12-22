@@ -1,9 +1,4 @@
- angular.module('storeAngular', 
-		[
-		'store-products', 
-		'nav-menus'
-		]
-	).
+ angular.module('storeCategoryService', []).
 
  factory('Category', ['$http', function CategoryFactory($http){
  	return {

@@ -1,12 +1,12 @@
 	// Custom directives.
 	// Inyected by storeAngular module
-	angular.module('store-products', [ ]).
+	angular.module('storeProducts', [])
 
-	directive('productThumb',function(){
+	.directive('productThumbs',function(){
 		//debugger;
 		return {
 			restrict: 'E', // Type of Directive (in this case HTML)
-			templateUrl: 'partials/product-thumb.html' // Template URL
+			templateUrl: 'partials/product-thumbs.html' // Template URL
 		};
 	}).
 

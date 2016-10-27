@@ -55,12 +55,12 @@ else
 
 }
 ?>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="../../js/admin.js" type="text/javascript"></script>
+
 <script language="JavaScript">
 
-function CierraVentana() {
-
-    window.close();
-}
 function AbreVentanaPortes()  {
     //sustituir ejemplo.html por la ruta y nombre de la pagina a cargar en la ventana
     window.open("inserta_portes.php?sid=<?php echo $sid;?>","" ,"" ,"width=40,heigth=20")

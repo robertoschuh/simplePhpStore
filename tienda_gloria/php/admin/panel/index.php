@@ -1,42 +1,32 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN" "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" version="XHTML+RDFa 1.0" dir="ltr"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/terms/"
-  xmlns:foaf="http://xmlns.com/foaf/0.1/"
-  xmlns:og="http://ogp.me/ns#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-  xmlns:sioc="http://rdfs.org/sioc/ns#"
-  xmlns:sioct="http://rdfs.org/sioc/types#"
-  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
-
+<!DOCTYPE html>
+<html lang="es">
 
 <head>
-<title> Panel de control acceso </title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="../../../gloria_rober.css" rel="stylesheet" type="text/css" />
-<link href="../../../gloria.css" rel="stylesheet" type="text/css" />
-<script language="javascript">
-//Su explorador no soporta java o lo tiene deshabilitado; esta pagina necesita javascript para funcionar correctamente<!--
-//Copyright ? McAnam.com
+  <title> Panel de control acceso </title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <link href="../../../gloria_rober.css" rel="stylesheet" type="text/css" />
+  <link href="../../../gloria.css" rel="stylesheet" type="text/css" />
+  <script language="javascript">
+  //Su explorador no soporta java o lo tiene deshabilitado; esta pagina necesita javascript para funcionar correctamente<!--
+  //Copyright ? McAnam.com
 
-function abrir(direccion, pantallacompleta, herramientas, direcciones, estado, barramenu, barrascroll, cambiatamano, ancho, alto, izquierda, arriba, sustituir){
-     var opciones = "fullscreen=" + pantallacompleta +
-                 ",toolbar=" + herramientas +
-                 ",location=" + direcciones +
-                 ",status=" + estado +
-                 ",menubar=" + barramenu +
-                 ",scrollbars=" + barrascroll +
-                 ",resizable=" + cambiatamano +
-                 ",width=" + ancho +
-                 ",height=" + alto +
-                 ",left=" + izquierda +
-                 ",top=" + arriba;
-     var ventana = window.open(direccion,"venta",opciones,sustituir);
+  function abrir(direccion, pantallacompleta, herramientas, direcciones, estado, barramenu, barrascroll, cambiatamano, ancho, alto, izquierda, arriba, sustituir){
+       var opciones = "fullscreen=" + pantallacompleta +
+                   ",toolbar=" + herramientas +
+                   ",location=" + direcciones +
+                   ",status=" + estado +
+                   ",menubar=" + barramenu +
+                   ",scrollbars=" + barrascroll +
+                   ",resizable=" + cambiatamano +
+                   ",width=" + ancho +
+                   ",height=" + alto +
+                   ",left=" + izquierda +
+                   ",top=" + arriba;
+       var ventana = window.open(direccion,"venta",opciones,sustituir);
 
-}
-//-->
-</script>
+  }
+  //-->
+  </script>
 </head>
 <body>
 <?php
@@ -93,4 +83,7 @@ else
   exit;
   }
 ?>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="../../js/admin.js" type="text/javascript"></script>
 </body>

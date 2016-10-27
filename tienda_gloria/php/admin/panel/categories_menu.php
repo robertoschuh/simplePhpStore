@@ -11,19 +11,21 @@
   xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
 
 <head>
-<?php @session_start(); ?>
-<title> Panel de control | Categorías </title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="../../../gloria.css" rel="stylesheet" type="text/css" />
+	<?php @session_start(); ?>
+	<title> Panel de control | Categorías </title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="../../../gloria.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-<?php
-$admin_user=$_SESSION['admin_user'];
-require ("../../fns.php");
-require ("../admin_fns.php");
-panel_control ();
-menu_categorias();
-?>
+	<?php
+		$admin_user = $_SESSION['admin_user'];
+		require ("../../fns.php");
+		require ("../admin_fns.php");
+		panel_control ();
+		menu_categorias();
+	?>
+	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+	<script src="../../js/admin.js"></script>
 </body>
 
 

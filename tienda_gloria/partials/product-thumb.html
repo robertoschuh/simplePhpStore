@@ -1,0 +1,10 @@
+<!-- load product -->
+<div class="product col-xs-3"
+ ng-repeat="product in store.products 
+ | orderBy:'+catid' | filter: query | filter: catFilter" 
+ >
+ 	<h4>{{product.art_name}}</h4>
+ 	<span style="display:none">{{product.catid}}</span>
+ 	<img ng-src="http://placehold.it/150x150" />
+</div>
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Documento sin t&iacute;tulo</title>
+<link href="gloria.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<?
+@session_start();
+
+if (session_is_registered("admin_user"))
+$msg="<h4> Bienvenida Sra Administradora </p>Sepa que desde aquí usted podrá </p> <ul> <li> Cambiar los precios</li><li>Cambiar nombre de productos</li>
+<li>Cambiar Detalles de producto</li><li>Cambiar Imagen de producto</li></ul></h4> ";
+
+else
+$msg="<h4> BIENVENIDOS A LA TIENDA ONLINE</h4> ";
+
+echo "$msg";
+?>
+
+ </body>
+</html>

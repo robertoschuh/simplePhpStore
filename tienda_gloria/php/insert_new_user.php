@@ -1,0 +1,164 @@
+<style type="text/css">
+
+    .msg{background-color:#EAEAFF; color:#1E1E1E ; text-align:center; width:50%; margin:auto}
+    .capital {font-size:18px }
+</style>
+<?php
+include ("data_valid_fns.php");
+include ("fns.php");
+$name = $_POST['name'];
+$surname = $_POST['surname'];
+$adress = $_POST['adress'];
+$city = $_POST['city'];
+$country = $_POST['country'];
+$email = $_POST['email'];
+$password = md5($_POST['password']);
+$state = $_POST['state'];
+$telf = $_POST['telf'];
+$celular = $_POST['celular'];
+$zip = $_POST['zip'];
+$promo = $_POST['promo'];
+
+
+//Constants
+define('EMAIL_SUPPORT', 'rob@masquebits.com');
+define('HOST', 'smtp.mandrillapp.com');
+define('USERNAME', 'pedidos@gloriabotonero.com');
+define('PWD', 'vZ8BE2jb9Kvp6d95Z3v9cw');
+define('PORT', 587);
+define('SMTPAUTH', true);
+define('LANGUAGE', 'es');
+define('DEBUGOUTPUT', 'html');
+define('DEBUG', 0);
+define('PROTOCOL', 'tls');
+
+
+function volver_atras() {
+    ?>
+    <div style="text-align:center">
+        <form name="volver" action="../php/register.php?apagar=26.6517" method="post" >
+            <input name="name" type="hidden"   value="<?php echo $_POST['name']; ?>"/>
+
+            <input name="surname" type="hidden"   value="<?php echo $_POST['surname']; ?>"/>
+            <input name="adress" type="hidden"   value="<?php echo $_POST['adress']; ?>"/>
+            <input name="city" type="hidden"   value="<?php echo $_POST['city']; ?>"/>
+            <input name="state" type="hidden"   value="<?php echo $_POST['state']; ?>"/>
+            <input name="email" type="hidden"   value="<?php echo $_POST['email']; ?>"/>
+            <input name="telf" type="hidden"   value="<?php echo $_POST['telf']; ?>"/>
+            <input name="zip" type="hidden"   value="<?php echo $_POST['zip']; ?>"/>
+            <input name="celular" type="hidden"   value="<?php echo $_POST['celular']; ?>"/>
+            <input name="apagar" type="hidden" value="<?php echo $_POST['apagar']; ?>" />
+            <input type="submit" name="Volver" value="volver"  />
+        </form>
+    </div>
+    <?php
+}
+
+if (!$_POST["name"] || !$_POST["surname"] || !$_POST["adress"] || !$_POST["city"] || !$_POST["country"] || !$_POST["email"] ||
+        !$_POST["password"] || !$_POST["password2"] || !$_POST["zip"] || !$_POST['telf'] && !$_POST['celular']) {
+    echo "<div style='text-align:center' class='msg'>No ha rellenado todos los campos obligatorios, por favor vuelva atr&aacute;s Gracias.<br/>";
+    volver_atras();
+    echo exit;
+}
+
+if (!valid_email($email)) {
+    echo "<div style='text-align:center' class='msg'>El <strong>Email no es v�lido</strong>, por favor int&eacute;ntelo de nuevo, Gracias </div>";
+
+    volver_atras();
+
+    echo exit;
+}
+
+if ($_POST['password'] !== $_POST['password2']) {
+    echo "<div style='text-align:center' class='msg'><strong>Las Contrase&ntilde;as no coinciden</strong> , por favor vuelva atr&aacute;s e int&eacute;ntelo de nuevo, Gracias</div> ";
+    volver_atras();
+    exit;
+}
+
+if (strlen($_POST['password']) > 10) {
+    echo "<div style='text-align:center' class='msg'>
+		Las contrase&ntilde;as son <strong>demasiado largas</strong> (m&aacute;ximo 10 caracteres por favor)</div>";
+    volver_atras();
+    //echo strlen ($_POST['password'] )  ;
+
+    exit;
+}
+if (strlen($_POST['password']) < 6) {
+    echo "<div style='text-align:center' class='msg'>
+		Las contrase&ntilde;as son <strong>demasiado cortas</strong> (m&iacute;nimo 6 caracteres por favor)</div>";
+    volver_atras();
+    //echo strlen ($_POST['password'] )  ;
+
+    exit;
+} else {
+
+    $conn = db_connect();
+    $query = "insert into usuarios values
+                    ('$email','$password','$name','$surname','$adress','$city','$zip',
+                    '$state','$country','$telf','$celular','$promo' ) 
+                   ";
+
+    $result = mysql_query($query);
+    if (!$result) {
+        echo "<div style='text-align:center' class='msg'><strong>Este Email se encuentra ya registrado</strong>, si usted est� ya registrado y no consigue entrar, por favor vuelva atr&aacute;s y pinche en el bot&oacute;n de <strong>recuperar contrase&ntilde;a</strong> , gracias</div>";
+        //or die (mysql_error());
+        volver_atras();
+    } else {
+        echo "<div style='text-align:center' class='msg'>Su registro se ha llevado a cabo correctamente, Gracias <p> Introduzca su Email y su Contrase�a para poder entrar como usuario registrado</div>";
+        echo "<br>";
+
+        $mail_webmaster = "gloriabotonero@gmail.com";
+        $mail_webmaster2 = "rob@masquebits.com";
+        $asunto = "nuevo registro de usuario";
+        $remitente = "From: avisos@gloriabotonero.com  \n \r\nContent-type: text/html\r\n";
+        $mensaje = "<h3>Datos nuevo usuario:</h3> Email: " . $_POST["email"] . "<br/> Nombre: " . $_POST["name"] . "<br/> Apellidos: " . $_POST["name"] . "<br/>
+            Ciudad: " . $_POST["city"] . "<br/>Fijo: " . $_POST['telf'] . " <br/>Movil: " . $_POST['celular'];
+        $msg_user = "<p>Bienvenido a la tienda de Gloria Botonero</p>";
+        $msg_user.="<p>Ya puede realizar compras utilizando sus datos de usuario</p>";
+        $msg_user.="<p>Usuario: <strong>" . $_POST["email"] . "</strong></p>";
+        $msg_user.="<p>Contrase&ntilde;a: <strong>" . $_POST["password"] . "</strong></p>";
+        $msg_user.="<p><i><span class='capital'>G</span>racias</i></p><p> Gloria Botonero</p>";
+
+
+        $mail = new phpmailer();
+
+        $mail->IsSMTP();
+
+        $mail->Port = PORT;
+
+        $mail->SMTPAuth = SMTPAUTH;
+
+        $mail->Username = USERNAME;
+
+        $mail->Password = PWD;
+
+        $mail->SMTPDebug = DEBUG;
+
+        $mail->Debugoutput = DEBUGOUTPUT;
+
+        $mail->Host = HOST;
+
+
+        $mail->SetFrom(USERNAME, HOST);
+
+        $mail->FromName = USERNAME;
+
+        $mail->Subject = utf8_decode($asunto);
+
+        $mail->AltBody = $asunto;
+
+        $mail->MsgHTML($mensaje);
+
+        $mail->AddAddress($_POST["email"]);
+
+        $mail->IsHTML(true);
+
+        // Intentamos enviarlo por SMTP
+        if (!$mail->Send()) {
+
+            log_admin('SMTP not works', 'error', HOST, $_POST["email"]);
+           
+        }
+        login_box_user($_POST['apagar']);
+    }
+}

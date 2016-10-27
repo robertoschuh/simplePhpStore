@@ -1,0 +1,13 @@
+User-Agent: *
+Disallow: /tienda_gloria/php/
+
+Disallow: /tienda_gloria/php/admin/panel/acces.php
+Disallow: /tienda_gloria/php/admin
+Disallow: /tienda_gloria/php/admin/panel
+
+Disallow: /tienda_gloria/php/admin/panel/index.php
+Disallow: tienda/
+
+
+
+ 

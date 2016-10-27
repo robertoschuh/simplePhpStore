@@ -141,156 +141,153 @@ $email=$result['email'];
 	</tr>
 </table>
 <br>
-<table border='0' align='center' width="100%">
-<tr>
-<td  align='center'  class='encabezadcos_tablas ' width="7%" style="color:#000">Ref </td>
-<td  align='center' class='encabezadcos_tablas ' style="color:#000" >Nombre</td>
-<td  align='center'  class='encabezadcos_tablas ' style="color:#000">Unidades </td>
-<td  align='center'  class='encabezadcos_tablas ' style="color:#000">Precio </td>
-<td  align='center' class='encabezadcos_tablas '  style="color:#000">Importe</td>
-</tr>
-<?php
-//inicializamos total a 0
-$total=0;
-?>
-<form method="post" action="<? $PHP_SELF ?> " name="form1">
-<?php
-foreach($articles as $row)
-{
-$artid=$row['artid'] ;
+<table border='0' align='center' width="100%" >
+	<tr>
+	<td  align='center'  class='encabezadcos_tablas ' width="7%" style="color:#000">Ref </td>
+	<td  align='center' class='encabezadcos_tablas ' style="color:#000" >Nombre</td>
+	<td  align='center'  class='encabezadcos_tablas ' style="color:#000">Unidades </td>
+	<td  align='center'  class='encabezadcos_tablas ' style="color:#000">Precio </td>
+	<td  align='center' class='encabezadcos_tablas '  style="color:#000">Importe</td>
+	</tr>
+	<?php
+	//inicializamos total a 0
+	$total=0;
+	?>
+	<form method="post" action="<? $PHP_SELF ?> " name="form1">
+	<?php
+	foreach($articles as $row)
+	{
+	$artid=$row['artid'] ;
 
-// Función para saber referencia y datos del artículo.
-$arts_datos = arts_info ($row['artid']);
-if (!$arts_datos)
-echo "No hay datos<br>";
+	// Función para saber referencia y datos del artículo.
+	$arts_datos = arts_info ($row['artid']);
+	if (!$arts_datos)
+	echo "No hay datos<br>";
 
-$unidades=$row['unidades'];
-if ($unidades==0)
-$unidades="NULO";
-$total+= $arts_datos['art_price']*$unidades ;
+	$unidades=$row['unidades'];
+	if ($unidades==0)
+	$unidades="NULO";
+	$total+= $arts_datos['art_price']*$unidades ;
 
-//Guardamos las unidades y la Id del art�culo en un array
-$arts_unidades_array[$artid] = $unidades;
-if ( !$_SESSION['arts_unidades_array']){
-  $_SESSION['arts_unidades_array'] = $arts_unidades_array;
-}
-?>
-<tr>
-<?php
-if ( !$_POST['ref'] )
-{
-?>
-<td width="7%" class="items"><div align="center">
-<?php echo $arts_datos['ref'] ?></div></td>
-<?php
-}
-else
-{
-    ?>
-    <td width="30%" class="items"><div align="center">
-    <?php $_POST['ref'] ?></div></td>
-    <?php
-}
-if ( !$_POST['name'] )
-{
-    
-    ?>
-    <td width="30%" class="items"><div align="center">
-           <?php print $row['nombre'] ;?></div></td>
-    <?php
-}
-else
-{
-    ?>
-    <td width="10%" class="items"><div align="center"><?php print $row['nombre']; ?>/div></td>
-    <?php
-}
-if ( !$_POST['unidades'] )
-{
-?>
-    <td width="20%"><div align="center"><?php print $unidades ?></div></td>
-    <?php
-}
-else
-{
-?>
-    <td width="20%"><div align="center"><?php print $_POST['unidades']; ?></div></td>
-    <?php
-}
-if ( !$_POST['price'] )
-{
-?>
-    <td width="20%"><div align="center"><?php echo redondear_dos_decimal($arts_datos['art_price']); ?> </div></td>
-    <?php
-}
-else
-{
-?>
-    <td width="20%"><div align="center"><?php  print redondear_dos_decimal($arts_datos['art_price']);?></div></td>
-    <?php
-}
-if ( !$_POST['price_tot'] )
-{
-?>
-    <td width="20%"><div align="center"><?php  print redondear_dos_decimal($arts_datos['art_price']*$unidades); ?></div></td>
-    <?php
-}
-else
-{
-?>
-    <td width="20%"><div align="center"><?php print $_POST['price_tot']*$unidades; ?>"</div></td>
-    <?php
-}?>
-</tr>
-<tr><td colspan="8"> <hr /> </td></tr>
+	//Guardamos las unidades y la Id del art�culo en un array
+	$arts_unidades_array[$artid] = $unidades;
+	if ( !$_SESSION['arts_unidades_array']){
+	  $_SESSION['arts_unidades_array'] = $arts_unidades_array;
+	}
+	?>
+	<tr>
+	<?php
+	if ( !$_POST['ref'] )
+	{
+	?>
+	<td width="7%" class="items"><div align="center">
+	<?php echo $arts_datos['ref'] ?></div></td>
+	<?php
+	}
+	else
+	{
+	    ?>
+	    <td width="30%" class="items"><div align="center">
+	    <?php $_POST['ref'] ?></div></td>
+	    <?php
+	}
+	if ( !$_POST['name'] )
+	{
+	    
+	    ?>
+	    <td width="30%" class="items"><div align="center">
+	           <?php print $row['nombre'] ;?></div></td>
+	    <?php
+	}
+	else
+	{
+	    ?>
+	    <td width="10%" class="items"><div align="center"><?php print $row['nombre']; ?>/div></td>
+	    <?php
+	}
+	if ( !$_POST['unidades'] )
+	{
+	?>
+	    <td width="20%"><div align="center"><?php print $unidades ?></div></td>
+	    <?php
+	}
+	else
+	{
+	?>
+	    <td width="20%"><div align="center"><?php print $_POST['unidades']; ?></div></td>
+	    <?php
+	}
+	if ( !$_POST['price'] )
+	{
+	?>
+	    <td width="20%"><div align="center"><?php echo redondear_dos_decimal($arts_datos['art_price']); ?> </div></td>
+	    <?php
+	}
+	else
+	{
+	?>
+	    <td width="20%"><div align="center"><?php  print redondear_dos_decimal($arts_datos['art_price']);?></div></td>
+	    <?php
+	}
+	if ( !$_POST['price_tot'] )
+	{
+	?>
+	    <td width="20%"><div align="center"><?php  print redondear_dos_decimal($arts_datos['art_price']*$unidades); ?></div></td>
+	    <?php
+	}
+	else
+	{
+	?>
+	    <td width="20%"><div align="center"><?php print $_POST['price_tot']*$unidades; ?>"</div></td>
+	    <?php
+	}?>
+	</tr>
+	<tr><td colspan="8"> <hr /> </td></tr>
 <?php
 		}//fin foreach
 		?>
-		<tr>
-             <td  colspan="4"  align="right" class="items" style="color:#000">Suma: </td>
-            <td align='right'  class="precio" style="color:#000">
-              <?php echo  redondear_dos_decimal($total); ?>  &euro;
-             </td>
-            </tr>
-            <tr>
-             <td  colspan="4"  align="right" class="items" style="color:#000" >Portes: </td>
-           <td align="right"  class="precio" style="color:#000" >
-           <?php echo  $_SESSION['portes']; ?>
-           </td>
-             </tr>
 	<tr>
-	<?php
-//$total_pagar=calcula_total($total,$_SESSION['portes']);
- $total_pagar=$total+$_SESSION['portes'];
-
-//$base_imponible=$total_pagar/1.18;
-$base_imponible=$total_pagar/1.21; //cambiamos al 21%
-$iva=$total_pagar - $base_imponible;
-
-
-	?>
+		<td  colspan="4"  align="right" class="items" style="color:#000">Suma: </td>
+		<td align='right'  class="precio" style="color:#000">
+		<?php echo  redondear_dos_decimal($total); ?>  &euro;
+	</td>
+	</tr>
 	<tr>
-	<td  colspan="4"  align="right" class="items" style="color:#000" >Importe Total : </td>
-	 <td align='right'  class="precio" style="color:#000">
-         <?php echo redondear_dos_decimal($total_pagar) ?> &euro;
-        </td>
-        </tr>
-        <tr>
-<td  colspan="4"  align="right" class="items" style="color:#000" >IVA aplicado 21% : </td>
+		<td  colspan="4"  align="right" class="items" style="color:#000" >Portes: </td>
+		<td align="right"  class="precio" style="color:#000" >
+		<?php echo  $_SESSION['portes']; 
+		//$total_pagar=calcula_total($total,$_SESSION['portes']);
+		 $total_pagar=$total+$_SESSION['portes'];
+
+		//$base_imponible=$total_pagar/1.18;
+		$base_imponible=$total_pagar/1.21; //cambiamos al 21%
+		$iva = $total_pagar - $base_imponible;
+
+		?>
+		</td>
+	</tr>
+
+		<td  colspan="4"  align="right" class="items" style="color:#000" >Importe Total : </td>
+		<td align='right'  class="precio" style="color:#000">
+	<?php echo redondear_dos_decimal($total_pagar) ?> &euro;
+		</td>
+	</tr>
+	<tr>
+		<td  colspan="4"  align="right" class="items" style="color:#000" >IVA aplicado 21% : </td>
         <td align='right'  class="precio"  style="color:#000">
-
        <?php echo $iva=redondear_dos_decimal($iva); ?> &euro; </td>
-       </tr>
-      </table>
+     </tr>
+  </table>
+
      <br /><br />
 <table>
-     <?php
-	}
-        ?>
-<tr><td></td></tr>
-<tr><td></td></tr>
-<tr><td></td></tr>
-<tr><td></td></tr>
+	     <?php
+		}
+	        ?>
+	<tr><td></td></tr>
+	<tr><td></td></tr>
+	<tr><td></td></tr>
+	<tr><td></td></tr>
 </table>
 <table border='0' align='center' width="100%">
 		<tr>
@@ -316,11 +313,11 @@ $iva=$total_pagar - $base_imponible;
 		?>
 		</tr>
 
- <tr>
- <td align='left' style="color:#000"><font size="-4" >La mercancía enviada por Gloria Botonero mediante la agencia Tourline Express está asegurada. Cualquier rotura o desperfecto causado durante el transporte, deberá ser comunicado a Gloria Botonero en un plazo máximo de 24 horas desde la recepción del paquete, de lo contrario se entenderá que se ha recibido en perfecto estado y no procederá la reclamación de la misma."
-"La mercancía que viaje por otro medio de transporte, será responsabilidad del cliente".</font>
-</td>
-</tr>
+	 <tr>
+		 <td align='left' style="color:#000"><font size="-4" >La mercancía enviada por Gloria Botonero mediante la agencia Tourline Express está asegurada. Cualquier rotura o desperfecto causado durante el transporte, deberá ser comunicado a Gloria Botonero en un plazo máximo de 24 horas desde la recepción del paquete, de lo contrario se entenderá que se ha recibido en perfecto estado y no procederá la reclamación de la misma."
+		"La mercancía que viaje por otro medio de transporte, será responsabilidad del cliente".</font>
+		</td>
+	</tr>
 </table>
 <?php
 }
@@ -400,10 +397,11 @@ echo "<tr><td><a href='pagados.php?ref=$ref&option=1'>SI</a></td>
 }
 function su_pedido () {
 	ob_start();
-	echo "<table border='0' width='100%' class='mail'><tr><td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td></tr>
+	?><table border='0' width='100%' class='mail'><tr><td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td></tr>
 	<tr bgcolor='#9292C8'>
 	<td> Art&iacute;culo </td> <td> Unidades </td> <td> Total </td>
-	</tr>";
+	</tr>
+	<?php
 	for ($i=0 ; $i < $_SESSION["ocarrito"]->num_productos ; $i++ )
 	{
 		//Si array_id_art[$this->num_productos] es = a 0 significa que es un art�culo eliminado de la cesta
@@ -444,240 +442,242 @@ function precio_articulo($artid){
 function menu_factura ($servido,$ref){
 ?>
 <table align="center" cellpadding="4">
-<tr>
-<td><a href='borrar_pedidos.php?ref=<?php echo $ref ?>' >BORRAR  </a> </td><td></td>
-<td> <a href='<?php echo $PHP_SELF; ?>?imprimir=1&ref=<?php echo trim($ref);?>' >  PANTALLA IMPRIMIR </a> </td>
+	<tr>
+		<td><a href='borrar_pedidos.php?ref=<?php echo $ref ?>' >BORRAR  </a> </td><td></td>
+		<td> <a href='<?php echo $PHP_SELF; ?>?imprimir=1&ref=<?php echo trim($ref);?>' >  PANTALLA IMPRIMIR </a> </td>
 
-</tr>
-<?php
-//Si estamos viendo los ya archivados entonces no necesitamos la opci�n de archivar
-if ($servido != 1)
-echo "<tr>
-<td>
-<a href='archivar_pedidos.php?ref=$ref '  >ARCHIVAR 	              </a></td><td></td>
-<td>
-<a href='edit_pedido.php?ref=$ref ' >EDITAR</a></td>
-     </tr>";
-}
-?>
+	</tr>
+	<?php
+	//Si estamos viendo los ya archivados entonces no necesitamos la opci�n de archivar
+	if ($servido != 1)
+	echo "<tr>
+			<td>
+			<a href='archivar_pedidos.php?ref=$ref '  >ARCHIVAR 	              </a></td><td></td>
+			<td>
+			<a href='edit_pedido.php?ref=$ref ' >EDITAR</a></td>
+	     </tr>";
+	}
+	?>
 </table>
 <?php
-
 
 function buscar_mail_pedido($ref) {
 $conn = db_connect();
-$result = mysql_query("SELECT email
-		       FROM pedidos
-		       WHERE ref='$ref' ");
-if ($result)
-{
- $pedido = mysql_fetch_array($result);
- return  $pedido['email'];
+	$result = mysql_query("SELECT email
+			       FROM pedidos
+			       WHERE ref='$ref' ");
+	if ($result) {
+	 $pedido = mysql_fetch_array($result);
+	 return  $pedido['email'];
+	}
+
+	return false;
 }
-else
-return false;
-}
+
 function precio_pedido ($ref) {
-$conn = db_connect();
-$result = mysql_query("SELECT precio
-		       FROM pedidos_articulos
-		       WHERE ref='$ref' ");
-//Si obtenemos resultado dele pedido ahora buscamos las unidades de cada art�culos pedidas
-if ($result)
-{
-$articles = db_result_to_array($result);
-}
-else
-return false;
-//inicializamos total a 0
-$total=0;
-foreach($articles as $row)
-{
-$total+= $row['precio'] ;
-}
-return $total;
+	$conn = db_connect();
+	$result = mysql_query("SELECT precio
+			       FROM pedidos_articulos
+			       WHERE ref='$ref' ");
+	//Si obtenemos resultado dele pedido ahora buscamos las unidades de cada art�culos pedidas
+	if ($result){
+		$articles = db_result_to_array($result);
+	}
+	else {
+		return false;
+	}
+	//inicializamos total a 0
+	$total=0;
+	foreach($articles as $row){
+		$total+= $row['precio'] ;
+	}
+	return $total;
 }
 function calcula_re($activar,$total,$portes) {
-//Si pulsamos activar Re creamos la sesi�n RE
-if ($activar==1)
-{
-$_SESSION['re']=($total+$portes)*0.04;
-//Activamos o desactivamos el RE
-?>
-<td align='left'>	<a href='<?php $PHP_SELF ?>?imprimir=0&ref=<?php echo $_GET['ref']; ?>&activar_re=2'  >
-Desactivar RE</a> </td>
-<?php
-}
-//Si el Re NO est� activado entonces saldra Activar RE
-if ($activar!=1)
-{
-//Si existe la sesi�n re "desregistrarla"
-if ($_SESSION['re'])
-session_unregister('re') ;
-?>
-<td align='left'><a href='<?php echo $PHP_SELF; ?>?imprimir=0&ref=<?php echo $_GET['ref']; ?>&activar_re=1'  >
-Activar RE</a> </td>
-<?php
-}
+	//Si pulsamos activar Re creamos la sesi�n RE
+	if ($activar==1){
+		$_SESSION['re']=($total+$portes)*0.04;
+	//Activamos o desactivamos el RE
+	?>
+		<td align='left'>	<a href='<?php $PHP_SELF ?>?imprimir=0&ref=<?php echo $_GET['ref']; ?>&activar_re=2'  >
+		Desactivar RE</a> </td>
+	<?php
+	}
+	//Si el Re NO est� activado entonces saldra Activar RE
+	if ($activar!=1){
+		//Si existe la sesi�n re "desregistrarla"
+		if ($_SESSION['re'])
+		session_unregister('re') ;
+		?>
+		<td align='left'><a href='<?php echo $PHP_SELF; ?>?imprimir=0&ref=<?php echo $_GET['ref']; ?>&activar_re=1'  >
+		Activar RE</a> </td>
+	<?php
+	}
 }
 function calcula_total($total,$portes) {
-$result=($total+$portes)*1.18;
-return $result;
+	$result=($total+$portes)*1.18;
+	return $result;
 }
 function pedido($ref,$envio) {
-$conn = db_connect();
-$result = mysql_query("SELECT *
-		       FROM pedidos_articulos
-		       WHERE ref='$ref' ");
-if (!$result)
-return 0;
- $pedido =db_result_to_array($result);
- //creamos tabla con el pedido entero
- ob_start();
- ?>
- <table border='0' width='100%' class='mail'><tr><td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td></tr>
-<tr bgcolor='#9292C8'>
-<td> Art&iacute;culo </td> <td> Unidades </td>
-</tr>
-<?php
-$total=0;
- foreach ($pedido as $row )
- {
- $total=$total+$row['precio'];
-?>
-<tr bgcolor="#CBCED8">
-<td><?php echo $row['nombre'] ?></td><td><?php echo $row['precio'] ?> &euro;</td>
-</tr>
-<?php
-}
-?>
-<tr>
-    <td colspan="2" align="right"><b>Total: </b><?php echo $total ;?> &euro;</td>
-</tr>
-</table>
-<?php
-return ob_get_clean();
+	$conn = db_connect();
+	$result = mysql_query("SELECT *
+			       FROM pedidos_articulos
+			       WHERE ref='$ref' ");
+	if (!$result){
+		return 0;
+	}
+	$pedido =db_result_to_array($result);
+	//creamos tabla con el pedido entero
+	ob_start();
+	?>
+	<table border='0' width='100%' class='mail'><tr><td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td></tr>
+		<tr bgcolor='#9292C8'>
+			<td> Art&iacute;culo </td> <td> Unidades </td>
+		</tr>
+		<?php
+		$total=0;
+		foreach ($pedido as $row ){
+			$total=$total+$row['precio'];
+			?>
+			<tr bgcolor="#CBCED8">
+			<td><?php echo $row['nombre'] ?></td><td><?php echo $row['precio'] ?> &euro;</td>
+			</tr>
+			<?php
+		}
+		?>
+		<tr>
+			<td colspan="2" align="right"><b>Total: </b><?php echo $total ;?> &euro;</td>
+		</tr>
+	</table>
+	<?php
+	return ob_get_clean();
 }
 function datos_cliente($ref) {
 
-$conn = db_connect();
-$result = mysql_query("SELECT *
-		       FROM pedidos
-		       WHERE ref='$ref' ");
-if (!$result)
-return 0;
-$pedido =mysql_fetch_array($result);
-//creamos tabla con el pedido entero
-ob_start();
-?>
-<table border='0' width='100%' class='mail'>
-<tr>
-	<td colspan='3' class='carrito_ver'><b>Sus datos de envío</b></td>
-</tr>
-<tr bgcolor='#9292C8'><td class="mini_text"> Nombre </td><td class="mini_text"> Dirección</td><td class="mini_text"> Ciudad</td> 	                      
-    <td class="mini_text">Provincia </td><td class="mini_text">CP</td><td class="mini_text"> País</td>
-</tr>
-<tr bgcolor="#CBCED8">
-	<td class="mini_text"><?php echo $pedido['name'] ?> </td>
-	<td class="mini_text"> <?php echo $pedido['address'] ?></td>
-	<td class="mini_text"><?php echo $pedido['city'] ?> </td>
-	<td class="mini_text"><?php echo $pedido['state'] ?>  </td>
-	<td class="mini_text"> <?php echo $pedido['zip'] ?></td>
-	<td class="mini_text"> <?php echo $pedido['country'] ?> </td>
-</tr>
-<tr bgcolor='#9292C8'>
-	<td class="mini_text"> Email</td> 
-	<td class="mini_text">Teléfono</td> 
-	<td class="mini_text"> Movil</td>
-	<td class="mini_text"> Fecha</td>
-</tr>
-<tr bgcolor="#CBCED8">
-	<td class="mini_text"> <?php echo $pedido['email']; ?></td> 
-	<td class="mini_text"><?php echo $pedido['telf'] ?>
-</td>
-	<td class="mini_text"> <?php echo $pedido['movil']; ?></td>
-	<td class="mini_text"> <?php echo fecha(); ?> </td>
-</tr>
-</table>
-<?php
-return ob_get_clean();
+	$conn = db_connect();
+	$result = mysql_query("SELECT *
+			       FROM pedidos
+			       WHERE ref='$ref' ");
+	if (!$result){
+		return 0;
+	}
+
+	$pedido =mysql_fetch_array($result);
+	//creamos tabla con el pedido entero
+	ob_start();
+	?>
+	<table border='0' width='100%' class='mail'>
+	<tr>
+		<td colspan='3' class='carrito_ver'><b>Sus datos de envío</b></td>
+	</tr>
+	<tr bgcolor='#9292C8'><td class="mini_text"> Nombre </td><td class="mini_text"> Dirección</td><td class="mini_text"> Ciudad</td> 	                      
+	    <td class="mini_text">Provincia </td><td class="mini_text">CP</td><td class="mini_text"> País</td>
+	</tr>
+	<tr bgcolor="#CBCED8">
+		<td class="mini_text"><?php echo $pedido['name'] ?> </td>
+		<td class="mini_text"> <?php echo $pedido['address'] ?></td>
+		<td class="mini_text"><?php echo $pedido['city'] ?> </td>
+		<td class="mini_text"><?php echo $pedido['state'] ?>  </td>
+		<td class="mini_text"> <?php echo $pedido['zip'] ?></td>
+		<td class="mini_text"> <?php echo $pedido['country'] ?> </td>
+	</tr>
+	<tr bgcolor='#9292C8'>
+		<td class="mini_text"> Email</td> 
+		<td class="mini_text">Teléfono</td> 
+		<td class="mini_text"> Movil</td>
+		<td class="mini_text"> Fecha</td>
+	</tr>
+	<tr bgcolor="#CBCED8">
+		<td class="mini_text"> <?php echo $pedido['email']; ?></td> 
+		<td class="mini_text"><?php echo $pedido['telf'] ?>
+	</td>
+		<td class="mini_text"> <?php echo $pedido['movil']; ?></td>
+		<td class="mini_text"> <?php echo fecha(); ?> </td>
+	</tr>
+	</table>
+	<?php
+	return ob_get_clean();
 }
 function edit_pedido($ref) {
-$conn = db_connect();
-$query = mysql_query("SELECT *
-		      FROM pedidos_articulos
-		      WHERE ref='$ref' ");
+	$conn = db_connect();
+	$query = mysql_query("SELECT *
+			      FROM pedidos_articulos
+			      WHERE ref='$ref' ");
 	$result=db_result_to_array($query) ;
 	mysql_free_result($query);
-	if (!$result)
-	return false;
+	if (!$result){
+		return false;
+	}
 
-        return $result;
+    return $result;
 }
 function update_articles_pedido($article) {
 //return count($articles);
-$conn = db_connect();
-for ($i=0;$i<count($article);$i++) {
-//En el caso de que seleccione -1 no se actualiza el artículo ,sino que se borra
-if ($article[$i][1] == -1)
-$sSQL=" DELETE from pedidos_articulos
-        WHERE pedidoid ='".$article[$i][0]."'  ";
-else {
- 	$sSQL = "UPDATE  pedidos_articulos
-             	 SET unidades='".$article[$i][1]."'
-		 WHERE pedidoid ='".$article[$i][0]."' ";
+	$conn = db_connect();
+	for ($i=0;$i<count($article);$i++) {
+		//En el caso de que seleccione -1 no se actualiza el artículo ,sino que se borra
+		if ($article[$i][1] == -1){
+			$sSQL=" DELETE from pedidos_articulos
+			WHERE pedidoid ='".$article[$i][0]."'  ";
 		}
-	$result=mysql_query($sSQL)or die(mysql_error());
-	if (!$result)
-	return 0;
+		else {
+			$sSQL = "UPDATE  pedidos_articulos
+			SET unidades='".$article[$i][1]."'
+			WHERE pedidoid ='".$article[$i][0]."' ";
+		}
+
+		$result=mysql_query($sSQL)or die(mysql_error());
+		if (!$result){
+			return 0;
+		}
 	}
 	return 1;
 }
 function datos_pedido($ref) {
-$connect=db_connect();
-if (!$connect)
-return 0;
+	$connect=db_connect();
+	if (!$connect){
+		return 0;
+	}
 	$result = mysql_query("SELECT *
 			       FROM pedidos_articulos
 			       WHERE ref='$ref' ");
 	//Si obtenemos resultado dele pedido ahora buscamos las unidades de cada art�culos pedidas
-	if ($result)
-	{
+	if ($result){
 	$articles = db_result_to_array($result);
-
 	}
-	else
+	else{
 		return false;
+	}
 	
 	return  $articles;
 }
+
 function add_new_art($ref_art,$ref_pedido,$items_art) {
-$connect=db_connect();
-if (!$connect)
-return 0;
-//obtenemos todos los datos del articulo cuya referencia es ref
-if (!$article=ask_art_by_ref($ref_art))
-return false;
-//Comprobamos que el art�culo no est� ya a�adido a el pedido
-$Ssql="SELECT * FROM pedidos_articulos
-		WHERE ref='".$ref_pedido."'
-		AND artid='".$article[artid]."' ";
-$result=mysql_query($Ssql);
-$num_arts = mysql_num_rows($result);
-   if ($num_arts == 0)
-    {
-                $query ="insert into pedidos_articulos values
- 		('','$article[artid]','$ref_pedido','$article[art_name]','$items_art','$article[art_price]','0')";
+	$connect=db_connect();
+	if (!$connect)
+	return 0;
+	//obtenemos todos los datos del articulo cuya referencia es ref
+	if (!$article=ask_art_by_ref($ref_art))
+	return false;
+	//Comprobamos que el art�culo no est� ya a�adido a el pedido
+	$Ssql="SELECT * FROM pedidos_articulos
+			WHERE ref='".$ref_pedido."'
+			AND artid='".$article[artid]."' ";
+	$result=mysql_query($Ssql);
+	$num_arts = mysql_num_rows($result);
+	if ($num_arts == 0){
+		$query ="insert into pedidos_articulos values
+		('','$article[artid]','$ref_pedido','$article[art_name]','$items_art','$article[art_price]','0')";
 
-		if ( !mysql_query($query) )
-
-		return 2;
+		if ( !mysql_query($query) ){
+			return 2;
+		}
 
 		return 1;
-
-		}
-	else
-return 3;
+	}
+	else{
+		return 3;
+	}
 }
 
 function generate_pdf($ref) {

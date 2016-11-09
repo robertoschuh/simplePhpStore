@@ -1,7 +1,10 @@
 <?php
 @session_start();
-error_reporting(1); 
+
+// Error and warnings track.
+ error_reporting(1); 
 ini_set('display_errors',1);
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -17,42 +20,46 @@ require ("../../fns.php");
 ?>
 <body>
 <?php
-if (!$_GET['ref']) {
-    $ref = $_POST['ref'];
-}
-else {
-    $ref=$_GET['ref'];
-}
-$servido=$_GET['opcion'];
+if (!$_GET['ref']) { $ref = $_POST['ref']; }
 
-//$admin_user=$_SESSION['admin_user'];
+else { $ref = $_GET['ref']; }
 
-
-if (!$_SESSION['admin_user'])
-{
+if (!$_SESSION['admin_user']){
     echo "Usted no tiene autorización para ver esto, si es el administrador consulte con el soporte técnico, Gracias<br>";
     echo "<a href='admin/acces.html'>Volver</a>";
 
 }
-else
-{
-    if ($_GET['imprimir']!=1  )
+else{
+ 
+        if ( isset($_GET['imprimir']) AND $_GET['imprimir'] <> 1  ) {
+            panel_control (); 
+            include ('vistas/forms/consultar_pedido.html.php');
 
-        panel_control ();
-     //no hay datos de variables ni $_post ni $_get
-    if (!$HTTP_POST_VARS && !$_GET['ref'] ){
-        form_consultar_pedido();
+            if(!isset($ref)) {
+                print '<div style="text-align:center">
+                <h4>Por favor seleccione que tipo de pedidos quiere ver (pendientes o servidos), gracias</h4>
+                </div>';
+            }
+        }
+
+        else{
+
+            $pedido = consultar_pedido($ref, $_GET['opcion']);
+           
+            if (!$pedido){
+                panel_control (); 
+                include ('vistas/forms/consultar_pedido.html.php');
+
+                print '<div style="text-align:center">No hay ningún pedido que concuerde con esa referencia de pedido, 
+                 Gracias, gracias</h4>
+                </div>';
+            }
+
+            $precio_total = precio_pedido($ref);
+            //dias_demora($ref,$precio_total);
+
+        }   
     }
-    else
-    {
-
-        consultar_pedido($ref,$servido);
-        $precio_total=precio_pedido($ref);
-        //dias_demora($ref,$precio_total);
-
-    }
-
-}
 ?>
 
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>

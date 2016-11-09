@@ -1,14 +1,12 @@
 <?php
-header("Content-Type: text/html;charset=utf-8");
 
-function pedido_add($id,$ref,$nombre,$precio_total)
-{
-$precio_unidad= precio_articulo($id);
-$unidades=$precio_total/$precio_unidad[0];
-//Conecatamos a la Bd
+function pedido_add($id,$ref,$nombre,$precio_total){
+	$precio_unidad= precio_articulo($id);
+	$unidades=$precio_total/$precio_unidad[0];
+	//Conecatamos a la Bd
 
-// se a�ade el campo a la bd "servido" que valdr� 0 "false" cuando se acabe de insertar en la bd,
-//es decir cuando a�n no se haya  servido
+	// se a�ade el campo a la bd "servido" que valdr� 0 "false" cuando se acabe de insertar en la bd,
+	//es decir cuando a�n no se haya  servido
 
  	$query ="insert into pedidos_articulos values
  		('','$id','$ref','$nombre','$unidades','$precio_unidad[0]','0')";
@@ -20,47 +18,16 @@ $unidades=$precio_total/$precio_unidad[0];
 
 }
 
-function form_consultar_pedido(){
-?>
-<form action="consulta_pedidos.php" method="post" >
-	<table align="center">
-		<tr>
-			<td> Referencia: </td>
-			<td><input name="ref" type="text" id="ref" /></td>
-		</tr>
-		<tr>
-			<td><input type="submit" name="Submit" value="Enviar" /></td>
-		</tr>
-	</table>
-</form>
-<table align="center">
-	<tr>
-	<?php
-	echo "<td><h3> <a href='ver_pedidos.php?servidos=0 target='_self'> Pedidos Pendientes </a></h3></td> ";
-	?>
+function consultar_pedido($ref, $servido){
 
-		<td></td>
-		<td></td>
-		<?php
-		echo "<td><a href='ver_pedidos.php?servidos=1  target='_self'>Pedidos Servidos</a></td>";
-		?>
-	</tr>
-</table>
-<?php
-}
-
-function consultar_pedido($ref,$servido){
-	
 	include("biblioteca_vars.php");
 	$conn = db_connect();
 
-	$result = mysql_query("SELECT * FROM pedidos WHERE ref='$ref' ");
+	$result = mysql_query("SELECT * FROM pedidos WHERE ref='" .$ref. "' ");
 	//if (!$result)
-	if ( mysql_num_rows($result) < 1 ){
-		echo "No hay ningún pedido que concuerde con esa referencia de pedido, 
-		Gracias<br> ";
+	if ( !$result OR mysql_num_rows($result) < 1 ){
 
-		return;
+		return FALSE;
 	}
 
 	$result   = mysql_fetch_array($result);
@@ -94,95 +61,86 @@ function consultar_pedido($ref,$servido){
 	include ('vistas/pedido_lista.html.php');
 }
 //inserta los datos del cliente en la tabla "pedidos" y nos devuelve el numero de referencia de ese pedido
-function get_ref($name,$surname,$address,$city,$state,$zip,$country,$email,$total,$telf,$movil,$modo)
-{
-$date=date("j,�n,�Y");
-$query ="insert into pedidos values
- 		('','$name','$surname','$address','$city','$state','$zip','$country','$email','$total','$telf','$movil','$modo','$date')";
-$result=mysql_query($query);
-if (!result)
-return false;
-else
-{
-$query="SELECT ref FROM pedidos  ORDER BY ref DESC LIMIT 1 ";
-$result=mysql_query($query);
-if (!$result)
-	return false;
-	if ($result)
-	{
+function get_ref($name,$surname,$address,$city,$state,$zip,$country,$email,$total,$telf,$movil,$modo){
+	$date=date("j,�n,�Y");
+	$query ="insert into pedidos values
+	 		('','$name','$surname','$address','$city','$state','$zip','$country','$email','$total','$telf','$movil','$modo','$date')";
+	$result=mysql_query($query);
+	if (!$result) {return false;}
+
+	$query="SELECT ref FROM pedidos  ORDER BY ref DESC LIMIT 1 ";
+	$result=mysql_query($query);
+	if (!$result) {return false;}
+		
 	$result = mysql_fetch_array($result);
 	return $result; //guarda los resultados en un array
-       }
-}
 }
 //Actualizamos el campo "servido" con el valor '1' "TRUE" ,q significa que el pedido ya esta servido
 //tambi�nb actualizamos el stok de cada uno de ellos
-function pedidos_servidos($ref)
-{
-$conn = db_connect();
-$query = "update pedidos_articulos
-             set servido='1'
-			 where ref='$ref' ";
- $result = @mysql_query($query);
-   if (!$result)
-     return false;
-   else
+function pedidos_servidos($ref){
+	$conn = db_connect();
+	$query = "update pedidos_articulos
+	             set servido='1'
+				 where ref='$ref' ";
+	 $result = @mysql_query($query);
+   if (!$result) {return false;}
+   
    return true;
  }
 
 //FUNCION COMPROBADA
 function consulta_unidades($artid) {
-$conn = db_connect();
+	$conn = db_connect();
 
-//Consultamos unidades disponibles de un art�culo en concreto "artid"
-$consulta_almacen=mysql_query("SELECT unidades FROM almacen
-						  			   WHERE artid='$artid' ");
+	//Consultamos unidades disponibles de un art�culo en concreto "artid"
+	$consulta_almacen=mysql_query("SELECT unidades FROM almacen
+							  			   WHERE artid='$artid' ");
+	$almacen=mysql_fetch_array($consulta_almacen);
+	if (!$consulta_almacen){
+		echo "No existencias";
+	}
+	else{
+		return $almacen['unidades'];
+	}
+}
 
-$almacen=mysql_fetch_array($consulta_almacen);
-if (!$consulta_almacen)
-echo "No existencias";
-else
-return $almacen['unidades'];
+function update_stok($stok,$artid){
+	$conn = db_connect();
+	//Actualizamos el Stock de cada articulo del pedido
+	$result =mysql_query ("update almacen
+	                       set unidades='$stok'
+	                       where artid='$artid' " );
+	if (!$result) {return false;}
+	
+	return true;
 }
-//FUNCION COMPROBADA
-function update_stok($stok,$artid)
-{
-$conn = db_connect();
-//Actualizamos el Stock de cada articulo del pedido
-$result =mysql_query ("update almacen
-                       set unidades='$stok'
-                       where artid='$artid' " );
-if (!$result)
-return false;
-else
-return true;
-}
-function pregunta_borrar($ref,$option)
-{
-echo "<table align='center'><tr> <td class='importante'> �Esta seguro de que desea borrar este pedido? :RECUERDE QUE LOS PEDIDOS BORRADOS SE PERDER�N PARA SIEMPRE</td></tr>";
-echo "<tr><td><a href='pagados.php?ref=$ref&option=1'>SI</a></td>
-	<td></td>	<td></td>	<td></td>	<td></td>
-	<td><a href='pagados.php?option=0'>NO</a></td></tr>";
-?>
-</table><br>
-<?php
+function pregunta_borrar($ref,$option){
+	echo "<table align='center'><tr> <td class='importante'> �Esta seguro de que desea borrar este pedido? :RECUERDE QUE LOS PEDIDOS BORRADOS SE PERDER�N PARA SIEMPRE</td></tr>";
+	echo "<tr><td><a href='pagados.php?ref=$ref&option=1'>SI</a></td>
+		<td></td>	<td></td>	<td></td>	<td></td>
+		<td><a href='pagados.php?option=0'>NO</a></td></tr>";
+	?>
+	</table><br>
+	<?php
 }
 function su_pedido () {
-	ob_start();
-	?><table border='0' width='100%' class='mail'><tr><td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td></tr>
-	<tr bgcolor='#9292C8'>
-	<td> Art&iacute;culo </td> <td> Unidades </td> <td> Total </td>
-	</tr>
+		ob_start();
+	?><table border='0' width='100%' class='mail'>
+		<tr>
+			<td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td>		
+		</tr>
+		<tr bgcolor='#9292C8'>
+			<td> Art&iacute;culo </td> <td> Unidades </td> <td> Total </td>
+		</tr>
 	<?php
-	for ($i=0 ; $i < $_SESSION["ocarrito"]->num_productos ; $i++ )
-	{
+	for ($i=0 ; $i < $_SESSION["ocarrito"]->num_productos ; $i++ ){
 		//Si array_id_art[$this->num_productos] es = a 0 significa que es un art�culo eliminado de la cesta
-		if ($_SESSION["ocarrito"]->array_id_art[$i] !=0)
-		{
-			echo "<tr bgcolor='#CBCED8'>
-			<td>" .$_SESSION["ocarrito"]->array_name[$i]." </td>";
-			echo " <td>".$_SESSION["ocarrito"]->array_qty[$i]." </td>";
-			echo " <td>".$_SESSION["ocarrito"]->array_price_total[$i]." &euro; </td> </tr>";
+		if ($_SESSION["ocarrito"]->array_id_art[$i] !=0){
+			echo "<tr bgcolor='#CBCED8'>".
+					  "<td>" .$_SESSION["ocarrito"]->array_name[$i]." </td>".
+					  "<td>".$_SESSION["ocarrito"]->array_qty[$i]." </td>".
+					  "<td>".$_SESSION["ocarrito"]->array_price_total[$i]." &euro; </td>". 
+			 	  "</tr>";
 		}
 	}
 	?>
@@ -199,8 +157,7 @@ function precio_articulo($artid){
 			       FROM articles
 			       WHERE artid='$artid' ");
 
-	if ($result)
-	{
+	if ($result){
 	 $articles_price = mysql_fetch_array($result);
 	 return  $articles_price;
 	}
@@ -213,28 +170,28 @@ function precio_articulo($artid){
  */
 function menu_factura ($servido,$ref){
 ?>
-<table align="center" cellpadding="4">
-	<tr>
-		<td><a href='borrar_pedidos.php?ref=<?php echo $ref ?>' >BORRAR  </a> </td><td></td>
-		<td> <a href='<?php echo $PHP_SELF; ?>?imprimir=1&ref=<?php echo trim($ref);?>' >  PANTALLA IMPRIMIR </a> </td>
+	<table align="center" cellpadding="4">
+		<tr>
+			<td><a href='borrar_pedidos.php?ref=<?php echo $ref ?>' >BORRAR  </a> </td><td></td>
+			<td> <a href='<?php echo $PHP_SELF; ?>?imprimir=1&ref=<?php echo trim($ref);?>' >  PANTALLA IMPRIMIR </a> </td>
 
-	</tr>
-	<?php
-	//Si estamos viendo los ya archivados entonces no necesitamos la opci�n de archivar
-	if ($servido != 1)
-	echo "<tr>
-			<td>
-			<a href='archivar_pedidos.php?ref=$ref '  >ARCHIVAR 	              </a></td><td></td>
-			<td>
-			<a href='edit_pedido.php?ref=$ref ' >EDITAR</a></td>
-	     </tr>";
-	}
-	?>
-</table>
+		</tr>
+		<?php
+		//Si estamos viendo los ya archivados entonces no necesitamos la opci�n de archivar
+		if ($servido != 1)
+		echo "<tr>
+				<td>
+				<a href='archivar_pedidos.php?ref=" .$ref. "'>ARCHIVAR</a></td><td></td>
+				<td>
+				<a href='edit_pedido.php?ref=$ref ' >EDITAR</a></td>
+		     </tr>";
+		}
+		?>
+	</table>
 <?php
 
 function buscar_mail_pedido($ref) {
-$conn = db_connect();
+	$conn = db_connect();
 	$result = mysql_query("SELECT email
 			       FROM pedidos
 			       WHERE ref='$ref' ");
@@ -255,9 +212,8 @@ function precio_pedido ($ref) {
 	if ($result){
 		$articles = db_result_to_array($result);
 	}
-	else {
-		return false;
-	}
+	else { return false; }
+
 	//inicializamos total a 0
 	$total=0;
 	foreach($articles as $row){
@@ -271,7 +227,7 @@ function calcula_re($activar,$total,$portes) {
 		$_SESSION['re']=($total+$portes)*0.04;
 	//Activamos o desactivamos el RE
 	?>
-		<td align='left'>	<a href='<?php $PHP_SELF ?>?imprimir=0&ref=<?php echo $_GET['ref']; ?>&activar_re=2'  >
+		<td align='left'><a href='<?php $PHP_SELF ?>?imprimir=0&ref=<?php echo $_GET['ref']; ?>&activar_re=2'  >
 		Desactivar RE</a> </td>
 	<?php
 	}
@@ -295,14 +251,16 @@ function pedido($ref,$envio) {
 	$result = mysql_query("SELECT *
 			       FROM pedidos_articulos
 			       WHERE ref='$ref' ");
-	if (!$result){
-		return 0;
-	}
+	if (!$result) { return 0; }
+	
 	$pedido =db_result_to_array($result);
 	//creamos tabla con el pedido entero
 	ob_start();
 	?>
-	<table border='0' width='100%' class='mail'><tr><td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td></tr>
+	<table border='0' width='100%' class='mail'>
+		<tr>
+			<td colspan='3' class='carrito_ver'><b>SU PEDIDO</b></td>
+		</tr>
 		<tr bgcolor='#9292C8'>
 			<td> Art&iacute;culo </td> <td> Unidades </td>
 		</tr>
@@ -312,7 +270,7 @@ function pedido($ref,$envio) {
 			$total=$total+$row['precio'];
 			?>
 			<tr bgcolor="#CBCED8">
-			<td><?php echo $row['nombre'] ?></td><td><?php echo $row['precio'] ?> &euro;</td>
+				<td><?php echo $row['nombre'] ?></td><td><?php echo $row['precio'] ?> &euro;</td>
 			</tr>
 			<?php
 		}
@@ -330,44 +288,16 @@ function datos_cliente($ref) {
 	$result = mysql_query("SELECT *
 			       FROM pedidos
 			       WHERE ref='$ref' ");
-	if (!$result){
-		return 0;
-	}
+
+	if (!$result) { return 0; }
 
 	$pedido =mysql_fetch_array($result);
 	//creamos tabla con el pedido entero
 	ob_start();
-	?>
-	<table border='0' width='100%' class='mail'>
-	<tr>
-		<td colspan='3' class='carrito_ver'><b>Sus datos de envío</b></td>
-	</tr>
-	<tr bgcolor='#9292C8'><td class="mini_text"> Nombre </td><td class="mini_text"> Dirección</td><td class="mini_text"> Ciudad</td> 	                      
-	    <td class="mini_text">Provincia </td><td class="mini_text">CP</td><td class="mini_text"> País</td>
-	</tr>
-	<tr bgcolor="#CBCED8">
-		<td class="mini_text"><?php echo $pedido['name'] ?> </td>
-		<td class="mini_text"> <?php echo $pedido['address'] ?></td>
-		<td class="mini_text"><?php echo $pedido['city'] ?> </td>
-		<td class="mini_text"><?php echo $pedido['state'] ?>  </td>
-		<td class="mini_text"> <?php echo $pedido['zip'] ?></td>
-		<td class="mini_text"> <?php echo $pedido['country'] ?> </td>
-	</tr>
-	<tr bgcolor='#9292C8'>
-		<td class="mini_text"> Email</td> 
-		<td class="mini_text">Teléfono</td> 
-		<td class="mini_text"> Movil</td>
-		<td class="mini_text"> Fecha</td>
-	</tr>
-	<tr bgcolor="#CBCED8">
-		<td class="mini_text"> <?php echo $pedido['email']; ?></td> 
-		<td class="mini_text"><?php echo $pedido['telf'] ?>
-	</td>
-		<td class="mini_text"> <?php echo $pedido['movil']; ?></td>
-		<td class="mini_text"> <?php echo fecha(); ?> </td>
-	</tr>
-	</table>
-	<?php
+
+	// Carga los datos del cliente.
+	include('vistas/datos_cliente.html.php');
+	
 	return ob_get_clean();
 }
 function edit_pedido($ref) {
@@ -429,8 +359,8 @@ function add_new_art($ref_art,$ref_pedido,$items_art) {
 	if (!$connect)
 	return 0;
 	//obtenemos todos los datos del articulo cuya referencia es ref
-	if (!$article=ask_art_by_ref($ref_art))
-	return false;
+	if (!$article=ask_art_by_ref($ref_art)) { return false; }
+	
 	//Comprobamos que el art�culo no est� ya a�adido a el pedido
 	$Ssql="SELECT * FROM pedidos_articulos
 			WHERE ref='".$ref_pedido."'
@@ -447,9 +377,9 @@ function add_new_art($ref_art,$ref_pedido,$items_art) {
 
 		return 1;
 	}
-	else{
-		return 3;
-	}
+	
+	return 3;
+	
 }
 
 function generate_pdf($ref) {

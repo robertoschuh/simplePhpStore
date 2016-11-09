@@ -14,6 +14,7 @@ $(document).ready(function() {
     
     //desplegados
     $("#desplegados").click( function(){
+        console.log('fire it!!');
         if( $(this).is(':checked') ) {
             $( ".pedido ul" ).removeClass( "hide_cls" ).addClass( "selected_cls" );    
         } else {

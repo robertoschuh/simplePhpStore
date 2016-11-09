@@ -14,11 +14,7 @@ $unidades=$precio_total/$precio_unidad[0];
  		('','$id','$ref','$nombre','$unidades','$precio_unidad[0]','0')";
 	$result=mysql_query($query);
 
-	if (!$result)
-
-	return false;
-
-	else
+	if (!$result) { return false; }
 
 	return true;
 
@@ -53,273 +49,49 @@ function form_consultar_pedido(){
 <?php
 }
 
-function consultar_pedido($ref,$servido)
-{
-include("biblioteca_vars.php");
-$conn = db_connect();
+function consultar_pedido($ref,$servido){
+	
+	include("biblioteca_vars.php");
+	$conn = db_connect();
+
 	$result = mysql_query("SELECT * FROM pedidos WHERE ref='$ref' ");
 	//if (!$result)
-	if (mysql_num_rows($result)<1)
-	echo "No hay ningún pedido que concuerde con esa referencia de pedido, Gracias<br> ";
-	else
-	{
-	$result = mysql_fetch_array($result);
-	$total=$result['total'];
-	$articles=datos_pedido($ref);
-	?>
-<table width="100%" height="342" border="0" cellpadding="4" cellspacing="4" bordercolor="#FFFFFF" >
-	<tr><td height="334" valign="top">
-	<?php
-	echo "<a href='$PHP_SELF?imprimir=0&ref=$ref'>$datos_factura</a>";;
-	?>
-	<td width="27%" valign="top">
-	<table width="100%" align='center' cellpadding="2" cellspacing="2" bordercolor="#FFFFFF" bgcolor="#FFFFFF">
-	<tr>
-	<td> </td>
-	</tr>
-	<tr><th colspan='5' align='center'>&nbsp;</th></tr>
-	<tr><th colspan='5' align='center'>&nbsp;</th></tr>
-	<tr><th colspan='5' align='center' style="color:#000">DATOS DE ENVÍO </th></tr>
-	<tr><td width="68%" colspan='4'  style="color:#000" ><?php print  $result['name'] ;?> <?php print " ".$result['surname'] ;?></td>
-	</tr>
-	<tr><td width="68%" colspan='4' style="color:#000" ><?php print  $result['address'];?>          </tr>
-	<tr><td colspan='5'  style="color:#000"><?php print $result['city'];?>  -<?php print  $result['zip'];?></td></tr>
-	<tr><td colspan='4' style="color:#000" ><?php print $result['state'];?></td></tr>
-	<tr><td colspan='4'style="color:#000"><?php print $result['country'];?></td></tr>
-	<tr><td class='datos_envio' colspan='4' style="color:#000" > <?php if ($result['telf']!=0) print $result['telf']; ?>
-	 Tel&eacute;fono: <?php print $result['movil'];?>            </td>
-	</tr>
-	<tr><td class='datos_envio' colspan='4' style="color:#000"> Modo de pago:<?php if  ($result['modo']==1)
-print "Transferencia o ingreso";
-else
-print "Contrareembolso"; ?></td>
-</tr>
-<tr>
-<?php print "<td colspan='4' style='color:#000'>
-<a style='color:#000' href='../../mails/mail_confim_existencias.php?email=$result[email]&ref=$ref&portes=".$_SESSION[portes]." ' >
-".$result['email']."</a></td>
-</tr>";?>
-</table ></td>
-</tr>
-<?php
-		if ( isset($_GET['imprimir']) && $_GET['imprimir'] == 1 )
-		{
+	if ( mysql_num_rows($result) < 1 ){
+		echo "No hay ningún pedido que concuerde con esa referencia de pedido, 
+		Gracias<br> ";
 
+		return;
+	}
+
+	$result   = mysql_fetch_array($result);
+	$total    = $result['total'];
+	$articles = datos_pedido($ref);
+
+	// Datos factura view.
+	include ('vistas/datos_factura.html.php');
+
+		if ( isset($_GET['imprimir']) && $_GET['imprimir'] == 1 ){
 
 			//Si hacemos clic en imprimir ya no sale el MENU OPCIONES para que el cliente no lo vea en el tiket
 			//y se retaen los art�culos de stock VER MAS ABAJO
 			?><h4><a href='<?php echo $PHP_SELF; ?>?imprimir=1&ref=<?php echo trim($ref);?>&pdf=1' >  GENERAR PDF </a></h4><?php
 
 		}
-		if ( !isset($_GET['imprimir']) && $_GET['imprimir'] != 1 )
-		{
+		if ( !isset($_GET['imprimir']) && $_GET['imprimir'] != 1 ){
+			// Menu factura view.
+			include ('vistas/menu_factura.html.php');
+			
+		}
 
-			//Creamos otra nueva funci�n para que al imprimir la factura para el cliente NO SALGAN LOS DATOS DEL MEN�
-			?>
-			<table style="text-align:center; width:100%">
-				<tr>
-					<td colspan="2" align="center" class="menuFactura"> <?php echo menu_factura ($servido,$ref) ;?>  </td>
-				</tr>
-			</table>
-<?php	}
-
-		if ( isset($_GET['pdf']) )
-		{
-
-
+		if ( isset($_GET['pdf']) ){
 			generate_pdf($_GET['ref']);
-			//Si hacemos clic en imprimir ya no sale el MENU OPCIONES para que el cliente no lo vea en el tiket
-			//y se retaen los art�culos de stock VER MAS ABAJO
-		}
-$email=$result['email'];
-?>
-
-<table border="1" width="70%" align="center">
-	<tr>
-		<td align="center" style="color:#000"><strong>Pedido Ref:</strong>  <strong>  <?php echo $ref; ?></strong> </td>
-		<td align="center" style="color:#000"><strong> FECHA</strong><strong>   <?php echo fecha(); ?></strong> 
-	</tr>
-</table>
-<br>
-<table border='0' align='center' width="100%" >
-	<tr>
-	<td  align='center'  class='encabezadcos_tablas ' width="7%" style="color:#000">Ref </td>
-	<td  align='center' class='encabezadcos_tablas ' style="color:#000" >Nombre</td>
-	<td  align='center'  class='encabezadcos_tablas ' style="color:#000">Unidades </td>
-	<td  align='center'  class='encabezadcos_tablas ' style="color:#000">Precio </td>
-	<td  align='center' class='encabezadcos_tablas '  style="color:#000">Importe</td>
-	</tr>
-	<?php
-	//inicializamos total a 0
-	$total=0;
-	?>
-	<form method="post" action="<? $PHP_SELF ?> " name="form1">
-	<?php
-	foreach($articles as $row)
-	{
-	$artid=$row['artid'] ;
-
-	// Función para saber referencia y datos del artículo.
-	$arts_datos = arts_info ($row['artid']);
-	if (!$arts_datos)
-	echo "No hay datos<br>";
-
-	$unidades=$row['unidades'];
-	if ($unidades==0)
-	$unidades="NULO";
-	$total+= $arts_datos['art_price']*$unidades ;
-
-	//Guardamos las unidades y la Id del art�culo en un array
-	$arts_unidades_array[$artid] = $unidades;
-	if ( !$_SESSION['arts_unidades_array']){
-	  $_SESSION['arts_unidades_array'] = $arts_unidades_array;
-	}
-	?>
-	<tr>
-	<?php
-	if ( !$_POST['ref'] )
-	{
-	?>
-	<td width="7%" class="items"><div align="center">
-	<?php echo $arts_datos['ref'] ?></div></td>
-	<?php
-	}
-	else
-	{
-	    ?>
-	    <td width="30%" class="items"><div align="center">
-	    <?php $_POST['ref'] ?></div></td>
-	    <?php
-	}
-	if ( !$_POST['name'] )
-	{
-	    
-	    ?>
-	    <td width="30%" class="items"><div align="center">
-	           <?php print $row['nombre'] ;?></div></td>
-	    <?php
-	}
-	else
-	{
-	    ?>
-	    <td width="10%" class="items"><div align="center"><?php print $row['nombre']; ?>/div></td>
-	    <?php
-	}
-	if ( !$_POST['unidades'] )
-	{
-	?>
-	    <td width="20%"><div align="center"><?php print $unidades ?></div></td>
-	    <?php
-	}
-	else
-	{
-	?>
-	    <td width="20%"><div align="center"><?php print $_POST['unidades']; ?></div></td>
-	    <?php
-	}
-	if ( !$_POST['price'] )
-	{
-	?>
-	    <td width="20%"><div align="center"><?php echo redondear_dos_decimal($arts_datos['art_price']); ?> </div></td>
-	    <?php
-	}
-	else
-	{
-	?>
-	    <td width="20%"><div align="center"><?php  print redondear_dos_decimal($arts_datos['art_price']);?></div></td>
-	    <?php
-	}
-	if ( !$_POST['price_tot'] )
-	{
-	?>
-	    <td width="20%"><div align="center"><?php  print redondear_dos_decimal($arts_datos['art_price']*$unidades); ?></div></td>
-	    <?php
-	}
-	else
-	{
-	?>
-	    <td width="20%"><div align="center"><?php print $_POST['price_tot']*$unidades; ?>"</div></td>
-	    <?php
-	}?>
-	</tr>
-	<tr><td colspan="8"> <hr /> </td></tr>
-<?php
-		}//fin foreach
-		?>
-	<tr>
-		<td  colspan="4"  align="right" class="items" style="color:#000">Suma: </td>
-		<td align='right'  class="precio" style="color:#000">
-		<?php echo  redondear_dos_decimal($total); ?>  &euro;
-	</td>
-	</tr>
-	<tr>
-		<td  colspan="4"  align="right" class="items" style="color:#000" >Portes: </td>
-		<td align="right"  class="precio" style="color:#000" >
-		<?php echo  $_SESSION['portes']; 
-		//$total_pagar=calcula_total($total,$_SESSION['portes']);
-		 $total_pagar=$total+$_SESSION['portes'];
-
-		//$base_imponible=$total_pagar/1.18;
-		$base_imponible=$total_pagar/1.21; //cambiamos al 21%
-		$iva = $total_pagar - $base_imponible;
-
-		?>
-		</td>
-	</tr>
-
-		<td  colspan="4"  align="right" class="items" style="color:#000" >Importe Total : </td>
-		<td align='right'  class="precio" style="color:#000">
-	<?php echo redondear_dos_decimal($total_pagar) ?> &euro;
-		</td>
-	</tr>
-	<tr>
-		<td  colspan="4"  align="right" class="items" style="color:#000" >IVA aplicado 21% : </td>
-        <td align='right'  class="precio"  style="color:#000">
-       <?php echo $iva=redondear_dos_decimal($iva); ?> &euro; </td>
-     </tr>
-  </table>
-
-     <br /><br />
-<table>
-	     <?php
-		}
-	        ?>
-	<tr><td></td></tr>
-	<tr><td></td></tr>
-	<tr><td></td></tr>
-	<tr><td></td></tr>
-</table>
-<table border='0' align='center' width="100%">
-		<tr>
-		<?php
-		if ( $_GET['imprimir']!=1 )
-		{
-		?>
-		<td align='left' ><a href='consulta_pedidos.php' style="color:#000"> Ver Más Pedidos </a></td>
-		<?php
-		}
-		if ($_GET['imprimir']!=1)
-
-		{
-		?>
-			<td align='left'  >	<a href='#'  onclick='AbreVentanaPortes() ;' style="color:#000">
-			 Insertar Portes</a> </td>
-
-		<td align='right' >	<a href='retraer_stock.php?ref=$ref' style="color:#000">
-			 RETRAER STOCK </a> </td>
-	<?php
 		}
 
-		?>
-		</tr>
+	$email = $result['email'];
+	
 
-	 <tr>
-		 <td align='left' style="color:#000"><font size="-4" >La mercancía enviada por Gloria Botonero mediante la agencia Tourline Express está asegurada. Cualquier rotura o desperfecto causado durante el transporte, deberá ser comunicado a Gloria Botonero en un plazo máximo de 24 horas desde la recepción del paquete, de lo contrario se entenderá que se ha recibido en perfecto estado y no procederá la reclamación de la misma."
-		"La mercancía que viaje por otro medio de transporte, será responsabilidad del cliente".</font>
-		</td>
-	</tr>
-</table>
-<?php
+	// Muestra los artículos comprados. 
+	include ('vistas/pedido_lista.html.php');
 }
 //inserta los datos del cliente en la tabla "pedidos" y nos devuelve el numero de referencia de ese pedido
 function get_ref($name,$surname,$address,$city,$state,$zip,$country,$email,$total,$telf,$movil,$modo)

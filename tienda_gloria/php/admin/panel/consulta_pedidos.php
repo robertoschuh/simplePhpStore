@@ -1,5 +1,7 @@
 <?php
 @session_start();
+error_reporting(1); 
+ini_set('display_errors',1);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -38,20 +40,17 @@ else
 
         panel_control ();
      //no hay datos de variables ni $_post ni $_get
-    if (!$HTTP_POST_VARS && !$_GET['ref'] )
-
+    if (!$HTTP_POST_VARS && !$_GET['ref'] ){
         form_consultar_pedido();
-
+    }
     else
-            {
+    {
 
-                consultar_pedido($ref,$servido);
+        consultar_pedido($ref,$servido);
+        $precio_total=precio_pedido($ref);
+        //dias_demora($ref,$precio_total);
 
-                $precio_total=precio_pedido($ref);
-
-                        //dias_demora($ref,$precio_total);
-
-            }
+    }
 
 }
 ?>

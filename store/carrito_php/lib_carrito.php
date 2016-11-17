@@ -18,11 +18,11 @@ class carrito {
 		$this->num_productos=0;
 	}
 
-//Si un producto ya existe entonces actualiza la cantidad de este en array_qty[$pos]
+    //Si un producto ya existe entonces actualiza la cantidad de este en array_qty[$pos]
 	function introduce_producto($id_art,$nombre_prod,$precio_prod,$img,$ref,$qty  ){
 
-//inicioamos la variable exists a false
-		$exist=false;
+    //inicioamos la variable exists a false
+        $exist = false;
 	if (@in_array($id_art,$this->array_id_art) )
 
 	//Buscamos la posici�n el la que sa haya el art�culo para sumarle 1

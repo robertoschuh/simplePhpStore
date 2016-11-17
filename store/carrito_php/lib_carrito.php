@@ -1,4 +1,4 @@
-﻿<link href="carrito.css" rel="stylesheet" type="text/css" />
+<link href="carrito.css" rel="stylesheet" type="text/css" />
 <?php
 class carrito {
 	//atributos de la clase

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html><head><TITLE>Gloria Botonero</TITLE>
 <META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
 <meta name="keywords" content="belenes,miniaturas,belen,bel�n,artesan�a andaluc�a,artesan�a belenes"  />

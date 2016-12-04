@@ -1,0 +1,47 @@
+<?php $__env->startSection('title', $ref); ?>
+<?php $__env->startSection('header-left'); ?>
+    <img src="img/FACTURA.jpg" alt='logo'"/>
+
+<?php $__env->stopSection(); ?>
+<?php $__env->startSection('header-right'); ?>
+    <h3>DATOS DE ENVÍO</h3>
+<ul class="list-group">
+    <li class="list-group-item"><?php echo $customer['name']; ?>  <?php echo $customer['surname']; ?></li>
+    <li class="list-group-item"><?php echo $customer['address']; ?> </li>
+    <li class="list-group-item"><?php echo $customer['city']; ?> <?php echo $customer['zip']; ?></li>
+    <li class="list-group-item"><?php echo $customer['state']; ?> </li>
+    <li class="list-group-item"><?php echo $customer['country']; ?> </li>
+    <li class="list-group-item">Fijo: <?php echo $customer['telf']; ?>, Móvil:<?php echo $customer['movil']; ?> </li>
+    <li class="list-group-item"><?php echo $customer['modo']; ?> </li>
+    <li class="list-group-item"><?php echo $customer['email']; ?> </li>
+
+</ul>
+
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('content'); ?>
+    <?php $total = 0; ?>
+    <div class="table-responsive">
+        <table class="table-bordered" width="100%">
+            <tr><th>Ref</th><th>Nombre</th><th>Unidades</th><th>Precio</th><th>Importe</th></tr>
+            <?php foreach($data as $prod): ?>
+                <?php // var_dump($prod); exit ?>
+                <?php $total += $prod['prodPrice'] * $prod['amount']; ?>
+                <tr><td><?php echo $prod['prodRef']; ?></td><td><?php echo $prod['proName']; ?></td><td><?php echo $prod['amount']; ?></td>
+                    <td><?php echo $prod['prodPrice']; ?></td><td><?php echo $prod['prodPrice'] * $prod['amount']; ?></td></tr>
+            <?php endforeach; ?>
+            <tr><td colspan="6" style="text-align: right">Total: <?php echo $total; ?></td></tr>
+            <tr>
+                <td colspan="6" style="text-align: right">
+                    IVA aplicado 21%: <?php
+                    $totalIva = $total - ($total / 1.21);
+                    print round($totalIva * 100) / 100;
+                    ?>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

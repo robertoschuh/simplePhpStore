@@ -428,7 +428,7 @@ function login_panel_admin () {
 
     <td bgcolor="#E5EDE9" class='login' colspan="2" align="center">
     <!-- pass a session id to the query string of the script to prevent ie caching -->
-<img src="/tienda_gloria/php/admin/panel/seguridad/securimage_show.php?sid=<?php echo md5(uniqid(time())); ?>"><BR/>
+<img src="../../../php/admin/panel/seguridad/securimage_show.php?sid=<?php echo md5(uniqid(time())); ?>"><BR/>
 <input type="text" name="code" />
 </td>
 </tr>

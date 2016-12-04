@@ -41,7 +41,7 @@ function consultar_pedido($ref, $servido){
 
 			//Si hacemos clic en imprimir ya no sale el MENU OPCIONES para que el cliente no lo vea en el tiket
 			//y se retaen los art�culos de stock VER MAS ABAJO
-			?><h4><a href='<?php echo $PHP_SELF; ?>?imprimir=1&ref=<?php echo trim($ref);?>&pdf=1' >  GENERAR PDF </a></h4><?php
+			?><h4><a href='http://gloriabotonero.dev/store/orders.php?ref=<?php echo trim($ref);?>'  target="_blank">  GENERAR PDF </a></h4><?php
 
 		}
 		if ( !isset($_GET['imprimir']) && $_GET['imprimir'] != 1 ){
@@ -387,7 +387,7 @@ function generate_pdf($ref) {
 	require_once  '../../../../vendor/autoload.php';
 	//print 'http://'.$_SERVER['PHP_SELF']; exit;
 
-	$file = 'http://gloriabotonero.com/tienda_gloria/php/admin/panel/consulta_pedidos.php?imprimir=1&ref=' .$ref;
+	$file = "../../../store/orders.php?ref=278";
 	$html = file_get_contents($file);
 
 	// instantiate and use the dompdf class

@@ -6,7 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Symfony\\Component\\Finder\\' => array($vendorDir . '/symfony/finder'),
     'Svg\\' => array($vendorDir . '/phenx/php-svg-lib/src'),
+    'Prophecy\\' => array($vendorDir . '/phpspec/prophecy/src'),
     'Monolog' => array($vendorDir . '/monolog/monolog/src'),
+    'Illuminate\\View' => array($vendorDir . '/illuminate/view'),
+    'Illuminate\\Support' => array($vendorDir . '/illuminate/support'),
+    'Illuminate\\Filesystem' => array($vendorDir . '/illuminate/filesystem'),
+    'Illuminate\\Events' => array($vendorDir . '/illuminate/events'),
+    'Illuminate\\Container' => array($vendorDir . '/illuminate/container'),
     'FontLib\\' => array($vendorDir . '/phenx/php-font-lib/src'),
 );

@@ -21,9 +21,9 @@
             <div class="header">
                 <div class="row">
 
-                    <div class="col-sm-4"> <?php echo $__env->yieldContent('header-left'); ?></div>
+                    <div class="col-sm-6"> <?php echo $__env->yieldContent('header-left'); ?></div>
                     <!-- Branding Image -->
-                    <div class="col-sm-4"> <?php echo $__env->yieldContent('header-right'); ?></div>
+                    <div class="col-sm-6"> <?php echo $__env->yieldContent('header-right'); ?></div>
                 </div>
 
             </div>

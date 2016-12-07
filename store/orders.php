@@ -1,11 +1,11 @@
 <?php
 // Autoload classes.
 require '../vendor/autoload.php';
-define('ROOT_FOLDER', 'store');
+define('ROOT_FOLDER', 'tienda_gloria');
 
 use store\Controllers\OrderController;
-use Windwalker\Renderer\BladeRenderer;
 use store\Helpers\Pdf;
+use Windwalker\Renderer\BladeRenderer;
 
 $paths = array(__DIR__ . '/resources/views');
 $renderer = new BladeRenderer($paths, array('cache_path' => __DIR__ . '/cache'));

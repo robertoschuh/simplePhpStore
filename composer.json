@@ -14,7 +14,6 @@
         "bitmannl/bcrypt" : "1.0.1",
         "nesbot/carbon" : "1.21.0",
         "fzaninotto/faker" : "1.6.0",
-        "symfony/routing" : "3.2.*@dev",
         "windwalker/renderer": "2.*",
         "illuminate/view": "4.*"
     },

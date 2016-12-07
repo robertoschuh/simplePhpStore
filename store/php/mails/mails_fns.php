@@ -20,7 +20,7 @@ define('PROTOCOL', 'tls');
 
 //include ('class.phpmailer.php');
 require('PHPMailer/PHPMailerAutoload.php');
-//include('./config_inc.php');
+include('config_inc.php');
 ///include ('PHPMailer/class.phpmailer.php');
 //include ('PHPMailer/class.phpmailer.php');
 //Email Robot que se envia al cliente una vez realizado el pedido indic�ndole que se le enviar� brevemente otro mail

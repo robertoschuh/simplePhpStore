@@ -8,7 +8,10 @@ require ("fns.php");
 
 //ver_carrito ();	
 
-$catid=$_GET['catid']; 
+$catid = isset($_GET['catid']) ? $_GET['catid'] : '';
+if(!is_numeric($catid)){
+    $catid = 2;
+}
 $art_array=get_arts($catid);
 //display_arts($art_array);
 

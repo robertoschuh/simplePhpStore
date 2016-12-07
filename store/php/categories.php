@@ -18,7 +18,11 @@ require ("fns.php");
 require ("admin/admin_fns.php");
 //Notas importantes: cuando $_GET['catid'] vale -2 entonces categories.php carga la p�gina de el ESCAPARATE
 $catid=$_GET['catid'] ;
-if ($catid!=2)
+
+if(!is_numeric($catid)){
+  $catid = 2;
+}
+if ($catid !=2 )
 //Si clicamos en una categoria que no sea la de novedades
 // session_unregister('novedades');
 unset($_SESSION['novedades']);

@@ -41,17 +41,13 @@ function consultar_pedido($ref, $servido){
 
 			//Si hacemos clic en imprimir ya no sale el MENU OPCIONES para que el cliente no lo vea en el tiket
 			//y se retaen los art�culos de stock VER MAS ABAJO
-			?><h4><a href='http://gloriabotonero.dev/store/orders.php?ref=<?php echo trim($ref);?>'  target="_blank">  GENERAR PDF </a></h4><?php
+			?><h4><a href='http://gloriabotonero.com/tienda_gloria/orders.php?ref=<?php echo trim($ref);?>'  targe>  GENERAR PDF </a></h4><?php
 
 		}
 		if ( !isset($_GET['imprimir']) && $_GET['imprimir'] != 1 ){
 			// Menu factura view.
 			include ('vistas/menu_factura.html.php');
 			
-		}
-
-		if ( isset($_GET['pdf']) ){
-			generate_pdf($_GET['ref']);
 		}
 
 	$email = $result['email'];
